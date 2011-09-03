@@ -4,14 +4,12 @@ use warnings;
 use parent qw/Ukigumo::Server Amon2::Web/;
 use File::Spec;
 
-# load all controller classes
-use Module::Find ();
-Module::Find::useall("Ukigumo::Server::Web::C");
-
 # dispatcher
 use Ukigumo::Server::Web::Dispatcher;
 sub dispatch {
-    return Ukigumo::Server::Web::Dispatcher->dispatch($_[0]) or die "response is not generated";
+	my $c = shift;
+    return Ukigumo::Server::Web::Dispatcher->dispatch($c)
+      or die "response is not generated";
 }
 
 # setup view class
@@ -23,7 +21,7 @@ use Text::Xslate;
     }
     my $view = Text::Xslate->new(+{
         'syntax'   => 'TTerse',
-        'module'   => [ 'Text::Xslate::Bridge::TT2Like' ],
+        'module'   => [ 'Text::Xslate::Bridge::TT2Like', 'Ukigumo::Helper' ],
         'function' => {
             c => sub { Amon2->context() },
             uri_with => sub { Amon2->context()->req->uri_with(@_) },
@@ -34,18 +32,10 @@ use Text::Xslate;
     sub create_view { $view }
 }
 
-# load plugins
-use HTTP::Session::Store::File;
 __PACKAGE__->load_plugins(
-    'Web::FillInFormLite',
-    'Web::NoCache', # do not cache the dynamic content by default
-    'Web::CSRFDefender',
-    'Web::HTTPSession' => {
-        state => 'Cookie',
-        store => HTTP::Session::Store::File->new(
-            dir => File::Spec->tmpdir(),
-        )
-    },
+	'Web::JSON',
+	'Web::PlackSession',
+	'Web::CSRFDefender',
 );
 
 # for your security
@@ -53,14 +43,6 @@ __PACKAGE__->add_trigger(
     AFTER_DISPATCH => sub {
         my ( $c, $res ) = @_;
         $res->header( 'X-Content-Type-Options' => 'nosniff' );
-    },
-);
-
-__PACKAGE__->add_trigger(
-    BEFORE_DISPATCH => sub {
-        my ( $c ) = @_;
-        # ...
-        return;
     },
 );
 

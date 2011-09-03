@@ -1,49 +1,34 @@
-package Ukigumo::Server;
 use strict;
 use warnings;
-use parent qw/Ukigumo::Server::Container Amon2::Web/;
+use utf8;
+
+package Ukigumo::Server;
+use parent qw(Amon2);
 use File::Spec;
+use DBI;
 
-# dispatcher
-use Ukigumo::Server::Dispatcher;
-use Ukigumo::Server::APIDispatcher;
-sub dispatch {
-	my $c = shift;
-    return Ukigumo::Server::Dispatcher->dispatch($c) or die "response is not generated";
+our $VERSION='0.01';
+
+sub dbh {
+	my $self = shift;
+
+	$self->{dbh} ||= do {
+		my $conf = $self->config->{DBI} or die "Missing configuration for DBI";
+        $conf->[3]->{RaiseError}     = 1;
+        $conf->[3]->{sqlite_unicode} = 1;
+		DBI->connect(@$conf) or die $DBI::errstr;
+	};
 }
 
-# setup view class
-use Text::Xslate;
-{
-    my $view_conf = __PACKAGE__->config->{'Text::Xslate'} || +{};
-    unless (exists $view_conf->{path}) {
-        $view_conf->{path} = [ File::Spec->catdir(__PACKAGE__->base_dir(), 'tmpl') ];
-    }
-    my $view = Text::Xslate->new(+{
-        'syntax'   => 'TTerse',
-        'module'   => [ 'Text::Xslate::Bridge::TT2Like', 'Ukigumo::Helper' ],
-        'function' => {
-            c => sub { Amon2->context() },
-            uri_with => sub { Amon2->context()->req->uri_with(@_) },
-            uri_for  => sub { Amon2->context()->uri_for(@_) },
-        },
-        %$view_conf
-    });
-    sub create_view { $view }
+sub setup_schema {
+	my $self = shift;
+	my $fname = File::Spec->catfile($self->base_dir , 'sql', 'sqlite3.sql');
+	open my $fh, '<', $fname or die "Cannot open $fname: $!";
+	my $schema = do { local $/; <$fh> };
+	for my $code (split /;/, $schema) {
+		$self->dbh->do( $code );
+	}
 }
-
-__PACKAGE__->load_plugins(
-	'Web::JSON',
-	'Web::PlackSession',
-	'Web::CSRFDefender',
-);
-
-# for your security
-__PACKAGE__->add_trigger(
-    AFTER_DISPATCH => sub {
-        my ( $c, $res ) = @_;
-        $res->header( 'X-Content-Type-Options' => 'nosniff' );
-    },
-);
 
 1;
+

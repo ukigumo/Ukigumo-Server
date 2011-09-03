@@ -2,13 +2,13 @@ use File::Spec;
 use File::Basename;
 use lib File::Spec->catdir(dirname(__FILE__), 'extlib', 'lib', 'perl5');
 use lib File::Spec->catdir(dirname(__FILE__), 'lib');
+use Plack::Builder;
 use Ukigumo::Server;
 use Ukigumo::Server::API;
-use Plack::Builder;
-use Ukigumo::Server::Container;
+use Ukigumo::Server::Web;
 
 {
-	my $app = Ukigumo::Server::Container->new();
+	my $app = Ukigumo::Server->new();
 	$app->setup_schema();
 }
 
@@ -21,7 +21,7 @@ builder {
           path => qr{^(?:/static/|/robot\.txt$|/favicon.ico$)},
           root => File::Spec->catdir( dirname(__FILE__) );
         enable 'Plack::Middleware::Session';
-        Ukigumo::Server->to_app();
+        Ukigumo::Server::Web->to_app();
     };
 
     sub {

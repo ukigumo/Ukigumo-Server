@@ -1,15 +1,15 @@
 package Ukigumo::Server::API;
 use strict;
 use warnings;
-use parent qw/Ukigumo::Server::Container Amon2::Web/;
+use parent qw/Ukigumo::Server Amon2::Web/;
 use File::Spec;
 
 # dispatcher
-use Ukigumo::Server::APIDispatcher;
+use Ukigumo::Server::API::Dispatcher;
 
 sub dispatch {
 	my $c = shift;
-    return Ukigumo::Server::APIDispatcher->dispatch($c) or die "response is not generated";
+    return Ukigumo::Server::API::Dispatcher->dispatch($c) or die "response is not generated";
 }
 
 __PACKAGE__->load_plugins( 'Web::JSON' );

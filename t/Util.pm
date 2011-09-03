@@ -6,7 +6,7 @@ BEGIN {
 }
 use parent qw/Exporter/;
 use Test::More 0.96;
-use Ukigumo::Server::Container;
+use Ukigumo::Server;
 
 our @EXPORT = qw//;
 
@@ -25,7 +25,7 @@ our @EXPORT = qw//;
 }
 
 {
-	my $c = Ukigumo::Server::Container->new;
+	my $c = Ukigumo::Server->new;
 	$c->setup_schema();
 }
 

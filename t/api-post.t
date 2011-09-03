@@ -6,13 +6,13 @@ use t::Util;
 use Plack::Util;
 use Test::Requires 'LWP::Protocol::PSGI', 'LWP::UserAgent';
 use JSON;
-use Ukigumo::Server::Container;
+use Ukigumo::Server;
 
 my $app = Plack::Util::load_psgi 'app.psgi';
 LWP::Protocol::PSGI->register($app);
 
 {
-	my $c = Ukigumo::Server::Container->new;
+	my $c = Ukigumo::Server->new;
 	$c->dbh->do(q{DELETE FROM report});
 }
 
