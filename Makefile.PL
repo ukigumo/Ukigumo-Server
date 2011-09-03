@@ -17,7 +17,7 @@ WriteMakefile(
 		'Data::Validator' => 0,
 		'Plack::Middleware::Session' => 0,
     },
-    MIN_PERL_VERSION => '5.008001',
+    MIN_PERL_VERSION => '5.010000',
     (-d 'xt' and $ENV{AUTOMATED_TESTING} || $ENV{RELEASE_TESTING}) ? (
         test => {
             TESTS => 't/*.t xt/*.t',

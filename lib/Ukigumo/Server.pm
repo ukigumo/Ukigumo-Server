@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 use utf8;
+use 5.010001;
 
 package Ukigumo::Server;
 use parent qw(Amon2);
