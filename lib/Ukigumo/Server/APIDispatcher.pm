@@ -29,7 +29,7 @@ get '/api/v1/report/search' => [
     my ($c, $args) = @_;
 
     # and insert it
-    my $reports = Ukigumo::Server::API::Report->search(
+    my $reports = Ukigumo::Server::Command::Report->search(
         %$args
     );
 
@@ -61,17 +61,17 @@ post '/api/v1/report/add' => [
     }
 
 	# get last report status
-    my $last_status = Ukigumo::Server::API::Report->get_last_status(
+    my $last_status = Ukigumo::Server::Command::Report->get_last_status(
         project => $args->{project},
         branch  => $args->{branch}
     );
 
     # and insert it
-    my $report_id = Ukigumo::Server::API::Report->insert(
+    my $report_id = Ukigumo::Server::Command::Report->insert(
         body => $body,
         %$args
     );
-    my $url = Ukigumo::Server::API::Report->get_url($report_id);
+    my $url = Ukigumo::Server::Command::Report->get_url($report_id);
 
     return {
         report => +{

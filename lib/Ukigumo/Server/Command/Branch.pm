@@ -3,7 +3,7 @@ use warnings;
 use utf8;
 use 5.010001;
 
-package Ukigumo::Server::API::Branch;
+package Ukigumo::Server::Command::Branch;
 use Time::Piece;
 use SQL::Interp qw(:all);
 use Amon2::Declare;

@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use utf8;
 
-package Ukigumo::Server::API::Report;
+package Ukigumo::Server::Command::Report;
 use SQL::Interp qw(:all);
 use Amon2::Declare;
 use URI::WithBase;
@@ -37,7 +37,7 @@ sub list {
     );
     my $args = $rule->validate(@_);
 
-    my $branch_id = Ukigumo::Server::API::Branch->find(
+    my $branch_id = Ukigumo::Server::Command::Branch->find(
         project => $args->{project},
         branch  => $args->{branch},
     );
@@ -82,7 +82,7 @@ sub insert {
     );
     my $args = $rule->validate(@_);
 
-    my $branch_id = Ukigumo::Server::API::Branch->find_or_create(
+    my $branch_id = Ukigumo::Server::Command::Branch->find_or_create(
         project => $args->{project},
         branch  => $args->{branch},
     );
