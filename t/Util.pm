@@ -6,6 +6,7 @@ BEGIN {
 }
 use parent qw/Exporter/;
 use Test::More 0.96;
+use Ukigumo::Server::Container;
 
 our @EXPORT = qw//;
 
@@ -21,6 +22,11 @@ our @EXPORT = qw//;
         binmode $builder->todo_output,    ":utf8";
         return $builder;
     };
+}
+
+{
+	my $c = Ukigumo::Server::Container->new;
+	$c->setup_schema();
 }
 
 1;

@@ -1,0 +1,14 @@
+[% WRAPPER 'include/layout.tt' %]
+
+<hr class="space">
+
+<div class="span-23 last">
+    <h1><a href="[% uri_for('/', {project => report.project}) %]">[% report.project %]</a> [<a href="[% uri_for('/project/' _ uri(report.project) _ '/' _ uri(report.branch)) %]">[% report.branch %]</a>]([% report.revision %])
+	<span style="font-weight:bold; font-size: 130%; color: [% report.status | status_color %]">[% report.status | status_str %]</span>
+	</h1>
+	<pre>[% report.body %]</pre>
+</div>
+
+<hr class="space">
+
+[% END %]

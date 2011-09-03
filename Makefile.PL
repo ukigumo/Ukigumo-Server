@@ -11,6 +11,11 @@ WriteMakefile(
         'Plack::Middleware::ReverseProxy' => '0.09',
         'HTML::FillInForm::Lite'          => '1.09',
         'Time::Piece'                     => '1.20',
+		'SQL::Interp' => 0,
+		'DBI' => 0,
+		'DBD::SQLite' => 0,
+		'Data::Validator' => 0,
+		'Plack::Middleware::Session' => 0,
     },
     MIN_PERL_VERSION => '5.008001',
     (-d 'xt' and $ENV{AUTOMATED_TESTING} || $ENV{RELEASE_TESTING}) ? (

@@ -2,21 +2,32 @@
 
 <hr class="space">
 
-<div class="span-15 colborder">
-    <h1>Hello, Amon2 world!</h1>
+<div class="span-23 last">
+    <h1>This is a Ukigumo's top page.</h1>
 
-    <h2>For benchmarkers...</h2>
-    <p>If you want to benchmarking between Plack based web application frameworks, you should use <B>Amon2::Setup::Flavor::Minimum</B> instead.</p>
-    <p>You can use it as following one liner:</p>
-    <pre>% amon2-setup.pl --flavor Minimum Ukigumo::Server</pre>
-</div>
-<div class="span-8 last">
-    <p>Amon2 is right for you if ...</p>
-    <ul>
-    <li>You need exceptional performance.</li>
-    <li>You want a framework with a small footprint.</li>
-    <li>You want a framework that requires nearly zero configuration.</li>
-    </ul>
+    <table>
+    <tr>
+        <th>project</th>
+        <th>branch</th>
+        <th>revision</th>
+        <th>status</th>
+        <th>date</th>
+    </tr>
+    [% FOR v IN projects %]
+        <tr>
+            <td>[% v.project %]</td>
+            <td><a href="[% uri_for('/project/' _ uri(v.project) _ '/' _ uri(v.branch)) %]">[% v.branch || '-' %]</a></td>
+            <td>[% v.revision || '-' %]</td>
+            <td style="color: [% v.status | status_color %]">[% v.status | status_str %] </td>
+            <td>
+                <a href="/report/[% v.report_id %]" style="color:[% IF v.ctime.epoch() < now-24*60*60 %]gray[% ELSE %]blue[% END %]">
+                    [% v.ctime.strftime('%Y-%m-%d(%a) %T') %]
+                   [% IF v.ctime.epoch() < now-24*60*60 %][old][% END %]
+                </a>
+            </td>
+        </tr>
+    [% END %]
+    </table>
 </div>
 
 <hr class="space">

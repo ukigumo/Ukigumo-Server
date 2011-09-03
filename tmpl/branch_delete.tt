@@ -1,0 +1,18 @@
+[% WRAPPER 'include/layout.tt' %]
+
+<hr class="space">
+
+<div class="span-23 last">
+    <h1>Delete branch</h1>
+
+	<p>Really delete a '[% branch.branch %]' branch from '[% branch.project %]'? This action removes all reports on '[% branch.branch %]'</p>
+
+	<form action="/branch/delete" method="post">
+		<input type="hidden" name="branch_id" value="[% branch.branch_id %]">
+		<input type="submit" value="Delete!" />
+	</form>
+</div>
+
+<hr class="space">
+
+[% END %]

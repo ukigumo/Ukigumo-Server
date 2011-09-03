@@ -1,0 +1,28 @@
+[% WRAPPER 'include/layout.tt' %]
+
+<hr class="space">
+
+<div class="span-23 last">
+    <h1>Reports for [% project %] [[% branch %]]</h1>
+
+    <table>
+        <tr>
+            <th>Revision</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    [% FOR v IN reports %]
+        <tr>
+            <td>[% v.revision %]</td>
+            <td style="color: [% v.status | status_color %]">[% v.status | status_str %] </td>
+            <td><a href="[% uri_for('/report/' _ v.report_id) %]">[% v.ctime.strftime('%Y-%m-%d(%a) %T') %]</a></td>
+        </tr>
+    [% END %]
+    </table>
+
+	<a href="[% uri_for('/branch/delete', { branch_id => v.branch_id }) %]">Delete branch</a>
+</div>
+
+<hr class="space">
+
+[% END %]
