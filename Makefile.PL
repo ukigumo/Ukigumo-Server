@@ -16,6 +16,7 @@ WriteMakefile(
 		'DBD::SQLite' => 0,
 		'Data::Validator' => 0,
 		'Plack::Middleware::Session' => 0,
+		'Ukigumo::Helper' => 0,
     },
     MIN_PERL_VERSION => '5.010000',
     (-d 'xt' and $ENV{AUTOMATED_TESTING} || $ENV{RELEASE_TESTING}) ? (
