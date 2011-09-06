@@ -14,3 +14,4 @@ META.yml
 MYMETA.json
 MYMETA.yml
 *.db
+config/production.pl
