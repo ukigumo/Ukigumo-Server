@@ -26,6 +26,7 @@ my $url = do {
 		status  => 1,
 		body    => '....',
         repo => 'git://...',
+        vc_log => 'testtest',
 	]);
 	is $res->code, 200;
 	note $res->content;

@@ -31,23 +31,17 @@ q{SELECT status FROM report INNER JOIN branch ON (report.report_id=branch.last_r
 sub list {
     my $class = shift;
     state $rule = Data::Validator->new(
-        project => { isa => 'Str' },
-        branch  => { isa => 'Str' },
+        branch_id  => { isa => 'Int' },
         limit   => { isa => 'Int', default => 50 },
     );
     my $args = $rule->validate(@_);
-
-    my $branch_id = Ukigumo::Server::Command::Branch->find(
-        project => $args->{project},
-        branch  => $args->{branch},
-    );
 
     my $reports = c->dbh->selectall_arrayref(
         q{SELECT report_id, revision, status, ctime FROM report WHERE branch_id=?
         ORDER BY report_id DESC
         LIMIT } . $args->{limit},
         { Slice => +{} },
-        $branch_id
+        $args->{branch_id}
     );
     for (@$reports) {
         $_->{ctime} = Time::Piece->new($_->{ctime});
@@ -122,7 +116,7 @@ sub find {
     );
     my $args = $rule->validate(@_);
 
-    my $report = c->dbh->selectrow_hashref(q{SELECT branch.project, branch.branch, * FROM report INNER JOIN branch ON (report.branch_id=branch.branch_id) WHERE report_id=?}, {}, $args->{report_id});
+    my $report = c->dbh->selectrow_hashref(q{SELECT branch.project, branch.branch, report.* FROM report INNER JOIN branch ON (report.branch_id=branch.branch_id) WHERE report_id=?}, {}, $args->{report_id});
     return $report;
 }
 

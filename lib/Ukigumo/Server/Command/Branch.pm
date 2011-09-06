@@ -45,7 +45,7 @@ sub lookup {
         branch_id => { isa => 'Int' },
     );
     my $args = $rule->validate(@_);
-    return c->dbh->selectrow_array( q{SELECT * FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
+    return c->dbh->selectrow_hashref( q{SELECT * FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
 }
 
 sub delete {

@@ -27,16 +27,20 @@ get '/project/{project}/{branch}' => sub {
     my $project = $args->{project};
     my $branch = $args->{branch};
 
+    my $branch_id = Ukigumo::Server::Command::Branch->find(
+        project => $args->{project},
+        branch  => $args->{branch},
+    );
     my $reports = Ukigumo::Server::Command::Report->list(
-        project => $project,
-        branch  => $branch,
-        limit   => 50,
+        branch_id => $branch_id,
+        limit     => 50,
     );
     return $c->render(
         'report_list.tt' => {
-            project => $project,
-            branch  => $branch,
-            reports => $reports,
+            project   => $project,
+            branch    => $branch,
+            branch_id => $branch_id,
+            reports   => $reports,
         }
     );
 };
@@ -47,7 +51,7 @@ get '/branch/delete' => sub {
     my $branch_id = $c->req->param('branch_id') || die;
     my $branch = Ukigumo::Server::Command::Branch->lookup(
         branch_id => $branch_id,
-    );
+    ) or die "Unknown branch: $branch_id";
     return $c->render(
         'branch_delete.tt' => {
             branch  => $branch,
@@ -59,7 +63,7 @@ post '/branch/delete' => sub {
 
     my $branch_id = $c->req->param('branch_id') || die;
     Ukigumo::Server::Command::Branch->delete(
-        branch_id => $args->{branch_id},
+        branch_id => $branch_id,
     );
     return $c->redirect('/');
 };

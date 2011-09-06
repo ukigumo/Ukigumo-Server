@@ -20,7 +20,7 @@
     [% END %]
     </table>
 
-	<a href="[% uri_for('/branch/delete', { branch_id => v.branch_id }) %]">Delete branch</a>
+	<a href="[% uri_for('/branch/delete', { branch_id => branch_id }) %]">Delete branch</a>
 </div>
 
 <hr class="space">
