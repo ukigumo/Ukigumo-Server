@@ -79,6 +79,7 @@ sub insert {
         repo     => { isa => 'Str', optional => 1 },
         revision => { isa => 'Str', optional => 1 },
         body     => { isa => 'Str', optional => 1 },
+        vc_log   => { isa => 'Str', optional => 1 },
     );
     my $args = $rule->validate(@_);
 

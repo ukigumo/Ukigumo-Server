@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS report (
     status    TINYINT UNSIGNED NOT NULL, -- 1: success, 2: fail, 3:na
     repo      TEXT,
     revision  VARCHAR(255),
+    vc_log    TEXT,
     body      TEXT,
     ctime     INT UNSIGNED NOT NULL,
     FOREIGN KEY (branch_id) REFERENCES branch (branch_id) ON DELETE CASCADE

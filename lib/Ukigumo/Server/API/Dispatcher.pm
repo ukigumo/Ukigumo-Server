@@ -48,6 +48,7 @@ post '/api/v1/report/add' => [
 	status   => { isa => 'Int' },
 	project  => { isa => 'Str' },
 	branch   => { isa => 'Str' },
+	vc_log   => { isa => 'Str', optional => 1 },
 	body     => { isa => 'Str', optional => 1 },
 	revision => { isa => 'Str' },
 	repo     => { isa => 'Str' },
