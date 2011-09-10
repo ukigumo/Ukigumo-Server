@@ -7,6 +7,8 @@ use SQL::Interp qw(:all);
 use Amon2::Declare;
 use URI::WithBase;
 use 5.010001;
+use Data::Validator;
+use Ukigumo::Server::Command::Branch;
 
 sub get_last_status {
 	my $class = shift;
