@@ -32,4 +32,10 @@
 
 <hr class="space">
 
+<div class="span-23 last">
+    <ul>
+        <li><a href="[% uri_for('/docs/about') %]">about Ukigumo(In Japanese)</a></li>
+    </ul>
+</div>
+
 [% END %]

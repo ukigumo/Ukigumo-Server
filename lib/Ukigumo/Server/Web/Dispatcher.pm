@@ -79,5 +79,9 @@ get '/report/{report_id:\d+}' => sub {
     }
 };
 
+get '/docs/about' => sub {
+    my $c = shift;
+    $c->render('docs/about.tt');
+};
 
 1;
