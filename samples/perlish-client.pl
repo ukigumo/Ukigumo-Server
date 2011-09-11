@@ -15,6 +15,7 @@ sub run {
 my $body = tee_merged {
     eval {
         run("git pull");
+        run("git status");
         run("perl Makefile.PL");
         run("make test");
     };
@@ -35,7 +36,7 @@ print "'$revision', '$repository', '$branch'\n";
 
 my $ua = LWP::UserAgent->new();
 my $res = $ua->post(
-    "$UKIGUMO_SEVER/api/v1/report/add",
+    "$UKIGUMO_SERVER/api/v1/report/add",
     [
         status   => $failed ? 2 : 1,             # status code: SUCCESS:1, FAIL:2, N/A:3
         project  => 'MyProj',      # project name
