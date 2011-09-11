@@ -80,14 +80,16 @@ get '/report/{report_id:\d+}' => sub {
     }
 };
 
-get '/docs/about' => sub {
-    my $c = shift;
+get '/docs/{path:[a-z0-9_-]+}' => sub {
+    my ($c, $args) = @_;
+    my $path = $args->{path} // die;
 
-    $c->render('docs/about.tt', {
+    $c->render('docs.tt', {
 		doc => do {
 			require Text::Xatena; # lazy load
 			my $src = do {
-				open my $fh, '<:utf8', 'docs/about.txt' or die "Cannot open file: docs/about.txt: $!";
+                my $fname = "docs/$path.txt";
+				open my $fh, '<:utf8', $fname or die "Cannot open file: $fname: $!";
 				do { local $/; <$fh> };
 			};
 			my $tnx = Text::Xatena->new();
