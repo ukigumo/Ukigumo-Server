@@ -9,6 +9,7 @@ use Time::Piece;
 use Ukigumo::Server::Command::Report;
 use Ukigumo::Server::Command::Branch;
 use Data::Validator;
+use Text::Xslate::Util qw(mark_raw);
 
 any '/' => sub {
     my ($c) = @_;
@@ -81,7 +82,19 @@ get '/report/{report_id:\d+}' => sub {
 
 get '/docs/about' => sub {
     my $c = shift;
-    $c->render('docs/about.tt');
+
+    $c->render('docs/about.tt', {
+		doc => do {
+			require Text::Xatena; # lazy load
+			my $src = do {
+				open my $fh, '<:utf8', 'docs/about.txt' or die "Cannot open file: docs/about.txt: $!";
+				do { local $/; <$fh> };
+			};
+			my $tnx = Text::Xatena->new();
+			my $doc = $tnx->format($src);
+			mark_raw($doc)
+		}
+	});
 };
 
 1;
