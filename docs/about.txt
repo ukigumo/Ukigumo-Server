@@ -1,68 +1,27 @@
-Ukigumo はゆるふわであることを第一目標として設計されているので、適当にサーバーを設置していれば、プロジェクトの担当者がそれぞれすきなタイミングでつかえるようになります。
+*About Ukigumo server
 
-まあ、なんか気軽に設置して気軽につかえるやつがいまいまほしかったのでつくったというかんじです。
+Ukigumo server is a yet another minimalistic "Continious testing server".
 
-クライアント側とサーバー側は完全に分離しているんで、クライアント側は自分のすきな実装でできるし、サーバーの管理者の世話になる必要がまったくありません。その方が楽でしょうということで。というか俺は管理したくないので。いや、するけど、できるだけ最低限の手間でやりたいじゃん。セットアップも超簡単にできるようにしてあるというか、むしろ dotcloud とかにすぐに設置できるレベルですよ。
+Ukigumo server is a:
+- storage of the continious testing result
+- provides JSON APIs
+- beautifule views
+- simply setup
+- supports dotcloud
 
-で、クライアント側はどうやってつかいはじめたらいいかということだけども、非常に簡単で、以下のように一個 HTTP Request をおくるだけでいいです。プロジェクトなどの登録は不要です。find_or_create 的につくられます。ゆるふわなんで。
->|perl|
-#!/usr/bin/perl
-use strict;
-use warnings;
-use utf8;
+Ukigumo server is *not* a:
+- test runner
+- beautiful views
 
-use LWP::UserAgent;
+You can send a test results to Ukigumo server. Ukigumo server stores the result, and display it.
+(Ukigumo server find_or_create's 'project', 'branch' automatically.)
 
-my $ua = LWP::UserAgent->new();
-$ua->post('http://localhost:9052/api/v1/report/add', [
-    status => 1, # status code: SUCCESS:1, FAIL:2, N/A:3
-    project => 'MyProj', # project name
-    branch  => 'master', # branch name
-    vc_log  => <<'...',  # optional
-commit 80202d0952c6f7d9aeb6dc24a12484e47e212c28
-Author: Tokuhiro Matsuno <tokuhirom@gmail.com>
-Date:   Tue Sep 6 10:11:08 2011 +0900
+* Client code
 
-do not index production.pl
-...
-    body => <<'...',     # test report body
-t/00_compile.t .. 
-1..1
-ok 1 - use Acme::Failing;
-ok
-t/01_fail.t ..... 
-not ok 1 - oops..
-1..1
+This is a example code of Ukigumo client code. You can run the code by cron(1). The client code have few deps. very easy.
 
-#   Failed test 'oops..'
-#   at t/01_fail.t line 6.
-# Looks like you failed 1 test of 1.
-Dubious, test returned 1 (wstat 256, 0x100)
-Failed 1/1 subtests 
+You can add a notification on the bottom of client code. I notify to Ikachan server on working.
 
-Test Summary Report
--------------------
-t/01_fail.t   (Wstat: 256 Tests: 1 Failed: 1)
-  Failed test:  1
-  Non-zero exit status: 1
-Files=2, Tests=2,  0 wallclock secs ( 0.04 usr  0.01 sys +  0.05 cusr  0.02 csys =  0.12 CPU)
-Result: FAIL
-...
-    revision => '80202d0952c6f7d9aeb6dc24a12484e47e212c28', # revision hash/number
-    repo     => 'git://github.com/tokuhirom/Acme-Failing.git', # repository uri
-]);
-||<
-
-ゆるふわなんで、へんなプロジェクトつくっちゃったりする日もあるとおもいますけど、そういうときは適当にすぐけせるんで、まあ適当にけせばいいんじゃないすかね。
-
-https://github.com/ukigumo/Ukigumo-Client/
-Ukigumo::Client をつかうと、このクライアント側の部分を
-- git の更新
-- prove によるテスト
-- IRC への通知
-ぐらいまでやってくれますけど、まあこれをつかう必要はかならずしもなくて、API をたたいてくれればそれでいいです。API つかうより楽なライブラリを一応用意してあるってだけなんです。
-
-いうたら、こんぐらい単純にできるんです。とても簡単でしょ。これ、shell script で hirose31 さんとかだったらぺろってかくところなんでしょうけど、僕は shell script 力がひくくて無理でした。Ukigumo::Client はこのぐらいのことやってるスクリプトをダラダラとながくかいてるだけなんですよ。。というかシンプルにかいてみようとおもってかいたらおもった以上にみじかくかけてしまってちょっとショックをうけているレベルですよ。
 >|perl|
 #!/usr/bin/perl
 use strict;
@@ -70,6 +29,8 @@ use warnings;
 use utf8;
 use Capture::Tiny qw(tee_merged);
 use LWP::UserAgent;
+
+my $UKIGUMO_URL = 'http://localhost:9052';
 
 my $failed = 0;
 sub run {
@@ -99,7 +60,7 @@ print "'$revision', '$repository', '$branch'\n";
 
 my $ua = LWP::UserAgent->new();
 my $res = $ua->post(
-    'http://localhost:9052/api/v1/report/add',
+    "$UKIGUMO_URL/api/v1/report/add",
     [
         status   => $failed ? 2 : 1,             # status code: SUCCESS:1, FAIL:2, N/A:3
         project  => 'MyProj',      # project name
@@ -110,7 +71,7 @@ my $res = $ua->post(
     ]
 );
 $res->is_success or die $res->as_string;
-||<
-こんぐらいのスクリプトをかいたら、あとは適当に cron でぶんまわしておけば、FAIL したときに表示はされますね。でもこれだけだとあんま意味ないんで、id:yappo の <a href="http://blog.yappo.jp/yappo/archives/000760.html">ikachan</a> サーバーと併用するか、im.kayac とかつかうとかした方がいいとおもいます。そんぐらいは自分でかけるよね?
 
-まあそんなこんなで超簡単に設置できるし、超簡単にクライアント側もかけるからお気軽につかってみたらいいんじゃないすかね。
+# and you can send a report to the developers.
+#  by ikachan, im.kayac.com, mail, etc.
+||<
