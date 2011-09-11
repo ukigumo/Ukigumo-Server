@@ -10,6 +10,7 @@ use Ukigumo::Server::Command::Report;
 use Ukigumo::Server::Command::Branch;
 use Data::Validator;
 use Text::Xslate::Util qw(mark_raw);
+use File::Spec;
 
 any '/' => sub {
     my ($c) = @_;
@@ -88,10 +89,15 @@ get '/docs/{path:[a-z0-9_-]+}' => sub {
 		doc => do {
 			require Text::Xatena; # lazy load
 			my $src = do {
-                my $fname = "docs/$path.txt";
+                my $fname = File::Spec->catfile($c->base_dir, "docs/$path.txt");
 				open my $fh, '<:utf8', $fname or die "Cannot open file: $fname: $!";
 				do { local $/; <$fh> };
 			};
+            $src =~ s{^#include "([^"]+)"}{
+                my $fname = File::Spec->catfile($c->base_dir, $1);
+				open my $fh, '<:utf8', $fname or die "Cannot open file: $fname: $!";
+				"\n>|perl|\n" . do { local $/; <$fh> } . "\n||<\n";
+            }mge;
 			my $tnx = Text::Xatena->new();
 			my $doc = $tnx->format($src);
 			mark_raw($doc)

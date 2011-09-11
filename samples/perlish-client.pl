@@ -5,6 +5,8 @@ use utf8;
 use Capture::Tiny qw(tee_merged);
 use LWP::UserAgent;
 
+my $UKIGUMO_SERVER = 'http://localhost:9052';
+
 my $failed = 0;
 sub run {
     system(@_)==0 or die "FAIL: @_";
@@ -33,7 +35,7 @@ print "'$revision', '$repository', '$branch'\n";
 
 my $ua = LWP::UserAgent->new();
 my $res = $ua->post(
-    'http://localhost:9052/api/v1/report/add',
+    "$UKIGUMO_SEVER/api/v1/report/add",
     [
         status   => $failed ? 2 : 1,             # status code: SUCCESS:1, FAIL:2, N/A:3
         project  => 'MyProj',      # project name
@@ -45,4 +47,6 @@ my $res = $ua->post(
 );
 $res->is_success or die $res->as_string;
 
+# and you can send a report to the developers.
+#  by ikachan, im.kayac.com, mail, etc.
 
