@@ -1,5 +1,15 @@
 [% WRAPPER 'include/layout.tt' %]
 
+
+<link href="[% uri_for('/static/google-code-prettify/prettify.css') %]" rel="stylesheet" type="text/css" media="screen" />
+<script src="[% uri_for('/static/google-code-prettify/prettify.js') %]"></script>
+<script>
+    $(function () {
+        $('pre.code').addClass('prettyprint');
+        prettyPrint();
+    });
+</script>
+
 <p>Ukigumo はゆるふわであることを第一目標として設計されているので、適当にサーバーを設置していれば、プロジェクトの担当者がそれぞれすきなタイミングでつかえるようになります。</p><p>まあ、なんか気軽に設置して気軽につかえるやつがいまいまほしかったのでつくったというかんじです。</p><p>クライアント側とサーバー側は完全に分離しているんで、クライアント側は自分のすきな実装でできるし、サーバーの管理者の世話になる必要がまったくありません。その方が楽でしょうということで。というか俺は管理したくないので。いや、するけど、できるだけ最低限の手間でやりたいじゃん。セットアップも超簡単にできるようにしてあるというか、むしろ dotcloud とかにすぐに設置できるレベルですよ。</p><p>で、クライアント側はどうやってつかいはじめたらいいかということだけども、非常に簡単で、以下のように一個 HTTP Request をおくるだけでいいです。プロジェクトなどの登録は不要です。find_or_create 的につくられます。ゆるふわなんで。</p>
 <pre class="code lang-perl">#!/usr/bin/perl
 use strict;
