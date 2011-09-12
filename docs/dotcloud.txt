@@ -6,12 +6,12 @@ You can deploy a Ukigumo server very easy.
 2nd, you would setup dotcloud cli.
 
 3rd, just deploy it with:
->||
-% dotcloud create <i>fusihara-</i>ukigumo
-% dotcloud push <i>fusihara-</i>ukigumo
-||<
+
+	% dotcloud create my-ukigumo
+	% dotcloud push my-ukigumo
 
 Very easy. If you want to use ukigumo as a private mode, you should put a following line on app.psgi.
->||
-enable "Auth::Basic", authenticator => sub { return $_[0] eq 'admin' && $_[1] eq 'admin'; }
-||<
+
+	enable "Auth::Basic", authenticator => sub { return $_[0] eq 'admin' && $_[1] eq 'p4ssw0rd'; }
+
+That's all.

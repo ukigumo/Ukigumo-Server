@@ -9,7 +9,6 @@ use Time::Piece;
 use Ukigumo::Server::Command::Report;
 use Ukigumo::Server::Command::Branch;
 use Data::Validator;
-use Text::Xslate::Util qw(mark_raw);
 use File::Spec;
 
 any '/' => sub {
@@ -84,24 +83,11 @@ get '/report/{report_id:\d+}' => sub {
 get '/docs/{path:[a-z0-9_-]+}' => sub {
     my ($c, $args) = @_;
     my $path = $args->{path} // die;
+    require Ukigumo::Server::Command::Docs;
+    my $html = Ukigumo::Server::Command::Docs->render($path);
 
     $c->render('docs.tt', {
-		doc => do {
-			require Text::Xatena; # lazy load
-			my $src = do {
-                my $fname = File::Spec->catfile($c->base_dir, "docs/$path.txt");
-				open my $fh, '<:utf8', $fname or die "Cannot open file: $fname: $!";
-				do { local $/; <$fh> };
-			};
-            $src =~ s{^#include "([^"]+)"}{
-                my $fname = File::Spec->catfile($c->base_dir, $1);
-				open my $fh, '<:utf8', $fname or die "Cannot open file: $fname: $!";
-				"\n>|perl|\n" . do { local $/; <$fh> } . "\n||<\n";
-            }mge;
-			my $tnx = Text::Xatena->new();
-			my $doc = $tnx->format($src);
-			mark_raw($doc)
-		}
+		doc => $html 
 	});
 };
 

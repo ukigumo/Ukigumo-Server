@@ -1,22 +1,26 @@
-*About Ukigumo server
+About Ukigumo server
+====================
 
 Ukigumo server is a yet another minimalistic "Continious testing server".
 
 Ukigumo server is a:
-- storage of the continious testing result
-- provides JSON APIs
-- beautifule views
-- simply setup
-- supports dotcloud
+
+  * storage of the continious testing result
+  * provides JSON APIs
+  * beautifule views
+  * simply setup
+  * supports dotcloud
 
 Ukigumo server is *not* a:
-- test runner
-- beautiful views
+
+  * test runner
+  * beautiful views
 
 You can send a test results to Ukigumo server. Ukigumo server stores the result, and display it.
 (Ukigumo server find_or_create's 'project', 'branch' automatically.)
 
-* Client code
+Client code
+-----------
 
 This is a example code of Ukigumo client code. You can run the code by cron(1). The client code have few deps. very easy.
 

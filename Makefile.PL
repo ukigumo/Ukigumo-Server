@@ -17,7 +17,7 @@ WriteMakefile(
 		'Data::Validator' => 0.08,
 		'Plack::Middleware::Session' => 0,
 		'Ukigumo::Helper' => 0,
-		'Text::Xatena' => 0.11,
+		'Text::Markdown' => 1,
     },
     MIN_PERL_VERSION => '5.010000',
     (-d 'xt' and $ENV{AUTOMATED_TESTING} || $ENV{RELEASE_TESTING}) ? (
