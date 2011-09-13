@@ -1,6 +1,6 @@
 +{
     'DBI' => [
-        'dbi:SQLite:dbname=' . (-f '/home/dotcloud/' ? '/home/dotcloud/ukigumo.db' : 'deployment.db'),
+        'dbi:SQLite:dbname=' . (-d '/home/dotcloud/' ? '/home/dotcloud/ukigumo.db' : 'deployment.db'),
         '',
         '',
         +{
