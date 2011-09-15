@@ -10,7 +10,7 @@
     <div>[% report.vc_log | html | html_line_break %]</div>
     <hr />
     [% END %]
-	<pre>[% report.body %]</pre>
+	<pre>[% body %]</pre>
 </div>
 
 <hr class="space">

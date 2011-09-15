@@ -18,6 +18,13 @@ footer {
         font-weight: bold;
     }
 
+.line-anchor {
+    color: #dddddd;
+}
+.line-anchor:hover {
+    color: #aaaaaa;
+}
+
 /* smart phones */
 @media screen and (max-device-width: 480px) {
 }

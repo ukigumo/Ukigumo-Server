@@ -10,6 +10,7 @@ use Ukigumo::Server::Command::Report;
 use Ukigumo::Server::Command::Branch;
 use Data::Validator;
 use File::Spec;
+use Ukigumo::Server::Util;
 
 any '/' => sub {
     my ($c) = @_;
@@ -74,7 +75,13 @@ get '/report/{report_id:\d+}' => sub {
     my $report_id = $args->{report_id};
     my $report = Ukigumo::Server::Command::Report->find( report_id => $report_id );
     if ($report) {
-        return $c->render('show_report.tt', {report => $report});
+        return $c->render(
+            'show_report.tt',
+            {
+                report => $report,
+                body => Ukigumo::Server::Util::make_line_link( $report->{body} )
+            }
+        );
     } else {
         return $c->res_404();
     }
