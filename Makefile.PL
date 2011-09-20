@@ -15,7 +15,7 @@ WriteMakefile(
 		'DBI' => 0,
 		'DBD::SQLite' => 1.33,
 		'Data::Validator' => 0.08,
-		'Plack::Middleware::Session' => 0,
+		'Plack::Middleware::Session' => 0.14,
 		'Ukigumo::Helper' => 0,
 		'Text::Markdown' => 1,
     },

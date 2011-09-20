@@ -27,6 +27,8 @@ our @EXPORT = qw//;
 {
 	my $c = Ukigumo::Server->new;
 	$c->setup_schema();
+    $c->dbh->do(q{DELETE FROM report});
+    $c->dbh->do(q{DELETE FROM branch});
 }
 
 1;
