@@ -54,7 +54,9 @@ sub delete {
         branch_id => { isa => 'Int' },
     );
     my $args = $rule->validate(@_);
-    return c->dbh->selectrow_array( q{DELETE FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
+    c->dbh->selectrow_array( q{DELETE FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
+    c->dbh->selectrow_array( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
+    return;
 }
 
 sub list {
