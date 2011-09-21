@@ -20,6 +20,20 @@
     [% END %]
     </table>
 
+	<div class="pager">
+	[% IF pager.prev_page %]
+		<a href="[% uri_with({page => pager.prev_page}) %]">←</a>
+	[% ELSE %]
+		←
+	[% END %]
+	|[% pager.current_page %]|
+	[% IF pager.next_page %]
+		<a href="[% uri_with({page => pager.next_page}) %]">→</a>
+	[% ELSE %]
+		→
+	[% END %]
+	</div>
+
 	<a href="[% uri_for('/branch/delete', { branch_id => branch_id }) %]">Delete branch</a>
 </div>
 

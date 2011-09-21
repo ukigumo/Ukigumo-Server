@@ -28,14 +28,17 @@ get '/project/{project}/{branch}' => sub {
     my ($c, $args) = @_;
     my $project = $args->{project};
     my $branch = $args->{branch};
+    my $page = $c->req->param('page') || 1;
+    my $limit = 50;
 
     my $branch_id = Ukigumo::Server::Command::Branch->find(
         project => $args->{project},
         branch  => $args->{branch},
     );
-    my $reports = Ukigumo::Server::Command::Report->list(
+    my ($reports, $pager) = Ukigumo::Server::Command::Report->list(
         branch_id => $branch_id,
-        limit     => 50,
+        page      => $page,
+        limit     => $limit,
     );
     return $c->render(
         'report_list.tt' => {
@@ -43,6 +46,7 @@ get '/project/{project}/{branch}' => sub {
             branch    => $branch,
             branch_id => $branch_id,
             reports   => $reports,
+            pager     => $pager,
         }
     );
 };

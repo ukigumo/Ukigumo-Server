@@ -9,6 +9,7 @@ use URI::WithBase;
 use 5.010001;
 use Data::Validator;
 use Ukigumo::Server::Command::Branch;
+use Data::Page::NoTotalEntries;
 
 sub get_last_status {
 	my $class = shift;
@@ -35,20 +36,35 @@ sub list {
     state $rule = Data::Validator->new(
         branch_id  => { isa => 'Int' },
         limit   => { isa => 'Int', default => 50 },
+        page    => { isa => 'Int', default => 1 },
     );
     my $args = $rule->validate(@_);
 
     my $reports = c->dbh->selectall_arrayref(
         q{SELECT report_id, revision, status, ctime FROM report WHERE branch_id=?
         ORDER BY report_id DESC
-        LIMIT } . $args->{limit},
+        LIMIT } . ($args->{limit} + 1) . " OFFSET " . $args->{limit}*($args->{page}-1),
         { Slice => +{} },
         $args->{branch_id}
     );
+	my $has_next = do {
+		if (@$reports == $args->{limit}+1) {
+			pop @$reports;
+			1;
+		} else {
+			0;
+		}
+	};
+	my $pager = Data::Page::NoTotalEntries->new(
+		has_next => $has_next,
+		entries_per_page => $args->{limit},
+		current_page => $args->{page},
+		entries_on_this_page => @$reports,
+	);
     for (@$reports) {
         $_->{ctime} = Time::Piece->new($_->{ctime});
     }
-    return $reports;
+    return wantarray ? ($reports, $pager) : $reports;
 }
 
 sub search {

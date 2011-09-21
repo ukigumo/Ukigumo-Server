@@ -18,6 +18,7 @@ WriteMakefile(
 		'Plack::Middleware::Session' => 0.14,
 		'Ukigumo::Helper' => 0,
 		'Text::Markdown' => 1,
+		'Data::Page::NoTotalEntries'     => 0.02,
     },
     MIN_PERL_VERSION => '5.010000',
     (-d 'xt' and $ENV{AUTOMATED_TESTING} || $ENV{RELEASE_TESTING}) ? (

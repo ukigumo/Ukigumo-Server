@@ -25,6 +25,10 @@ footer {
     color: #aaaaaa;
 }
 
+.pager {
+	text-align: center;
+}
+
 /* smart phones */
 @media screen and (max-device-width: 480px) {
 }
