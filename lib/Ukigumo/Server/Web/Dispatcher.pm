@@ -25,7 +25,7 @@ any '/' => sub {
     $c->render( 'index.tt', { projects => $projects, now => time(), project => $project } );
 };
 
-get '/project/{project}/{branch}' => sub {
+get '/project/{project}/{branch:[A-Za-z0-9/_-]+}' => sub {
     my ($c, $args) = @_;
     my $project = $args->{project};
     my $branch = $args->{branch};
