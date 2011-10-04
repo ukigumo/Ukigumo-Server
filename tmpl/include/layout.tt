@@ -8,9 +8,10 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"]]>
 	<meta name="robots" content="noindex,nofollow,noarchive" />
     <meta name="format-detection" content="telephone=no" />
-    <link href="[% uri_for('/static/css/bootstrap.min.css') %]" rel="stylesheet" type="text/css" media="screen" />
-    <link href="[% uri_for('/static/css/main.css') %]" rel="stylesheet" type="text/css" media="screen" />
+    <link href="[% uri_for('/static/less/bootstrap/bootstrap.less') %]" rel="stylesheet/less" media="screen" />
     <script src="[% uri_for('/static/js/jquery-1.6.3.min.js') %]"></script>
+    <script src="[% uri_for('/static/js/less-1.1.3.min.js') %]"></script>
+    <link href="[% uri_for('/static/css/main.css') %]" rel="stylesheet" type="text/css" media="screen" />
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
