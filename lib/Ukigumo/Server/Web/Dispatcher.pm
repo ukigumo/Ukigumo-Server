@@ -16,12 +16,13 @@ any '/' => sub {
     my ($c) = @_;
 
     my %where;
-    if (my $project = $c->req->param('project')) {
+    my $project = $c->req->param('project');
+    if ($project) {
         $where{project} = $project;
     }
     my $projects = Ukigumo::Server::Command::Branch->list(%where);
 
-    $c->render( 'index.tt', { projects => $projects, now => time() } );
+    $c->render( 'index.tt', { projects => $projects, now => time(), project => $project } );
 };
 
 get '/project/{project}/{branch}' => sub {

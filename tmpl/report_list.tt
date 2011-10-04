@@ -2,8 +2,9 @@
 
 <hr class="space">
 
-<div class="span-23 last">
-    <h1>Reports for [% project %] [[% branch %]]</h1>
+<section>
+<div class="row">
+    <h1>Reports for <a href="[% uri_for('/', {project => project}) %]">[% project %]</a> [[% branch %]]</h1>
 
     <table>
         <tr>
@@ -13,7 +14,7 @@
         </tr>
     [% FOR v IN reports %]
         <tr>
-            <td>[% v.revision %]</td>
+            <td>[% v.revision || '-' %]</td>
             <td style="color: [% v.status | status_color %]">[% v.status | status_str %] </td>
             <td><a href="[% uri_for('/report/' _ v.report_id) %]">[% v.ctime.strftime('%Y-%m-%d(%a) %T') %]</a></td>
         </tr>
@@ -36,7 +37,6 @@
 
 	<a href="[% uri_for('/branch/delete', { branch_id => branch_id }) %]">Delete branch</a>
 </div>
-
-<hr class="space">
+</section>
 
 [% END %]

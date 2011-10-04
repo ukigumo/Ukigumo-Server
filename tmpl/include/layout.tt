@@ -8,9 +8,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"]]>
 	<meta name="robots" content="noindex,nofollow,noarchive" />
     <meta name="format-detection" content="telephone=no" />
-    <link href="[% uri_for('/static/css/blueprint/screen.css') %]" rel="stylesheet" type="text/css" media="screen" />
-    <link href="[% uri_for('/static/css/blueprint/print.css') %]" rel="stylesheet" type="text/css" media="print" />
-    <!--[if lt IE 8]><link rel="stylesheet" href="[% uri_for('/static/css/blueprint/ie.css') %]" type="text/css" media="screen, projection"><![endif]--> 
+    <link href="[% uri_for('/static/css/bootstrap.min.css') %]" rel="stylesheet" type="text/css" media="screen" />
     <link href="[% uri_for('/static/css/main.css') %]" rel="stylesheet" type="text/css" media="screen" />
     <script src="[% uri_for('/static/js/jquery-1.6.3.min.js') %]"></script>
     <!--[if lt IE 9]>
@@ -19,9 +17,13 @@
 </head>
 <body[% IF bodyID %] class="[% bodyID %]"[% END %]>
     <div class="container">
-        <header>
-            <a href="[% uri_for('/') %]">Ukigumo</a>
-        </header>
+        <div class="topbar">
+            <div class="topbar-inner">
+                <div class="container">
+                    <h3><a href="[% uri_for('/') %]">Ukigumo</a></h3>
+                </div>
+            </div>
+        </div>
         <div id="main">
             [% content %]
         </div>
