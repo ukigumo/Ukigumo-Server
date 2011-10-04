@@ -40,11 +40,16 @@
 
 <section class="docs">
 <div class="row">
-    <ul>
-        <li><a href="[% uri_for('/docs/about') %]">about Ukigumo(In English)</a></li>
-        <li><a href="[% uri_for('/docs/dotcloud') %]">Deploy Ukigumo-Server to the dotcloud</a></li>
-        <li><a href="[% uri_for('/docs/about-ja') %]">about Ukigumo(In Japanese)</a></li>
-    </ul>
+    <div class="span10">
+        <ul>
+            <li><a href="[% uri_for('/docs/about') %]">about Ukigumo(In English)</a></li>
+            <li><a href="[% uri_for('/docs/dotcloud') %]">Deploy Ukigumo-Server to the dotcloud</a></li>
+            <li><a href="[% uri_for('/docs/about-ja') %]">about Ukigumo(In Japanese)</a></li>
+        </ul>
+    </div>
+    <div class="span6">
+        <img src="[% uri_for('/static/img/ukigumo-chan.png') %]" alt="Ukigumo chan" />
+    </div>
 </div>
 </section>
 
