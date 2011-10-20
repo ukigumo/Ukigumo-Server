@@ -29,6 +29,14 @@ footer {
 	text-align: center;
 }
 
+code {
+    line-height: 18px;
+}
+
+#main {
+    margin-top: 50px;
+}
+
 /* smart phones */
 @media screen and (max-device-width: 480px) {
 }
