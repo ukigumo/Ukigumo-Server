@@ -15,7 +15,6 @@
     <h2><a href="[% uri_for('/', {project => project_name}) %]">[% project_name %]</a></h2>
     <table>
     <tr>
-        <th>project</th>
         <th>branch</th>
         <th>revision</th>
         <th>status</th>
@@ -23,7 +22,6 @@
     </tr>
         [% FOR v IN projects.item(project_name) %]
         <tr>
-            <td><a href="[% uri_for('/', {project => v.project}) %]">[% v.project %]</a></td>
             <td><a href="[% uri_for('/project/' _ uri(v.project) _ '/' _ uri(v.branch)) %]">[% v.branch || '-' %]</a></td>
             <td>[% v.revision || '-' %]</td>
             <td style="color: [% v.status | status_color %]">[% v.status | status_str %] </td>
