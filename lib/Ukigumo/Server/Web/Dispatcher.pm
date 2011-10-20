@@ -20,9 +20,13 @@ any '/' => sub {
     if ($project) {
         $where{project} = $project;
     }
-    my $projects = Ukigumo::Server::Command::Branch->list(%where);
+    my $project_src = Ukigumo::Server::Command::Branch->list(%where);
+    my %projects = ();
+    for my $project (@$project_src) {
+        push @{$projects{$project->{project}}}, $project;
+    }
 
-    $c->render( 'index.tt', { projects => $projects, now => time(), project => $project } );
+    $c->render( 'index.tt', { now => time(), project => $project, projects => \%projects } );
 };
 
 get '/project/{project}/{branch:[A-Za-z0-9/_-]+}' => sub {

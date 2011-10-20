@@ -10,6 +10,9 @@
     <h1>This is a Ukigumo's top page.</h1>
     [% END %]
 
+    [% FOR project_name IN projects.keys() %]
+
+    <h2><a href="[% uri_for('/', {project => project_name}) %]">[% project_name %]</a></h2>
     <table>
     <tr>
         <th>project</th>
@@ -18,7 +21,7 @@
         <th>status</th>
         <th>date</th>
     </tr>
-    [% FOR v IN projects %]
+        [% FOR v IN projects.item(project_name) %]
         <tr>
             <td><a href="[% uri_for('/', {project => v.project}) %]">[% v.project %]</a></td>
             <td><a href="[% uri_for('/project/' _ uri(v.project) _ '/' _ uri(v.branch)) %]">[% v.branch || '-' %]</a></td>
@@ -31,8 +34,9 @@
                 </a>
             </td>
         </tr>
-    [% END %]
+        [% END %]
     </table>
+    [% END %]
 </div>
 </section>
 
