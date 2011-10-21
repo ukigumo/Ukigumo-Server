@@ -61,9 +61,6 @@ sub list {
 		current_page => $args->{page},
 		entries_on_this_page => @$reports,
 	);
-    for (@$reports) {
-        $_->{ctime} = Time::Piece->new($_->{ctime});
-    }
     return wantarray ? ($reports, $pager) : $reports;
 }
 

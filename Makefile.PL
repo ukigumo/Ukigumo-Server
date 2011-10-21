@@ -19,6 +19,9 @@ WriteMakefile(
 		'Ukigumo::Helper' => 0,
 		'Text::Markdown' => 1,
 		'Data::Page::NoTotalEntries'     => 0.02,
+		'Locale::Maketext::Lexicon' => 0,
+		'Time::Duration::ja' => 0,
+		'Time::Duration' => 0,
     },
     MIN_PERL_VERSION => '5.010000',
     (-d 'xt' and $ENV{AUTOMATED_TESTING} || $ENV{RELEASE_TESTING}) ? (

@@ -5,9 +5,7 @@
 <section>
 <div class="row">
     [% IF project %]
-    <h1>List of branches in [% project %]</h1>
-    [% ELSE %]
-    <h1>This is a Ukigumo's top page.</h1>
+    <h1>[% l('List of branches in %1', project) %]</h1>
     [% END %]
 
     [% FOR project_name IN projects.keys() %]
@@ -15,10 +13,10 @@
     <h2><a href="[% uri_for('/', {project => project_name}) %]">[% project_name %]</a></h2>
     <table>
     <tr>
-        <th>branch</th>
-        <th>revision</th>
-        <th>status</th>
-        <th>date</th>
+        <th>[% l('Branch') %]</th>
+        <th>[% l('Revision') %]</th>
+        <th>[% l('Status') %]</th>
+        <th>[% l('Date') %]</th>
     </tr>
         [% FOR v IN projects.item(project_name) %]
         <tr>
@@ -26,9 +24,9 @@
             <td>[% v.revision || '-' %]</td>
             <td style="color: [% v.status | status_color %]">[% v.status | status_str %] </td>
             <td>
-                <a href="/report/[% v.report_id %]" style="color:[% IF v.ctime.epoch() < now-24*60*60 %]gray[% ELSE %]blue[% END %]">
-                    [% v.ctime.strftime('%Y-%m-%d(%a) %T') %]
-                   [% IF v.ctime.epoch() < now-24*60*60 %][old][% END %]
+                <a href="/report/[% v.report_id %]" style="color:[% IF (v.ctime < (now - 24*60*60)) %]gray[% ELSE %]blue[% END %]">
+                    [% ago(now-v.ctime, 1) %]
+                   [% IF v.ctime < now - 24*60*60 %][old][% END %]
                 </a>
             </td>
         </tr>
@@ -44,9 +42,11 @@
 <div class="row">
     <div class="span10">
         <ul>
-            <li><a href="[% uri_for('/docs/about') %]">about Ukigumo(In English)</a></li>
-            <li><a href="[% uri_for('/docs/dotcloud') %]">Deploy Ukigumo-Server to the dotcloud</a></li>
-            <li><a href="[% uri_for('/docs/about-ja') %]">about Ukigumo(In Japanese)</a></li>
+            <li><a href="[% uri_for('/docs/about') %]">[% l('about Ukigumo(In English)') %]</a></li>
+            <li><a href="[% uri_for('/docs/dotcloud') %]">[% l('Deploy Ukigumo-Server to the dotcloud') %]</a></li>
+            [% IF lang()=='ja' %]
+            <li><a href="[% uri_for('/docs/about-ja') %]">浮雲ってなんですか?(開発者向け)</a></li>
+            [% END %]
         </ul>
     </div>
     <div class="span6">

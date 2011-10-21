@@ -72,9 +72,6 @@ sub list {
 
         @{ c->dbh->selectall_arrayref( $sql, { Slice => +{} }, @binds, ) };
     };
-    for my $project (@projects) {
-       $project->{ctime} = Time::Piece->new($project->{ctime});
-    }
     return \@projects;
 }
 

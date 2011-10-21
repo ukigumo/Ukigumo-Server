@@ -26,7 +26,8 @@ any '/' => sub {
         push @{$projects{$project->{project}}}, $project;
     }
 
-    $c->render( 'index.tt', { now => time(), project => $project, projects => \%projects } );
+    $c->render( 'index.tt',
+        { now => time(), project => $project, projects => \%projects } );
 };
 
 get '/project/{project}/{branch:[A-Za-z0-9/_-]+}' => sub {
@@ -52,6 +53,7 @@ get '/project/{project}/{branch:[A-Za-z0-9/_-]+}' => sub {
             branch_id => $branch_id,
             reports   => $reports,
             pager     => $pager,
+            now       => time(),
         }
     );
 };

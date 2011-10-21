@@ -4,19 +4,19 @@
 
 <section>
 <div class="row">
-    <h1>Reports for <a href="[% uri_for('/', {project => project}) %]">[% project %]</a> [[% branch %]]</h1>
+    <h1>[% l('Reports for') %] <a href="[% uri_for('/', {project => project}) %]">[% project %]</a> [[% branch %]]</h1>
 
     <table>
         <tr>
-            <th>Revision</th>
-            <th>Status</th>
-            <th>Date</th>
+            <th>[% l('Revision') %]</th>
+            <th>[% l('Status') %]</th>
+            <th>[% l('Date') %]</th>
         </tr>
     [% FOR v IN reports %]
         <tr>
             <td>[% v.revision || '-' %]</td>
             <td style="color: [% v.status | status_color %]">[% v.status | status_str %] </td>
-            <td><a href="[% uri_for('/report/' _ v.report_id) %]">[% v.ctime.strftime('%Y-%m-%d(%a) %T') %]</a></td>
+            <td><a href="[% uri_for('/report/' _ v.report_id) %]">[% ago(now-v.ctime, 1) %]</a></td>
         </tr>
     [% END %]
     </table>
@@ -35,7 +35,7 @@
 	[% END %]
 	</div>
 
-	<a href="[% uri_for('/branch/delete', { branch_id => branch_id }) %]">Delete branch</a>
+	<a href="[% uri_for('/branch/delete', { branch_id => branch_id }) %]">[% l('Delete test data for this branch') %]</a>
 </div>
 </section>
 

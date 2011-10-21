@@ -5,7 +5,7 @@
 <section>
 <div class="row">
     <h1><a href="[% uri_for('/', {project => report.project}) %]">[% report.project %]</a> [<a href="[% uri_for('/project/' _ uri(report.project) _ '/' _ uri(report.branch)) %]">[% report.branch %]</a>]([% report.revision %])
-	<span style="font-weight:bold; font-size: 130%; color: [% report.status | status_color %]">[% report.status | status_str %]</span>
+	<span style="font-weight:bold; font-size: 130%; color: [% report.status | status_color %]">[% report.status | status_str | l %]</span>
 	</h1>
     [% IF report.vc_log %]
     <div>[% report.vc_log | html | html_line_break %]</div>
