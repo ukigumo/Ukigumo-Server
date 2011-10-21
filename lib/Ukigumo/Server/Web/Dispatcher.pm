@@ -4,7 +4,7 @@ use warnings;
 use 5.010001;
 use Amon2::Web::Dispatcher::Lite;
 use SQL::Interp qw(:all);
-use URI::Escape qw(uri_unescape);
+use URI::Escape qw(uri_unescape uri_escape);
 use Time::Piece;
 use Ukigumo::Server::Command::Report;
 use Ukigumo::Server::Command::Branch;
@@ -18,7 +18,7 @@ any '/' => sub {
     my %where;
     my $project = $c->req->param('project');
     if ($project) {
-        $where{project} = $project;
+        return $c->redirect('/project/' . uri_escape($project));
     }
     my $project_src = Ukigumo::Server::Command::Branch->list(%where);
     my %projects = ();
@@ -28,6 +28,24 @@ any '/' => sub {
 
     $c->render( 'index.tt',
         { now => time(), project => $project, projects => \%projects } );
+};
+
+get '/project/{project}' => sub {
+    my ($c, $args) = @_;
+
+    my $project = $args->{project} || die;
+    my $project_src = Ukigumo::Server::Command::Branch->list(
+        project => $project,
+    );
+
+    $c->render(
+        'project/index.tt',
+        {
+            now          => time(),
+            project_name => $project,
+            projects     => $project_src,
+        }
+    );
 };
 
 get '/project/{project}/{branch:[A-Za-z0-9/_-]+}' => sub {

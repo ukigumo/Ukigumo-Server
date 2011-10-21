@@ -1,0 +1,9 @@
+[% WRAPPER 'include/layout.tt' WITH subtitle=project_name %]
+
+<section>
+<div class="row">
+    [% INCLUDE 'include/table/project.tt' WITH project_name=project_name, projects=projects %]
+</div>
+</section>
+
+[% END %]
