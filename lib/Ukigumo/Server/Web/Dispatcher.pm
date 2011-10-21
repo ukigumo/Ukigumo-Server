@@ -15,19 +15,22 @@ use Ukigumo::Server::Util;
 any '/' => sub {
     my ($c) = @_;
 
-    my %where;
     my $project = $c->req->param('project');
     if ($project) {
         return $c->redirect('/project/' . uri_escape($project));
     }
-    my $project_src = Ukigumo::Server::Command::Branch->list(%where);
+    my $project_src = Ukigumo::Server::Command::Branch->list();
     my %projects = ();
     for my $project (@$project_src) {
         push @{$projects{$project->{project}}}, $project;
     }
 
     $c->render( 'index.tt',
-        { now => time(), project => $project, projects => \%projects } );
+        {
+            now => time(),
+            projects => \%projects,
+        }
+    );
 };
 
 get '/project/{project}' => sub {
@@ -35,7 +38,7 @@ get '/project/{project}' => sub {
 
     my $project = $args->{project} || die;
     my $project_src = Ukigumo::Server::Command::Branch->list(
-        project => $project,
+       project => $project,
     );
 
     $c->render(
