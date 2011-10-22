@@ -96,8 +96,8 @@ __PACKAGE__->add_trigger(
         return $langs{ $c->lang };
     }
 
-    use Time::Duration;
-    use Time::Duration::ja;
+    use Time::Duration ();
+    use Time::Duration::ja ();
     sub duration {
         shift->lang eq 'ja' ? 'Time::Duration::ja' : 'Time::Duration';
     }
