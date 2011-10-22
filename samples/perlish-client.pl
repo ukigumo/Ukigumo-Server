@@ -41,7 +41,6 @@ my $res = $ua->post(
         status   => $failed ? 2 : 1,             # status code: SUCCESS:1, FAIL:2, N/A:3
         project  => 'MyProj',      # project name
         branch   => $branch,       # branch name
-        body     => $body,
         revision => $revision,
         repo     => $repository,
     ]

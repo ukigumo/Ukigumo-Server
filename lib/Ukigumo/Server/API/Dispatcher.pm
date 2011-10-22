@@ -70,7 +70,7 @@ post '/api/v1/report/add' => [
 
     # and insert it
     my $report_id = Ukigumo::Server::Command::Report->insert(
-        body => $body,
+        (defined $body ? (body => $body) : () ),
         %$args
     );
     my $url = Ukigumo::Server::Command::Report->get_url($report_id);
