@@ -10,13 +10,13 @@
     <meta name="format-detection" content="telephone=no" />
     <link href="[% uri_for('/static/less/bootstrap/bootstrap.less') %]" rel="stylesheet/less" media="screen" />
     <script src="[% uri_for('/static/js/jquery-1.6.3.min.js') %]"></script>
+    <link href="[% uri_for('/static/css/main.less') %]" rel="stylesheet/less" type="text/css" media="screen" />
     <script src="[% uri_for('/static/js/less-1.1.3.min.js') %]"></script>
-    <link href="[% uri_for('/static/css/main.css') %]" rel="stylesheet" type="text/css" media="screen" />
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body[% IF bodyID %] class="[% bodyID %]"[% END %]>
+<body[% IF bodyID %] id="[% bodyID %]"[% END %]>
     <div class="container">
         <div class="topbar">
             <div class="topbar-inner">

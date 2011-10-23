@@ -15,6 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: tmpl/docs/api.tt:5
+msgid "API Document for Ukigumo"
+msgstr "浮雲 API ドキュメント"
+
+#: tmpl/docs/api.tt:8
+msgid "Add new report"
+msgstr "レポートを追加する"
+
 #: tmpl/include/table/project.tt:4
 msgid "Branch"
 msgstr "ブランチ"
@@ -39,6 +47,10 @@ msgstr "浮雲サーバーを DotCloud に配置する方法(英語)"
 msgid "FAIL"
 msgstr "失敗"
 
+#: tmpl/docs/api.tt:14 tmpl/docs/api.tt:42
+msgid "Input"
+msgstr "入力"
+
 #:
 msgid "List of branches in %1"
 msgstr "%1 のブランチ一覧"
@@ -46,6 +58,10 @@ msgstr "%1 のブランチ一覧"
 #:
 msgid "NA"
 msgstr "不明。。"
+
+#: tmpl/docs/api.tt:27 tmpl/docs/api.tt:52
+msgid "Output"
+msgstr "出力"
 
 #. (branch.branch, branch.project)
 #: tmpl/branch_delete.tt:9
@@ -63,6 +79,10 @@ msgstr "リビジョン"
 #:
 msgid "SUCCESS"
 msgstr "成功"
+
+#: tmpl/docs/api.tt:38
+msgid "Search report"
+msgstr ""
 
 #: tmpl/include/table/project.tt:6 tmpl/report_list.tt:12
 msgid "Status"

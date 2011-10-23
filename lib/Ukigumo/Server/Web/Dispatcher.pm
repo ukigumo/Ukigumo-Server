@@ -119,6 +119,11 @@ get '/report/{report_id:\d+}' => sub {
     }
 };
 
+get '/docs/api' => sub {
+    my ($c) = @_;
+    return $c->render('docs/api.tt');
+};
+
 get '/docs/{path:[a-z0-9_-]+}' => sub {
     my ($c, $args) = @_;
     my $path = $args->{path} // die;

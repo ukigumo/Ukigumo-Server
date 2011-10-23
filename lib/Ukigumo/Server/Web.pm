@@ -27,6 +27,10 @@ use Text::Xslate qw/mark_raw html_escape/;
                 c        => sub { Amon2->context() },
                 uri_with => sub { Amon2->context()->req->uri_with(@_) },
                 uri_for  => sub { Amon2->context()->uri_for(@_) },
+                abs_uri_for => sub {
+                    my $c = Amon2->context();
+                    URI::WithBase->new($c->uri_for(@_), $c->req->base)->abs;
+                },
                 lang     => sub {
                     Amon2->context->lang
                 },
