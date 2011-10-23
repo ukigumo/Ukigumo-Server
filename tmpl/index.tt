@@ -15,7 +15,9 @@
 <section class="docs">
 <div class="row">
     <div class="span10">
+        <h2>ドキュメント</h2>
         <ul>
+            <li><a href="[% uri_for('/docs/api') %]">[% l('API Document') %]</a></li>
             <li><a href="[% uri_for('/docs/about') %]">[% l('about Ukigumo(In English)') %]</a></li>
             <li><a href="[% uri_for('/docs/dotcloud') %]">[% l('Deploy Ukigumo-Server to the dotcloud') %]</a></li>
             [% IF lang()=='ja' %]

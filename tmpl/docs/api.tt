@@ -35,7 +35,7 @@
     </section>
 
     <section>
-        <h2>[% l('Search report') %]</h2>
+        <h2>[% l('Search Report') %]</h2>
         <p>[% abs_uri_for('/api/v1/report/search') %]</p>
         <div class="io">
             <div class="input">

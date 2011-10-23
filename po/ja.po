@@ -15,6 +15,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: tmpl/index.tt:20
+msgid "API Document"
+msgstr "API ドキュメント"
+
 #: tmpl/docs/api.tt:5
 msgid "API Document for Ukigumo"
 msgstr "浮雲 API ドキュメント"
@@ -39,7 +43,7 @@ msgstr "このブランチのテストデータを削除する"
 msgid "Delete!"
 msgstr "はい。本当に削除してください。"
 
-#: tmpl/index.tt:20
+#: tmpl/index.tt:22
 msgid "Deploy Ukigumo-Server to the dotcloud"
 msgstr "浮雲サーバーを DotCloud に配置する方法(英語)"
 
@@ -81,8 +85,8 @@ msgid "SUCCESS"
 msgstr "成功"
 
 #: tmpl/docs/api.tt:38
-msgid "Search report"
-msgstr ""
+msgid "Search Report"
+msgstr "レポートを検索する"
 
 #: tmpl/include/table/project.tt:6 tmpl/report_list.tt:12
 msgid "Status"
@@ -97,6 +101,6 @@ msgstr "実行すると %1 ブランチに関するすべてのテスト結果�
 msgid "Ukigumo"
 msgstr "浮雲"
 
-#: tmpl/index.tt:19
+#: tmpl/index.tt:21
 msgid "about Ukigumo(In English)"
 msgstr "浮雲ってなんですか?(英語)"
