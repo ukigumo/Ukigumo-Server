@@ -58,7 +58,7 @@ post '/api/v1/report/add' => [
     my $body;
     if (my $upload = $c->req->upload('body')) {
         my $fname = $upload->path;
-        open my $fh, '<:utf8', $fname or die "Cannot open file: $fname: $!";
+        open my $fh, '<:encoding(utf-8)', $fname or die "Cannot open file: $fname: $!";
         $body = do { local $/; <$fh> };
     }
 

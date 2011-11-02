@@ -14,7 +14,7 @@ sub render {
 
     my $src = do {
         my $fname = File::Spec->catfile($c->base_dir, "docs/$path.txt");
-        open my $fh, '<:utf8', $fname or die "Cannot open file: $fname: $!";
+        open my $fh, '<:encoding(utf-8)', $fname or die "Cannot open file: $fname: $!";
         do { local $/; <$fh> };
     };
     $src =~ s{^#include "([^"]+)"}{
