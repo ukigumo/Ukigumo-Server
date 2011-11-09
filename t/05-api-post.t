@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use utf8;
 use Test::More;
+use Test::Requires 'LWP::Protocol::PSGI', 'LWP::UserAgent', 'Capture::Tiny';
 use Capture::Tiny qw(tee_merged);
 use LWP::UserAgent;
 use Plack::Util;

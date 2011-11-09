@@ -22,6 +22,7 @@ WriteMakefile(
 		'Locale::Maketext::Lexicon' => 0,
 		'Time::Duration::ja' => 0,
 		'Time::Duration' => 0,
+		'Test::Requires' => 0,
     },
     MIN_PERL_VERSION => '5.010000',
     (-d 'xt' and $ENV{AUTOMATED_TESTING} || $ENV{RELEASE_TESTING}) ? (
