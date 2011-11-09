@@ -38,7 +38,5 @@ Ukigumo::Server::Command::Branch->delete(
     is($report_num, 0, 'report was deleted');
 }
 
-use Data::Dumper; warn Dumper($dat);
-
 done_testing;
 
