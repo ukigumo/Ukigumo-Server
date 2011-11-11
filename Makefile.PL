@@ -16,7 +16,7 @@ WriteMakefile(
 		'DBD::SQLite' => 1.33,
 		'Data::Validator' => 0.08,
 		'Plack::Middleware::Session' => 0.14,
-		'Ukigumo::Common' => '0.02',
+		'Ukigumo::Common' => '0.03',
 		'Text::Markdown' => 1,
 		'Data::Page::NoTotalEntries'     => 0.02,
 		'Locale::Maketext::Lexicon' => 0,
