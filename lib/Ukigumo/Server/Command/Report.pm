@@ -75,7 +75,7 @@ sub search {
     my $args = $rule->validate(@_);
     my %where = map { $_ => $args->{$_} } qw(project branch revision);
 
-    my ($sql, @bind) = sql_interp q{SELECT status, report_id FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id) WHERE }, \%where, q{ ORDER BY report_id LIMIT }, $args->{limit};
+    my ($sql, @bind) = sql_interp q{SELECT status, report_id, report.ctime FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id) WHERE }, \%where, q{ ORDER BY report_id LIMIT }, $args->{limit};
     return c->dbh->selectall_arrayref($sql, +{ Slice => {}}, @bind);
 }
 

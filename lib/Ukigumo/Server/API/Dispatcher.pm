@@ -39,6 +39,7 @@ get '/api/v1/report/search' => [
             map { +{
                 report_id => $_->{report_id},
                 status    => $_->{status},
+                ctime     => $_->{ctime},
             } } @$reports
         ]
     };
