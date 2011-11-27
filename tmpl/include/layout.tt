@@ -22,6 +22,11 @@
             <div class="topbar-inner">
                 <div class="container">
                     <h3><a href="[% uri_for('/') %]">[% l('Ukigumo') %]</a></h3>
+                    <ul class="nav">
+                        <li>
+                            <a href="[% uri_for('/recent') %]">Recent</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

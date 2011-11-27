@@ -33,6 +33,25 @@ any '/' => sub {
     );
 };
 
+get '/recent' => sub {
+    my ($c, $args) = @_;
+
+    my $page = $c->req->param('page') || 1;
+    my $limit = 50;
+
+    my ($reports, $pager) = Ukigumo::Server::Command::Report->recent_list(
+        page      => $page,
+        limit     => $limit,
+    );
+    return $c->render(
+        'recent.tt' => {
+            reports   => $reports,
+            pager     => $pager,
+            now       => time(),
+        }
+    );
+};
+
 get '/project/{project}' => sub {
     my ($c, $args) = @_;
 
