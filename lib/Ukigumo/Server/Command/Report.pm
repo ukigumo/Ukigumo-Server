@@ -26,7 +26,7 @@ q{SELECT status FROM report INNER JOIN branch ON (report.report_id=branch.last_r
         'branch.project' => $args->{project},
         'branch.branch'  => $args->{branch}
       },
-      q{ ORDER BY report_id LIMIT 1};
+      q{ ORDER BY report_id DESC LIMIT 1};
     my ($last_status) = c->dbh->selectrow_array($sql, {}, @bind);
 	return $last_status;
 }
@@ -107,7 +107,7 @@ sub search {
     my $args = $rule->validate(@_);
     my %where = map { $_ => $args->{$_} } qw(project branch revision);
 
-    my ($sql, @bind) = sql_interp q{SELECT status, report_id, report.ctime FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id) WHERE }, \%where, q{ ORDER BY report_id LIMIT }, $args->{limit};
+    my ($sql, @bind) = sql_interp q{SELECT status, report_id, report.ctime FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id) WHERE }, \%where, q{ ORDER BY report_id DESC LIMIT }, $args->{limit};
     return c->dbh->selectall_arrayref($sql, +{ Slice => {}}, @bind);
 }
 
