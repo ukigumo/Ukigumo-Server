@@ -27,11 +27,11 @@ msgstr "浮雲 API ドキュメント"
 msgid "Add new report"
 msgstr "レポートを追加する"
 
-#: tmpl/include/table/project.tt:4
+#: tmpl/include/table/project.tt:4 tmpl/recent.tt:12
 msgid "Branch"
 msgstr "ブランチ"
 
-#: tmpl/include/table/project.tt:7 tmpl/report_list.tt:13
+#: tmpl/include/table/project.tt:7 tmpl/recent.tt:15 tmpl/report_list.tt:13
 msgid "Date"
 msgstr "日付"
 
@@ -67,16 +67,24 @@ msgstr "不明。。"
 msgid "Output"
 msgstr "出力"
 
+#: tmpl/recent.tt:11
+msgid "Project"
+msgstr "プロジェクト"
+
 #. (branch.branch, branch.project)
 #: tmpl/branch_delete.tt:9
 msgid "Really delete a '%1' branch from '%2'?"
 msgstr "本当に %2 の %1 ブランチを削除しますか?"
 
+#: tmpl/recent.tt:7
+msgid "Recent reports"
+msgstr "最近のレポート"
+
 #: tmpl/report_list.tt:7
 msgid "Reports for"
 msgstr "レポート: "
 
-#: tmpl/include/table/project.tt:5 tmpl/report_list.tt:11
+#: tmpl/include/table/project.tt:5 tmpl/recent.tt:13 tmpl/report_list.tt:11
 msgid "Revision"
 msgstr "リビジョン"
 
@@ -88,7 +96,7 @@ msgstr "成功"
 msgid "Search Report"
 msgstr "レポートを検索する"
 
-#: tmpl/include/table/project.tt:6 tmpl/report_list.tt:12
+#: tmpl/include/table/project.tt:6 tmpl/recent.tt:14 tmpl/report_list.tt:12
 msgid "Status"
 msgstr "状態"
 

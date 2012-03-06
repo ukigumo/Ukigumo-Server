@@ -83,17 +83,18 @@ subtest 'api list' => sub {
 	is $res->code, 200;
 	note $res->content;
 	my $dat = decode_json($res->content);
+    for (@{$dat->{reports}}) { delete $_->{ctime}; }
     is_deeply $dat,
       {
         'reports' => [
             {
+                'status'    => 2,
+                'report_id' => 2
+            },
+            {
                 'status'    => 1,
                 'report_id' => 1
             },
-            {
-                'status'    => 2,
-                'report_id' => 2
-            }
         ]
       };
 };
