@@ -112,7 +112,7 @@ subtest 'api branch list' => sub {
 };
 
 subtest 'api branch delete' => sub {
-    my $res = $ua->get(
+    my $res = $ua->post(
         'http://localhost/api/v1/branch/delete?project=TestingProject&branch=master',
     );
 	is $res->code, 200;
