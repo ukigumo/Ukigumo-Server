@@ -33,7 +33,7 @@ get '/api/v1/branch/list' => [
     };
 };
 
-get '/api/v1/branch/delete' => [
+post '/api/v1/branch/delete' => [
 	project  => { isa => 'Str' },
 	branch   => { isa => 'Str' },
 ] => sub {
