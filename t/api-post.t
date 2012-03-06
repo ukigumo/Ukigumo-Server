@@ -99,5 +99,39 @@ subtest 'api list' => sub {
       };
 };
 
+subtest 'api branch list' => sub {
+    my $res = $ua->get(
+        'http://localhost/api/v1/branch/list?project=TestingProject',
+    );
+	is $res->code, 200;
+	note $res->content;
+	my $dat = decode_json($res->content);
+    is ref($dat->{branches}), 'ARRAY';
+    is 0+@{$dat->{branches}}, 1;
+    is $dat->{branches}->[0]->{branch}, 'master';
+};
+
+subtest 'api branch delete' => sub {
+    my $res = $ua->get(
+        'http://localhost/api/v1/branch/delete?project=TestingProject&branch=master',
+    );
+	is $res->code, 200;
+	note $res->content;
+	my $dat = decode_json($res->content);
+    is_deeply $dat, +{ };
+};
+
+subtest 'api branch list' => sub {
+    my $res = $ua->get(
+        'http://localhost/api/v1/branch/list?project=TestingProject',
+    );
+	is $res->code, 200;
+	note $res->content;
+	my $dat = decode_json($res->content);
+    is ref($dat->{branches}), 'ARRAY';
+    is 0+@{$dat->{branches}}, 0, 'removed';
+};
+
+
 done_testing;
 

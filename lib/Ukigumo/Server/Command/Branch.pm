@@ -68,7 +68,7 @@ sub list {
 
     my @projects = do {
         my ($sql, @binds) = 
-            sql_interp q{SELECT branch.project, branch.branch AS branch, report.report_id, report.status, report.revision, report.ctime FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) WHERE }, $args, q{ORDER BY last_report_id DESC};
+            sql_interp q{SELECT DISTINCT branch.project, branch.branch AS branch, report.report_id, report.status, report.revision, report.ctime FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) WHERE }, $args, q{ORDER BY last_report_id DESC};
 
         @{ c->dbh->selectall_arrayref( $sql, { Slice => +{} }, @binds, ) };
     };

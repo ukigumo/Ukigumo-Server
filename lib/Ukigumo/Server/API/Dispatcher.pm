@@ -21,6 +21,34 @@ sub get {
 	$router->connect($path, +{ code => $code, rule => $rule }, {method => 'GET'})
 }
 
+get '/api/v1/branch/list' => [
+	project  => { isa => 'Str' },
+] => sub {
+    my ($c, $args) = @_;
+
+    return +{
+        branches => scalar(Ukigumo::Server::Command::Branch->list(
+            %$args
+        ))
+    };
+};
+
+get '/api/v1/branch/delete' => [
+	project  => { isa => 'Str' },
+	branch   => { isa => 'Str' },
+] => sub {
+    my ($c, $args) = @_;
+
+    my $branch_id = Ukigumo::Server::Command::Branch->find(
+        %$args
+    );
+    Ukigumo::Server::Command::Branch->delete(
+        branch_id => $branch_id
+    );
+
+    return { };
+};
+
 get '/api/v1/report/search' => [
 	project  => { isa => 'Str' },
 	branch   => { isa => 'Str' },
