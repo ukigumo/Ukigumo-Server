@@ -34,6 +34,8 @@
             [% content %]
         </div>
         <footer>
+            Support <a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a>
+            format XML (<a href="/cc.xml">cc.xml</a>)<br />
             Powered by <a href="http://amon.64p.org/">Amon2</a>
         </footer>
     </div>

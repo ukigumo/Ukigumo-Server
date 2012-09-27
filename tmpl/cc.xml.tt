@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Projects>
+[% FOR project_name IN projects.keys() -%]
+    [% FOR v IN projects.item(project_name) -%]
+    <Project name="[% project_name %] - [% v.branch %]"
+             activity="Sleeping"
+             lastBuildStatus="[% v.status | status_cc_str %]"
+             lastBuildLabel="[% v.revision || '-' %]"
+             lastBuildTime="[% v.ctime | ctime_cc_str %]"
+             webUrl="[% abs_uri_for('/project/' _ uri(v.project) _ '/' _ uri(v.branch)) %]" />
+    [% END -%]
+[% END %]
+</Projects>
