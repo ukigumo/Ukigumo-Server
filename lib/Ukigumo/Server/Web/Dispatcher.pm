@@ -33,6 +33,23 @@ any '/' => sub {
     );
 };
 
+get '/cc.xml' => sub {
+    my ($c) = @_;
+
+    my $project_src = Ukigumo::Server::Command::Branch->list();
+    my %projects = ();
+    for my $project (@$project_src) {
+        push @{$projects{$project->{project}}}, $project;
+    }
+
+    $c->render( 'cc.xml.tt',
+        {
+            now => time(),
+            projects => \%projects,
+        }
+    );
+};
+
 get '/recent' => sub {
     my ($c, $args) = @_;
 

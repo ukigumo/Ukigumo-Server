@@ -4,6 +4,8 @@ use warnings;
 use parent qw/Ukigumo::Server Amon2::Web/;
 use File::Spec;
 
+use Ukigumo::Constants;
+
 # dispatcher
 use Ukigumo::Server::Web::Dispatcher;
 sub dispatch {
@@ -41,6 +43,19 @@ use Text::Xslate qw/mark_raw html_escape/;
                     my $base = shift;
                     my @args = map { html_escape $_ } @_;    # escape arguments
                     mark_raw( Amon2->context->loc( $base, @args ) );
+                },
+                ctime_cc_str => sub {
+                    my $epoch = shift;
+                    Time::Piece->new($epoch)->strftime('%Y-%m-%dT%H:%M:%S.000%z');
+                },
+                status_cc_str => sub {
+                    my $status = shift;
+                    +{
+                        STATUS_SUCCESS() => 'Success',
+                        STATUS_FAIL()    => 'Failure',
+                        STATUS_NA()      => 'Unknown',
+                        STATUS_SKIP()    => 'Unknown',
+                        }->{$status} || 'Unknown';
                 },
             },
             %$view_conf
