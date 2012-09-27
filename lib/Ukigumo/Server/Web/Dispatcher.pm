@@ -33,6 +33,7 @@ any '/' => sub {
     );
 };
 
+# CruiseControl format XML http://cruisecontrol.sourceforge.net/
 get '/cc.xml' => sub {
     my ($c) = @_;
 
