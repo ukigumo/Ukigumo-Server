@@ -1,0 +1,28 @@
+
+setup ukigumo-server
+--------------------
+
+### normal setup
+
+Install all depended modules to your system
+
+    % cpanm --installdeps .
+
+And run a psgi.
+
+    % plackup app.spgi
+
+### Using carton
+
+First, install carton to your system
+
+    % cpanm Carton
+
+And setup the carton.
+
+    % carton install
+
+Then, run the http server by carton.
+
+    % carton exec perl -- local/bin/plackup --port 5555 app.psgi
+

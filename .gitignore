@@ -15,3 +15,5 @@ MYMETA.json
 MYMETA.yml
 *.db
 config/production.pl
+local/
+.carton/
