@@ -21,6 +21,7 @@ WriteMakefile(
 		'Locale::Maketext::Lexicon' => 0,
 		'Time::Duration::ja' => 0,
 		'Time::Duration' => 0,
+		'JSON' => 2,
 		'Test::Requires' => 0,
     },
     MIN_PERL_VERSION => '5.010000',
