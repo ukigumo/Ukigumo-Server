@@ -1,18 +1,9 @@
+Ukigumo-Server
+--------------
 
-setup ukigumo-server
---------------------
+Ukigumo-Server is CI data server for minimalists.
 
-### normal setup
-
-Install all depended modules to your system
-
-    % cpanm --installdeps .
-
-And run a psgi.
-
-    % plackup app.spgi
-
-### Using carton
+# Installation
 
 First, install carton to your system
 
@@ -22,7 +13,7 @@ And setup the carton.
 
     % carton install
 
-Then, run the http server by carton.
+Then, run the http server!
 
     % carton exec perl -- local/bin/plackup --port 5555 app.psgi
 
