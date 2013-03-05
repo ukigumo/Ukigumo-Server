@@ -17,3 +17,6 @@ MYMETA.yml
 config/production.pl
 local/
 .carton/
+/Build
+/_build/
+carton.lock
