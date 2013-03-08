@@ -4,9 +4,11 @@
 
 <section>
 <div class="row">
-    [% FOR project_name IN projects.keys() %]
-    [% INCLUDE 'include/table/project.tt' WITH project_name=project_name, projects=projects.item(project_name) %]
-    [% END %]
+    <div class="span16">
+        [% FOR project_name IN projects.keys() %]
+        [% INCLUDE 'include/table/project.tt' WITH project_name=project_name, projects=projects.item(project_name) %]
+        [% END %]
+    </div>
 </div>
 </section>
 
