@@ -2,7 +2,9 @@
 
 <section>
 <div class="row">
-    [% INCLUDE 'include/table/project.tt' WITH project_name=project_name, projects=projects %]
+    <div class="span16">
+        [% INCLUDE 'include/table/project.tt' WITH project_name=project_name, projects=projects %]
+    </div>
 </div>
 </section>
 
