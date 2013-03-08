@@ -24,7 +24,7 @@ use Text::Xslate qw/mark_raw html_escape/;
     my $view = Text::Xslate->new(
         +{
             'syntax' => 'TTerse',
-            'module' => [ 'Text::Xslate::Bridge::TT2Like', 'Ukigumo::Helper' ],
+            'module' => [ 'Text::Xslate::Bridge::TT2Like', 'Ukigumo::Helper', 'Text::Xslate::Bridge::Star' ],
             'function' => {
                 c        => sub { Amon2->context() },
                 uri_with => sub { Amon2->context()->req->uri_with(@_) },
