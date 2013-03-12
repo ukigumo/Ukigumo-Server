@@ -15,6 +15,7 @@ requires 'Locale::Maketext::Lexicon' => 0;
 requires 'Time::Duration::ja' => 0;
 requires 'Time::Duration' => 0;
 requires 'JSON' => 2;
+requires 'Module::Functions';
 
 on 'test' => sub {
     requires 'Test::Requires' => 0;
