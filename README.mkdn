@@ -1,15 +1,17 @@
 Ukigumo-Server
 --------------
 
-Ukigumo-Server is CI data server for minimalists.
+Ukigumo-Server is testing report storage server. You can use this server for Continious Testing.
 
-# Installation
+![Screen shot](http://gyazo.64p.org/image/dbd98bc15032d97fab081a271541baa2.png)
+
+## Installation
 
 First, install carton to your system
 
-    % cpanm Carton
+    % curl -L http://cpanmin.us | perl - Carton
 
-And setup the carton.
+And setup the depended modules.
 
     % carton install
 
