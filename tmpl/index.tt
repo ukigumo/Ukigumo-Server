@@ -22,6 +22,7 @@
             <li><a href="[% uri_for('/docs/api') %]">[% l('API Document') %]</a></li>
             <li><a href="[% uri_for('/docs/about') %]">[% l('about Ukigumo(In English)') %]</a></li>
             <li><a href="[% uri_for('/docs/dotcloud') %]">[% l('Deploy Ukigumo-Server to the dotcloud') %]</a></li>
+            <li><a href="[% uri_for('/docs/heroku') %]">[% l('Deploy Ukigumo-Server to the heroku') %]</a></li>
             [% IF lang()=='ja' %]
             <li><a href="[% uri_for('/docs/about-ja') %]">浮雲ってなんですか?(開発者向け)</a></li>
             [% END %]

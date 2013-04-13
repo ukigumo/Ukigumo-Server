@@ -47,6 +47,10 @@ msgstr "はい。本当に削除してください。"
 msgid "Deploy Ukigumo-Server to the dotcloud"
 msgstr "浮雲サーバーを DotCloud に配置する方法(英語)"
 
+#: tmpl/index.tt:23
+msgid "Deploy Ukigumo-Server to the heroku"
+msgstr "浮雲サーバーを Heroku に配置する方法(英語)"
+
 #:
 msgid "FAIL"
 msgstr "失敗"

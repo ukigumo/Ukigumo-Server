@@ -1,0 +1,19 @@
+*How can I deploy a ukigumo server on heroku?
+You can deploy a Ukigumo server very easy.
+
+1st, you would setup heroku account.
+
+2nd, you would setup heroku toolbelt.
+
+3rd, just deploy it with:
+
+	% heroku create --buildpack https://github.com/miyagawa/heroku-buildpack-perl.git
+	% git push heroku master
+
+Very easy. If you want to use ukigumo as a private mode, you should put a following line on app.psgi.
+
+	enable "Auth::Basic", authenticator => sub { return $_[0] eq 'admin' && $_[1] eq 'p4ssw0rd'; }
+
+And you can access the URL like 'http://admin:p4ssw0rd@my-ukigumo-app.herokuapp.com/'.
+
+That's all.
