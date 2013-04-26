@@ -1,0 +1,93 @@
+{
+   "abstract" : "Testing report storage Server",
+   "author" : [
+      "tokuhirom <tokuhirom@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Minilla/v0.0.56, CPAN::Meta::Converter version 2.130880",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Ukigumo-Server",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "xt",
+         "inc",
+         "share",
+         "eg",
+         "examples",
+         "author"
+      ]
+   },
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "CPAN::Meta" : "0",
+            "CPAN::Meta::Prereqs" : "0",
+            "Module::Build" : "0.38"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::CPAN::Meta" : "0",
+            "Test::MinimumVersion" : "0.10108",
+            "Test::Pod" : "1.41",
+            "Test::Spellunker" : "v0.0.16"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Amon2" : "2.50",
+            "DBD::SQLite" : "1.33",
+            "DBI" : "0",
+            "Data::Page::NoTotalEntries" : "0.02",
+            "Data::Validator" : "0.08",
+            "JSON" : "2",
+            "Locale::Maketext::Lexicon" : "0",
+            "Module::Functions" : "0",
+            "Plack::Middleware::ReverseProxy" : "0.09",
+            "Plack::Middleware::Session" : "0.14",
+            "SQL::Interp" : "0",
+            "Text::Markdown" : "1",
+            "Text::Xslate" : "1.1005",
+            "Text::Xslate::Bridge::TT2Like" : "0.00008",
+            "Time::Duration" : "0",
+            "Time::Duration::ja" : "0",
+            "Time::Piece" : "1.20",
+            "Ukigumo::Common" : "0.03",
+            "perl" : "5.010001"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::Requires" : "0"
+         }
+      }
+   },
+   "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/ukigumo/Ukigumo-Server/issues"
+      },
+      "homepage" : "https://github.com/ukigumo/Ukigumo-Server",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/ukigumo/Ukigumo-Server.git",
+         "web" : "https://github.com/ukigumo/Ukigumo-Server"
+      }
+   },
+   "version" : "0.01",
+   "x_contributors" : [
+      "xaicron <xaicron@gmail.com>",
+      "cho45 <cho45@lowreal.net>",
+      "Kan Fushihara <kan@fout.jp>",
+      "mattn <mattn.jp@gmail.com>",
+      "Kan Fushihara <kan.fushihara@gmail.com>",
+      "Masayuki Matsuki <y.songmu@gmail.com>"
+   ]
+}

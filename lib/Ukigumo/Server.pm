@@ -32,4 +32,28 @@ sub setup_schema {
 }
 
 1;
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+Ukigumo::Server - Testing report storage Server
+
+=head1 DESCRIPTION
+
+Ukigumo::Server is ...
+
+=head1 LICENSE
+
+Copyright (C) tokuhirom.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+tokuhirom E<lt>tokuhirom@gmail.comE<gt>
+
+=cut
 
