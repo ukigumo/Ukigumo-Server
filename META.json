@@ -43,29 +43,51 @@
       "runtime" : {
          "requires" : {
             "Amon2" : "2.50",
+            "Amon2::Declare" : "0",
+            "Amon2::Web" : "0",
+            "Amon2::Web::Dispatcher::Lite" : "0",
+            "Capture::Tiny" : "0",
             "DBD::SQLite" : "1.33",
             "DBI" : "0",
             "Data::Page::NoTotalEntries" : "0.02",
             "Data::Validator" : "0.08",
+            "File::Find::Rule" : "0",
             "JSON" : "2",
+            "LWP::UserAgent" : "0",
+            "Locale::Maketext::Extract" : "0",
             "Locale::Maketext::Lexicon" : "0",
             "Module::Functions" : "0",
+            "Plack::Builder" : "0",
             "Plack::Middleware::ReverseProxy" : "0.09",
             "Plack::Middleware::Session" : "0.14",
+            "Plack::Session::Store::File" : "0",
+            "Router::Simple" : "0",
             "SQL::Interp" : "0",
+            "Template" : "0",
             "Text::Markdown" : "1",
             "Text::Xslate" : "1.1005",
             "Text::Xslate::Bridge::TT2Like" : "0.00008",
+            "Text::Xslate::Util" : "0",
             "Time::Duration" : "0",
             "Time::Duration::ja" : "0",
             "Time::Piece" : "1.20",
+            "URI::Escape" : "0",
+            "URI::WithBase" : "0",
             "Ukigumo::Common" : "0.03",
+            "Ukigumo::Constants" : "0",
+            "parent" : "0",
             "perl" : "5.010001"
          }
       },
       "test" : {
          "requires" : {
-            "Test::Requires" : "0"
+            "HTTP::Message::PSGI" : "0",
+            "LWP::Protocol::PSGI" : "0",
+            "Plack::Test" : "0",
+            "Plack::Util" : "0",
+            "Test::More" : "0.96",
+            "Test::Requires" : "0",
+            "autodie" : "0"
          }
       }
    },

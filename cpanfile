@@ -1,3 +1,4 @@
+requires 'perl', '5.010001';
 requires 'Amon2'                           => '2.50';
 requires 'Text::Xslate'                    => '1.1005';
 requires 'Text::Xslate::Bridge::TT2Like'   => '0.00008';
@@ -16,7 +17,29 @@ requires 'Time::Duration::ja' => 0;
 requires 'Time::Duration' => 0;
 requires 'JSON' => 2;
 requires 'Module::Functions';
+requires 'Amon2::Declare';
+requires 'Amon2::Web';
+requires 'Amon2::Web::Dispatcher::Lite';
+requires 'Capture::Tiny';
+requires 'File::Find::Rule';
+requires 'LWP::UserAgent';
+requires 'Locale::Maketext::Extract';
+requires 'Plack::Builder';
+requires 'Plack::Session::Store::File';
+requires 'Router::Simple';
+requires 'Template';
+requires 'Text::Xslate::Util';
+requires 'URI::Escape';
+requires 'URI::WithBase';
+requires 'Ukigumo::Constants';
+requires 'parent';
 
 on 'test' => sub {
     requires 'Test::Requires' => 0;
+    requires 'HTTP::Message::PSGI';
+    requires 'LWP::Protocol::PSGI';
+    requires 'Plack::Test';
+    requires 'Plack::Util';
+    requires 'Test::More', '0.96';
+    requires 'autodie';
 };
