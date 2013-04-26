@@ -4,7 +4,7 @@ use utf8;
 use Test::More;
 use autodie;
 
-system("$^X bin/xgettext.pl");
+system("$^X author/xgettext.pl");
 open my $fh, '<', 'po/ja.po';
 my $src = do { local $/; <$fh> };
 like($src, qr{Ukigumo});
