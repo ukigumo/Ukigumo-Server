@@ -26,5 +26,5 @@ This is a example code of Ukigumo client code. You can run the code by cron(1). 
 
 You can add a notification on the bottom of client code. I notify to Ikachan server on working.
 
-#include "samples/perlish-client.pl"
+#include "eg/perlish-client.pl"
 
