@@ -13,8 +13,8 @@ my $session_dir = File::Spec->catdir(File::Spec->tmpdir(), "ukigumo-session-$ENV
 mkpath($session_dir);
 
 {
-	my $app = Ukigumo::Server->new();
-	$app->setup_schema();
+    my $app = Ukigumo::Server->new();
+    $app->setup_schema();
 }
 
 builder {

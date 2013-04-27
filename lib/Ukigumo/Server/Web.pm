@@ -9,7 +9,7 @@ use Ukigumo::Constants;
 # dispatcher
 use Ukigumo::Server::Web::Dispatcher;
 sub dispatch {
-	my $c = shift;
+    my $c = shift;
     return Ukigumo::Server::Web::Dispatcher->dispatch($c)
       or die "response is not generated";
 }
@@ -31,9 +31,9 @@ sub dispatch {
 }
 
 __PACKAGE__->load_plugins(
-	'Web::JSON',
-	'Web::PlackSession',
-	'Web::CSRFDefender',
+    'Web::JSON',
+    'Web::PlackSession',
+    'Web::CSRFDefender',
 );
 
 # for your security

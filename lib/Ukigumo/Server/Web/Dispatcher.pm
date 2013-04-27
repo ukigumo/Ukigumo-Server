@@ -168,8 +168,8 @@ get '/docs/{path:[a-z0-9_-]+}' => sub {
     my $html = Ukigumo::Server::Command::Docs->render($path);
 
     $c->render('docs.tt', {
-		doc => $html 
-	});
+        doc => $html
+    });
 };
 
 1;

@@ -8,7 +8,7 @@ use File::Spec;
 use Ukigumo::Server::API::Dispatcher;
 
 sub dispatch {
-	my $c = shift;
+    my $c = shift;
     return Ukigumo::Server::API::Dispatcher->dispatch($c) or die "response is not generated";
 }
 

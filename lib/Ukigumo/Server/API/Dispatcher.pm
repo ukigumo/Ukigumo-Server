@@ -11,18 +11,18 @@ my $router = Router::Simple->new();
 
 sub rule { Ukigumo::Server::Validator->new(@_) }
 sub post {
-	my ($path, $rule_src, $code) = @_;
-	my $rule = Data::Validator->new(@$rule_src)->with('NoThrow');
-	$router->connect($path, +{ code => $code, rule => $rule }, {method => 'POST'})
+    my ($path, $rule_src, $code) = @_;
+    my $rule = Data::Validator->new(@$rule_src)->with('NoThrow');
+    $router->connect($path, +{ code => $code, rule => $rule }, {method => 'POST'})
 }
 sub get {
-	my ($path, $rule_src, $code) = @_;
-	my $rule = Data::Validator->new(@$rule_src)->with('NoThrow');
-	$router->connect($path, +{ code => $code, rule => $rule }, {method => 'GET'})
+    my ($path, $rule_src, $code) = @_;
+    my $rule = Data::Validator->new(@$rule_src)->with('NoThrow');
+    $router->connect($path, +{ code => $code, rule => $rule }, {method => 'GET'})
 }
 
 get '/api/v1/branch/list' => [
-	project  => { isa => 'Str' },
+    project  => { isa => 'Str' },
 ] => sub {
     my ($c, $args) = @_;
 
@@ -34,8 +34,8 @@ get '/api/v1/branch/list' => [
 };
 
 post '/api/v1/branch/delete' => [
-	project  => { isa => 'Str' },
-	branch   => { isa => 'Str' },
+    project  => { isa => 'Str' },
+    branch   => { isa => 'Str' },
 ] => sub {
     my ($c, $args) = @_;
 
@@ -50,10 +50,10 @@ post '/api/v1/branch/delete' => [
 };
 
 get '/api/v1/report/search' => [
-	project  => { isa => 'Str' },
-	branch   => { isa => 'Str' },
-	revision => { isa => 'Str' },
-	limit    => { isa => 'Int', default => 20 },
+    project  => { isa => 'Str' },
+    branch   => { isa => 'Str' },
+    revision => { isa => 'Str' },
+    limit    => { isa => 'Int', default => 20 },
 ] => sub {
     my ($c, $args) = @_;
 
@@ -74,15 +74,15 @@ get '/api/v1/report/search' => [
 };
 
 post '/api/v1/report/add' => [
-	status   => { isa => 'Int' },
-	project  => { isa => 'Str' },
-	branch   => { isa => 'Str' },
-	vc_log   => { isa => 'Str', optional => 1 },
-	body     => { isa => 'Str', optional => 1 },
-	revision => { isa => 'Str' },
-	repo     => { isa => 'Str' },
+    status   => { isa => 'Int' },
+    project  => { isa => 'Str' },
+    branch   => { isa => 'Str' },
+    vc_log   => { isa => 'Str', optional => 1 },
+    body     => { isa => 'Str', optional => 1 },
+    revision => { isa => 'Str' },
+    repo     => { isa => 'Str' },
 ] => sub {
-	my ($c, $args) = @_;
+    my ($c, $args) = @_;
 
     my $body;
     if (my $upload = $c->req->upload('body')) {
@@ -91,7 +91,7 @@ post '/api/v1/report/add' => [
         $body = do { local $/; <$fh> };
     }
 
-	# get last report status
+    # get last report status
     my $last_status = Ukigumo::Server::Command::Report->get_last_status(
         project => $args->{project},
         branch  => $args->{branch}
@@ -114,27 +114,27 @@ post '/api/v1/report/add' => [
 };
 
 sub dispatch {
-	my ($class, $c) = @_;
+    my ($class, $c) = @_;
 
-	if (my $controller = $router->match($c->req->env)) {
-		my $rule = $controller->{rule} or die;
-		my $args = $rule->validate(%{$c->req->parameters});
-		if ($rule->has_errors) {
-			my $errors = $rule->clear_errors;
-			my $message = join("\n", map { $_->{message} } @$errors);
-			my $res = $c->render_json( +{ error => +{ message => $message } } );
-			$res->code(400);
-			return $res;
-		}
-		my $res = $controller->{code}->($c, $args);
-		if (ref $res eq 'HASH') {
-			return $c->render_json($res); # succeeded
-		} else {
-			return $res; # succeeded
-		}
-	} else {
-		return $c->res_404(); # not found...
-	}
+    if (my $controller = $router->match($c->req->env)) {
+        my $rule = $controller->{rule} or die;
+        my $args = $rule->validate(%{$c->req->parameters});
+        if ($rule->has_errors) {
+            my $errors = $rule->clear_errors;
+            my $message = join("\n", map { $_->{message} } @$errors);
+            my $res = $c->render_json( +{ error => +{ message => $message } } );
+            $res->code(400);
+            return $res;
+        }
+        my $res = $controller->{code}->($c, $args);
+        if (ref $res eq 'HASH') {
+            return $c->render_json($res); # succeeded
+        } else {
+            return $res; # succeeded
+        }
+    } else {
+        return $c->res_404(); # not found...
+    }
 }
 
 1;

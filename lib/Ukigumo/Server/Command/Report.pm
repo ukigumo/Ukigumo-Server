@@ -12,7 +12,7 @@ use Ukigumo::Server::Command::Branch;
 use Data::Page::NoTotalEntries;
 
 sub get_last_status {
-	my $class = shift;
+    my $class = shift;
     state $rule = Data::Validator->new(
         project => { isa => 'Str' },
         branch  => { isa => 'Str' },
@@ -28,7 +28,7 @@ q{SELECT status FROM report INNER JOIN branch ON (report.report_id=branch.last_r
       },
       q{ ORDER BY report_id DESC LIMIT 1};
     my ($last_status) = c->dbh->selectrow_array($sql, {}, @bind);
-	return $last_status;
+    return $last_status;
 }
 
 sub recent_list {
@@ -46,20 +46,20 @@ sub recent_list {
         LIMIT } . ($args->{limit} + 1) . " OFFSET " . $args->{limit}*($args->{page}-1),
         { Slice => +{} },
     );
-	my $has_next = do {
-		if (@$reports == $args->{limit}+1) {
-			pop @$reports;
-			1;
-		} else {
-			0;
-		}
-	};
-	my $pager = Data::Page::NoTotalEntries->new(
-		has_next => $has_next,
-		entries_per_page => $args->{limit},
-		current_page => $args->{page},
-		entries_on_this_page => @$reports,
-	);
+    my $has_next = do {
+        if (@$reports == $args->{limit}+1) {
+            pop @$reports;
+            1;
+        } else {
+            0;
+        }
+    };
+    my $pager = Data::Page::NoTotalEntries->new(
+        has_next => $has_next,
+        entries_per_page => $args->{limit},
+        current_page => $args->{page},
+        entries_on_this_page => @$reports,
+    );
     return wantarray ? ($reports, $pager) : $reports;
 }
 
@@ -79,20 +79,20 @@ sub list {
         { Slice => +{} },
         $args->{branch_id}
     );
-	my $has_next = do {
-		if (@$reports == $args->{limit}+1) {
-			pop @$reports;
-			1;
-		} else {
-			0;
-		}
-	};
-	my $pager = Data::Page::NoTotalEntries->new(
-		has_next => $has_next,
-		entries_per_page => $args->{limit},
-		current_page => $args->{page},
-		entries_on_this_page => @$reports,
-	);
+    my $has_next = do {
+        if (@$reports == $args->{limit}+1) {
+            pop @$reports;
+            1;
+        } else {
+            0;
+        }
+    };
+    my $pager = Data::Page::NoTotalEntries->new(
+        has_next => $has_next,
+        entries_per_page => $args->{limit},
+        current_page => $args->{page},
+        entries_on_this_page => @$reports,
+    );
     return wantarray ? ($reports, $pager) : $reports;
 }
 
