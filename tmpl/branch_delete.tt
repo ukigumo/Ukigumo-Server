@@ -10,7 +10,7 @@
 	    <p>[% l("Really delete a '%1' branch from '%2'?", branch.branch, branch.project) %]<br />
         [% l("This action removes all reports on '%1'.", branch.branch) %]</p>
 
-	    <form action="/branch/delete" method="post">
+	    <form action="[% uri_for('/branch/delete') %]" method="post">
 		    <input type="hidden" name="branch_id" value="[% branch.branch_id %]" />
 		    <input type="submit" value="[% l('Delete!') %]" class="btn primary" />
 	    </form>
