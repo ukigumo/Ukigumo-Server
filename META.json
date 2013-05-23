@@ -4,7 +4,7 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.0.56, CPAN::Meta::Converter version 2.130880",
+   "generated_by" : "Minilla/v0.4.3, CPAN::Meta::Converter version 2.130880",
    "license" : [
       "perl_5"
    ],
@@ -34,10 +34,11 @@
       },
       "develop" : {
          "requires" : {
+            "Locale::Maketext::Extract::Plugin::Xslate" : "v0.0.2",
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion" : "0.10108",
             "Test::Pod" : "1.41",
-            "Test::Spellunker" : "v0.0.16"
+            "Test::Spellunker" : "v0.2.7"
          }
       },
       "runtime" : {
@@ -63,7 +64,6 @@
             "Plack::Session::Store::File" : "0",
             "Router::Simple" : "0",
             "SQL::Interp" : "0",
-            "Template" : "0",
             "Text::Markdown" : "1",
             "Text::Xslate" : "1.1005",
             "Text::Xslate::Bridge::TT2Like" : "0.00008",

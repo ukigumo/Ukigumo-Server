@@ -75,7 +75,6 @@ msgstr "出力"
 msgid "Project"
 msgstr "プロジェクト"
 
-#. (branch.branch, branch.project)
 #: tmpl/branch_delete.tt:10
 msgid "Really delete a '%1' branch from '%2'?"
 msgstr "本当に %2 の %1 ブランチを削除しますか?"
@@ -104,7 +103,6 @@ msgstr "レポートを検索する"
 msgid "Status"
 msgstr "状態"
 
-#. (branch.branch)
 #: tmpl/branch_delete.tt:11
 msgid "This action removes all reports on '%1'."
 msgstr "実行すると %1 ブランチに関するすべてのテスト結果レポートが削除されます。"

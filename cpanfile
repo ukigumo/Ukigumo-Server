@@ -27,12 +27,15 @@ requires 'Locale::Maketext::Extract';
 requires 'Plack::Builder';
 requires 'Plack::Session::Store::File';
 requires 'Router::Simple';
-requires 'Template';
 requires 'Text::Xslate::Util';
 requires 'URI::Escape';
 requires 'URI::WithBase';
 requires 'Ukigumo::Constants';
 requires 'parent';
+
+on 'develop' => sub {
+    requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
+};
 
 on 'test' => sub {
     requires 'Test::Requires' => 0;

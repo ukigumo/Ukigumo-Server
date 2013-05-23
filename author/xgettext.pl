@@ -1,28 +1,20 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 use strict;
 use warnings;
 use utf8;
 use Locale::Maketext::Extract;
+use Locale::Maketext::Extract::Plugin::Xslate;
 use File::Find::Rule;
-use Template; # for parsing TT
 
 my $Ext = Locale::Maketext::Extract->new(
-    # Specify which parser plugins to use
     plugins => {
-        # Use Perl parser, process files with extension .pl .pm .cgi
         perl => [qw/pl pm js/],
-
-        # Use TT2 parser, process files with extension .tt2 .tt .html
-        # or which match the regex
-        tt2  => [
-            'tt',
-        ],
+        xslate => {
+            syntax     => 'TTerse',
+            extensions => ['tt', 'html'],
+        },
     },
-
-    # Warn if a parser can't process a file
     warnings => 1,
-
-    # List processed files
     verbose => 1,
 );
 for my $lang (qw/ja/) {
