@@ -29,6 +29,7 @@ mkpath($session_dir);
     $app->setup_schema();
 }
 
+local $0 = "$0 (Ukigumo::Server)"; # steal from growthforecast.pl
 my $app = builder {
     enable 'Plack::Middleware::ReverseProxy';
 
