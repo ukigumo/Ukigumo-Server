@@ -1,15 +1,9 @@
 #!/usr/bin/perl
-use File::Spec;
-use File::Basename;
-use FindBin::libs;
+use strict;
+use warnings;
 use Getopt::Long qw/:config posix_default no_ignore_case bundling auto_help/;
-use Plack::Builder;
 use Plack::Loader;
-use Ukigumo::Server;
-use Ukigumo::Server::API;
-use Ukigumo::Server::Web;
-use Plack::Session::Store::File;
-use File::Path qw(mkpath);
+use Ukigumo::Server::CLI;
 
 GetOptions(\my %opt, qw/
     port=s
@@ -21,39 +15,10 @@ $opt{port}          //= 2828;
 $opt{'max-workers'} //= 4;
 
 $ENV{PLACK_ENV} //= 'development';
-my $session_dir = File::Spec->catdir(File::Spec->tmpdir(), "ukigumo-session-$ENV{PLACK_ENV}");
-mkpath($session_dir);
-
-{
-    my $app = Ukigumo::Server->new();
-    $app->setup_schema();
-}
-
 local $0 = "$0 (Ukigumo::Server)"; # steal from growthforecast.pl
-my $app = builder {
-    enable 'Plack::Middleware::ReverseProxy';
 
-    my $api = Ukigumo::Server::API->to_app();
-    my $ui = builder {
-        enable 'Plack::Middleware::Static',
-          path => qr{^(?:/static/|/robot\.txt$|/favicon.ico$)},
-          root => File::Spec->catdir( Ukigumo::Server->share_dir );
-        enable 'Plack::Middleware::Session',
-            store => Plack::Session::Store::File->new(
-                dir => $session_dir,
-            );
-        Ukigumo::Server::Web->to_app();
-    };
-
-    sub {
-        my $env = shift;
-        if ($env->{PATH_INFO} =~ m{^/api/}) {
-            $api->($env);
-        } else {
-            $ui->($env);
-        }
-    };
-};
+Ukigumo::Server::CLI->setup;
+my $app = Ukigumo::Server::CLI->to_app;
 
 my $loader = Plack::Loader->load('Starlet',
     port        => $opt{port},
