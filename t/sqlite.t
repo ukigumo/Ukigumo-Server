@@ -7,6 +7,8 @@ use t::Util;
 use Ukigumo::Server::Command::Report;
 use Ukigumo::Server;
 
+my $guard = t::Util::Guard->new;
+
 my $c = Ukigumo::Server->bootstrap();
 
 my $report_id = Ukigumo::Server::Command::Report->insert(

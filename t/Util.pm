@@ -31,4 +31,11 @@ our @EXPORT = qw//;
     $c->dbh->do(q{DELETE FROM branch});
 }
 
+package t::Util::Guard;
+
+sub new {bless {}, shift};
+sub DESTROY {
+    unlink 'test.db';
+}
+
 1;
