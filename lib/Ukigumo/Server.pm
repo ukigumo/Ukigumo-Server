@@ -14,7 +14,7 @@ our $VERSION='0.01';
 sub config {
     my $c = shift;
     state $config = do {
-        my $env = $ENV{PLACK_ENV} // 'development';
+        my $env = $c->mode_name // 'development';
         my $fname = File::Spec->catfile($c->base_dir, 'config', "${env}.pl");
 
         my $conf;
