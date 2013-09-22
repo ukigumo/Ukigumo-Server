@@ -6,6 +6,7 @@ use Plack::Util;
 use Test::More;
 use Test::Requires 'Test::WWW::Mechanize::PSGI';
 
+my $guard = t::Util::Guard->new;
 my $app = Plack::Util::load_psgi 'app.psgi';
 
 my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);

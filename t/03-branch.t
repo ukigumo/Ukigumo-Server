@@ -9,6 +9,7 @@ use Ukigumo::Constants;
 use Ukigumo::Server::Command::Report;
 use LWP::UserAgent;
 
+my $guard = t::Util::Guard->new;
 my $app = Plack::Util::load_psgi('app.psgi');
 LWP::Protocol::PSGI->register($app);
 

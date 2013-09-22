@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use utf8;
 use Test::More;
+use t::Util;
 use Test::Requires 'LWP::Protocol::PSGI', 'LWP::UserAgent', 'Capture::Tiny';
 use Capture::Tiny qw(tee_merged);
 use LWP::UserAgent;
@@ -11,6 +12,7 @@ use HTTP::Message::PSGI;
 use LWP::Protocol::PSGI;
 use Data::Dumper;
 
+my $guard = t::Util::Guard->new;
 my $app = Plack::Util::load_psgi('app.psgi');
 LWP::Protocol::PSGI->register($app);
 

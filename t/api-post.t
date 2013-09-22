@@ -8,6 +8,7 @@ use Test::Requires 'LWP::Protocol::PSGI', 'LWP::UserAgent';
 use JSON;
 use Ukigumo::Server;
 
+my $guard = t::Util::Guard->new;
 my $app = Plack::Util::load_psgi 'app.psgi';
 LWP::Protocol::PSGI->register($app);
 
