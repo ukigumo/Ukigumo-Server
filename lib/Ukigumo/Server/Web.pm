@@ -1,6 +1,7 @@
 package Ukigumo::Server::Web;
 use strict;
 use warnings;
+use feature ':5.10';
 use parent qw/Ukigumo::Server Amon2::Web/;
 use File::Spec;
 
@@ -15,19 +16,20 @@ sub dispatch {
 }
 
 # setup view class
-{
-    my $view_conf = __PACKAGE__->config->{'Text::Xslate'} || +{};
-    unless (exists $view_conf->{path}) {
-        $view_conf->{path} = [ File::Spec->catdir(__PACKAGE__->share_dir(), 'tmpl') ];
-    }
-    my $view = Text::Xslate->new(
-        +{
-            'syntax' => 'TTerse',
-            'module' => [ 'Text::Xslate::Bridge::TT2Like', 'Ukigumo::Helper', 'Text::Xslate::Bridge::Star', 'Ukigumo::Server::Web::ViewFunctions' ],
-            %$view_conf
+sub create_view {
+    state $view = do {
+        my $view_conf = __PACKAGE__->config->{'Text::Xslate'} || +{};
+        unless (exists $view_conf->{path}) {
+            $view_conf->{path} = [ File::Spec->catdir(__PACKAGE__->share_dir(), 'tmpl') ];
         }
-    );
-    sub create_view { $view }
+        Text::Xslate->new(
+            +{
+                'syntax' => 'TTerse',
+                'module' => [ 'Text::Xslate::Bridge::TT2Like', 'Ukigumo::Helper', 'Text::Xslate::Bridge::Star', 'Ukigumo::Server::Web::ViewFunctions' ],
+                %$view_conf
+            }
+        );
+    };
 }
 
 __PACKAGE__->load_plugins(
