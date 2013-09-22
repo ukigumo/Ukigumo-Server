@@ -28,9 +28,11 @@ sub config {
         }
         else {
             die 'Characters in $ENV{PLACK_ENV} must be alnum, hiphen or underscore' if $env =~ /[^-_0-9a-zA-Z]/;
+            my $db = "$env.db";
+            print qq[Config file: "$fname" is not available. Use $db for launching ukigumo server\n];
             $conf = {
                 'DBI' => [
-                    "dbi:SQLite:dbname=$env.db",
+                    "dbi:SQLite:dbname=$db",
                     '',
                     '',
                     +{
