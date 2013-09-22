@@ -8,6 +8,7 @@ use Ukigumo::Server::CLI;
 GetOptions(\my %opt, qw/
     port=s
     host=s
+    config=s
     max-workers=i
 /);
 $opt{host}          //= 0;
@@ -17,6 +18,7 @@ $opt{'max-workers'} //= 4;
 $ENV{PLACK_ENV} //= 'development';
 local $0 = "$0 (Ukigumo::Server)"; # steal from growthforecast.pl
 
+Ukigumo::Server::CLI->set_config($opt{config});
 Ukigumo::Server::CLI->setup;
 my $app = Ukigumo::Server::CLI->to_app;
 

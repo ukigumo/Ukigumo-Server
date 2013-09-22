@@ -12,37 +12,8 @@ __PACKAGE__->load_plugins(qw(ShareDir));
 our $VERSION='0.01';
 
 sub config {
-    my $c = shift;
-    state $config = do {
-        my $env = $c->mode_name // 'development';
-        my $fname = File::Spec->catfile($c->base_dir, 'config', "${env}.pl");
-
-        my $conf;
-        if (-e $fname) {
-            $conf = do $fname;
-            Carp::croak("$fname: $@") if $@;
-            Carp::croak("$fname: $!") unless defined $conf;
-            unless ( ref($conf) eq 'HASH' ) {
-                Carp::croak("$fname does not return HashRef.");
-            }
-        }
-        else {
-            die 'Characters in $ENV{PLACK_ENV} must be alnum, hyphen or underscore' if $env =~ /[^-_0-9a-zA-Z]/;
-            my $db = "$env.db";
-            print qq[Config file: "$fname" is not available. Use $db for launching ukigumo server\n];
-            $conf = {
-                'DBI' => [
-                    "dbi:SQLite:dbname=$db",
-                    '',
-                    '',
-                    +{
-                        sqlite_unicode => 1,
-                    }
-                ],
-            };
-        }
-        $conf;
-    };
+    my ($c, $conf) = @_;
+    state $config = $conf || Ukigumo::Server->load_config;
 }
 
 sub dbh {

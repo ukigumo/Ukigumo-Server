@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use feature ':5.10';
 
+use Carp ();
 use File::Spec;
 use File::Path qw(mkpath);
 use Plack::Builder;
@@ -24,6 +25,19 @@ sub session_dir {
 sub setup {
     my $app = Ukigumo::Server->new();
     $app->setup_schema();
+}
+
+sub set_config {
+    my ($class, $file) = @_;
+    $file ||= File::Spec->catfile(Ukigumo::Server->share_dir, qw/config development.pl/);
+
+    my $config = do $file;
+    Carp::croak("$file: $@") if $@;
+    Carp::croak("$file: $!") unless defined $config;
+    unless ( ref($config) eq 'HASH' ) {
+        Carp::croak("$file does not return HashRef.");
+    }
+    Ukigumo::Server->config($config);
 }
 
 sub to_app {
