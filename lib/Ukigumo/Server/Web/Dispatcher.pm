@@ -88,7 +88,7 @@ get '/project/{project}' => sub {
     );
 };
 
-get '/project/{project}/{branch:[A-Za-z0-9/_-]+}' => sub {
+get '/project/{project}/{branch:[A-Za-z0-9/_\-\.]+}' => sub {
     my ($c, $args) = @_;
     my $project = $args->{project};
     my $branch = $args->{branch};
