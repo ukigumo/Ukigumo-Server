@@ -5,14 +5,14 @@ BEGIN {
     }
 }
 use parent qw/Exporter/;
-use Test::More 0.96;
+use Test::More 0.98;
 use Ukigumo::Server;
 
 our @EXPORT = qw//;
 
 {
     # utf8 hack.
-    binmode Test::More->builder->$_, ":utf8" for qw/output failure_output todo_output/;                       
+    binmode Test::More->builder->$_, ":utf8" for qw/output failure_output todo_output/;
     no warnings 'redefine';
     my $code = \&Test::Builder::child;
     *Test::Builder::child = sub {
@@ -25,8 +25,8 @@ our @EXPORT = qw//;
 }
 
 {
-	my $c = Ukigumo::Server->new;
-	$c->setup_schema();
+    my $c = Ukigumo::Server->new;
+    $c->setup_schema();
     $c->dbh->do(q{DELETE FROM report});
     $c->dbh->do(q{DELETE FROM branch});
 }

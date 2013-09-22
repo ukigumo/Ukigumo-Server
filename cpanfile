@@ -44,6 +44,6 @@ on 'test' => sub {
     requires 'LWP::Protocol::PSGI';
     requires 'Plack::Test';
     requires 'Plack::Util';
-    requires 'Test::More', '0.96';
+    requires 'Test::More', '0.98';
     requires 'autodie';
 };
