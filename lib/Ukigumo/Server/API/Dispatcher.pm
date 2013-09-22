@@ -118,7 +118,7 @@ sub dispatch {
 
     if (my $controller = $router->match($c->req->env)) {
         my $rule = $controller->{rule} or die;
-        my $args = $rule->validate(%{$c->req->parameters});
+        my $args = $rule->validate($c->req->parameters->flatten);
         if ($rule->has_errors) {
             my $errors = $rule->clear_errors;
             my $message = join("\n", map { $_->{message} } @$errors);
