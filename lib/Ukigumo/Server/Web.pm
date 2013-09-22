@@ -18,7 +18,7 @@ sub dispatch {
 {
     my $view_conf = __PACKAGE__->config->{'Text::Xslate'} || +{};
     unless (exists $view_conf->{path}) {
-        $view_conf->{path} = [ File::Spec->catdir(__PACKAGE__->base_dir(), 'tmpl') ];
+        $view_conf->{path} = [ File::Spec->catdir(__PACKAGE__->share_dir(), 'tmpl') ];
     }
     my $view = Text::Xslate->new(
         +{

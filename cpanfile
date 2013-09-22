@@ -1,5 +1,6 @@
 requires 'perl', '5.010001';
 requires 'Amon2'                           => '2.50';
+requires 'Amon2::Plugin::ShareDir';
 requires 'Text::Xslate'                    => '1.1005';
 requires 'Text::Xslate::Bridge::TT2Like'   => '0.00008';
 requires 'Plack::Middleware::ReverseProxy' => '0.09';
