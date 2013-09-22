@@ -12,21 +12,35 @@ __PACKAGE__->load_plugins(qw(ShareDir));
 our $VERSION='0.01';
 
 sub config {
+    my $c = shift;
     state $config = do {
-        my $plack_env = $ENV{PLACK_ENV} // 'development';
+        my $env = $ENV{PLACK_ENV} // 'development';
+        my $fname = File::Spec->catfile($c->base_dir, 'config', "${env}.pl");
 
-        die 'Characters in $ENV{PLACK_ENV} must be alnum, hiphen or underscore' if $plack_env =~ /[^-_0-9a-zA-Z]/;
-        +{
-            'DBI' => [
-                "dbi:SQLite:dbname=$plack_env.db",
-                '',
-                '',
-                +{
-                    sqlite_unicode => 1,
-                }
-            ],
+        my $conf;
+        if (-e $fname) {
+            $conf = do $fname;
+            Carp::croak("$fname: $@") if $@;
+            Carp::croak("$fname: $!") unless defined $conf;
+            unless ( ref($conf) eq 'HASH' ) {
+                Carp::croak("$fname does not return HashRef.");
+            }
         }
-    }
+        else {
+            die 'Characters in $ENV{PLACK_ENV} must be alnum, hiphen or underscore' if $env =~ /[^-_0-9a-zA-Z]/;
+            $conf = {
+                'DBI' => [
+                    "dbi:SQLite:dbname=$env.db",
+                    '',
+                    '',
+                    +{
+                        sqlite_unicode => 1,
+                    }
+                ],
+            };
+        }
+        $conf;
+    };
 }
 
 sub dbh {
