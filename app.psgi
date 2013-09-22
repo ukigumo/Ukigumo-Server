@@ -24,7 +24,7 @@ builder {
     my $ui = builder {
         enable 'Plack::Middleware::Static',
           path => qr{^(?:/static/|/robot\.txt$|/favicon.ico$)},
-          root => File::Spec->catdir( dirname(__FILE__) );
+          root => File::Spec->catdir( Ukigumo::Server->share_dir );
         enable 'Plack::Middleware::Session',
             store => Plack::Session::Store::File->new(
                 dir => $session_dir,
