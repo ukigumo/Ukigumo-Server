@@ -13,12 +13,12 @@ sub render {
     my $c = c();
 
     my $src = do {
-        my $fname = File::Spec->catfile($c->base_dir, "docs/$path.txt");
+        my $fname = File::Spec->catfile($c->share_dir, "docs/$path.txt");
         open my $fh, '<:encoding(utf-8)', $fname or die "Cannot open file: $fname: $!";
         do { local $/; <$fh> };
     };
     $src =~ s{^#include "([^"]+)"}{
-        my $fname = File::Spec->catfile($c->base_dir, $1);
+        my $fname = File::Spec->catfile($c->share_dir, $1);
         open my $fh, '<:utf8', $fname or die "Cannot open file: $fname: $!";
         "\n\n" . do { join '', map { "    $_" } <$fh> } . "\n\n";
     }mge;

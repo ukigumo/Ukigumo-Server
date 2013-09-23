@@ -5,7 +5,7 @@ use Test::More;
 use autodie;
 
 system("$^X author/xgettext.pl");
-open my $fh, '<', 'po/ja.po';
+open my $fh, '<', 'share/po/ja.po';
 my $src = do { local $/; <$fh> };
 like($src, qr{Ukigumo});
 

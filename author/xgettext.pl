@@ -18,13 +18,13 @@ my $Ext = Locale::Maketext::Extract->new(
     verbose => 1,
 );
 for my $lang (qw/ja/) {
-    $Ext->read_po("po/$lang.po") if -f "po/$lang.po";
+    $Ext->read_po("share/po/$lang.po") if -f "share/po/$lang.po";
     $Ext->extract_file($_) for File::Find::Rule->file()->name('*.pm')->in('lib');
-    $Ext->extract_file($_) for File::Find::Rule->file()->name('*.tt')->in('tmpl/');
+    $Ext->extract_file($_) for File::Find::Rule->file()->name('*.tt')->in('share/tmpl/');
 
     # Set $entries_are_in_gettext_format if the .pl files above use
     # loc('%1') instead of loc('[_1]')
     $Ext->compile(1);
 
-    $Ext->write_po("po/$lang.po");
+    $Ext->write_po("share/po/$lang.po");
 }

@@ -5,7 +5,7 @@ use utf8;
 use parent 'Locale::Maketext';
 use File::Spec;
 use Locale::Maketext::Lexicon + {
-    ja => [ Gettext => File::Spec->catdir( Ukigumo::Server->base_dir(), 'po', 'ja.po' ) ],
+    ja => [ Gettext => File::Spec->catdir( Ukigumo::Server->share_dir(), 'po', 'ja.po' ) ],
     en => ['Auto'], # ソース言語はそのままだす
     _preload => 1,
     _auto    => $ENV{UKIGUMO_DEBUG_L10N} ? 0 : 1,

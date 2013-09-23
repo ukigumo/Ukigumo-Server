@@ -6,8 +6,7 @@ use Plack::Util;
 use Test::More;
 use Test::Requires 'Test::WWW::Mechanize::PSGI';
 
-my $app = Plack::Util::load_psgi 'app.psgi';
-
+my $app  = test_ukigumo;
 my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);
 $mech->get_ok('/');
 

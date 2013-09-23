@@ -15,39 +15,39 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: tmpl/index.tt:22
+#: share/tmpl/index.tt:22
 msgid "API Document"
 msgstr "API ドキュメント"
 
-#: tmpl/docs/api.tt:5
+#: share/tmpl/docs/api.tt:5
 msgid "API Document for Ukigumo"
 msgstr "浮雲 API ドキュメント"
 
-#: tmpl/docs/api.tt:8
+#: share/tmpl/docs/api.tt:8
 msgid "Add new report"
 msgstr "レポートを追加する"
 
-#: tmpl/include/table/project.tt:4 tmpl/recent.tt:13
+#: share/tmpl/include/table/project.tt:4 share/tmpl/recent.tt:13
 msgid "Branch"
 msgstr "ブランチ"
 
-#: tmpl/include/table/project.tt:7 tmpl/recent.tt:16 tmpl/report_list.tt:14
+#: share/tmpl/include/table/project.tt:7 share/tmpl/recent.tt:16 share/tmpl/report_list.tt:14
 msgid "Date"
 msgstr "日付"
 
-#: tmpl/branch_delete.tt:8 tmpl/report_list.tt:39
+#: share/tmpl/branch_delete.tt:8 share/tmpl/report_list.tt:39
 msgid "Delete test data for this branch"
 msgstr "このブランチのテストデータを削除する"
 
-#: tmpl/branch_delete.tt:15
+#: share/tmpl/branch_delete.tt:15
 msgid "Delete!"
 msgstr "はい。本当に削除してください。"
 
-#: tmpl/index.tt:24
+#: share/tmpl/index.tt:24
 msgid "Deploy Ukigumo-Server to the dotcloud"
 msgstr "浮雲サーバーを DotCloud に配置する方法(英語)"
 
-#: tmpl/index.tt:25
+#: share/tmpl/index.tt:25
 msgid "Deploy Ukigumo-Server to the heroku"
 msgstr "浮雲サーバーを Heroku に配置する方法(英語)"
 
@@ -55,7 +55,7 @@ msgstr "浮雲サーバーを Heroku に配置する方法(英語)"
 msgid "FAIL"
 msgstr "失敗"
 
-#: tmpl/docs/api.tt:14 tmpl/docs/api.tt:42
+#: share/tmpl/docs/api.tt:14 share/tmpl/docs/api.tt:42
 msgid "Input"
 msgstr "入力"
 
@@ -67,27 +67,27 @@ msgstr "%1 のブランチ一覧"
 msgid "NA"
 msgstr "不明。。"
 
-#: tmpl/docs/api.tt:27 tmpl/docs/api.tt:52
+#: share/tmpl/docs/api.tt:27 share/tmpl/docs/api.tt:52
 msgid "Output"
 msgstr "出力"
 
-#: tmpl/recent.tt:12
+#: share/tmpl/recent.tt:12
 msgid "Project"
 msgstr "プロジェクト"
 
-#: tmpl/branch_delete.tt:10
+#: share/tmpl/branch_delete.tt:10
 msgid "Really delete a '%1' branch from '%2'?"
 msgstr "本当に %2 の %1 ブランチを削除しますか?"
 
-#: tmpl/recent.tt:8
+#: share/tmpl/recent.tt:8
 msgid "Recent reports"
 msgstr "最近のレポート"
 
-#: tmpl/report_list.tt:8
+#: share/tmpl/report_list.tt:8
 msgid "Reports for"
 msgstr "レポート: "
 
-#: tmpl/include/table/project.tt:5 tmpl/recent.tt:14 tmpl/report_list.tt:12
+#: share/tmpl/include/table/project.tt:5 share/tmpl/recent.tt:14 share/tmpl/report_list.tt:12
 msgid "Revision"
 msgstr "リビジョン"
 
@@ -95,22 +95,22 @@ msgstr "リビジョン"
 msgid "SUCCESS"
 msgstr "成功"
 
-#: tmpl/docs/api.tt:38
+#: share/tmpl/docs/api.tt:38
 msgid "Search Report"
 msgstr "レポートを検索する"
 
-#: tmpl/include/table/project.tt:6 tmpl/recent.tt:15 tmpl/report_list.tt:13
+#: share/tmpl/include/table/project.tt:6 share/tmpl/recent.tt:15 share/tmpl/report_list.tt:13
 msgid "Status"
 msgstr "状態"
 
-#: tmpl/branch_delete.tt:11
+#: share/tmpl/branch_delete.tt:11
 msgid "This action removes all reports on '%1'."
 msgstr "実行すると %1 ブランチに関するすべてのテスト結果レポートが削除されます。"
 
-#: tmpl/include/layout.tt:25 tmpl/include/layout.tt:5
+#: share/tmpl/include/layout.tt:25 share/tmpl/include/layout.tt:5
 msgid "Ukigumo"
 msgstr "浮雲"
 
-#: tmpl/index.tt:23
+#: share/tmpl/index.tt:23
 msgid "about Ukigumo(In English)"
 msgstr "浮雲ってなんですか?(英語)"
