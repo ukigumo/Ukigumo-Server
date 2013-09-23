@@ -1,13 +1,12 @@
+package Ukigumo::Server;
 use strict;
 use warnings;
-use utf8;
 use 5.010001;
-
-package Ukigumo::Server;
 use parent qw(Amon2);
 use Carp;
 use DBI;
 use File::Spec;
+
 __PACKAGE__->load_plugins(qw(ShareDir));
 
 our $VERSION = '0.01';
