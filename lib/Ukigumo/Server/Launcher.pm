@@ -1,4 +1,4 @@
-package Ukigumo::Server::CLI;
+package Ukigumo::Server::Launcher;
 use strict;
 use warnings;
 use feature ':5.10';
