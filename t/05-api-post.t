@@ -12,8 +12,7 @@ use HTTP::Message::PSGI;
 use LWP::Protocol::PSGI;
 use Data::Dumper;
 
-my $guard = t::Util::Guard->new;
-my $app = Plack::Util::load_psgi('app.psgi');
+my $app = test_ukigumo;
 LWP::Protocol::PSGI->register($app);
 
 my $c = Ukigumo::Server->bootstrap();

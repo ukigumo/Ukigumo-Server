@@ -16,7 +16,7 @@ use Ukigumo::Server::Web;
 sub session_dir {
     state $session_dir = do {
         my $env = $ENV{PLACK_ENV} // 'cli';
-        my $session_dir = File::Spec->catdir(File::Spec->tmpdir(), "ukigumo-session-$ENV{PLACK_ENV}");
+        my $session_dir = File::Spec->catdir(File::Spec->tmpdir(), "ukigumo-session-$env");
         mkpath($session_dir);
         $session_dir;
     };
