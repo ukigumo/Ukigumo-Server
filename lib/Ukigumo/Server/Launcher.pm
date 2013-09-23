@@ -29,13 +29,20 @@ sub setup {
 
 sub set_config {
     my ($class, $file) = @_;
-    $file ||= File::Spec->catfile(Ukigumo::Server->share_dir, qw/config development.pl/);
 
-    my $config = do $file;
-    Carp::croak("$file: $@") if $@;
-    Carp::croak("$file: $!") unless defined $config;
-    unless ( ref($config) eq 'HASH' ) {
-        Carp::croak("$file does not return HashRef.");
+    my $config;
+    if (ref $file && ref $file eq 'HASH') {
+        $config = $file;
+    }
+    else {
+        $file ||= File::Spec->catfile(Ukigumo::Server->share_dir, qw/config development.pl/);
+
+        my $config = do $file;
+        Carp::croak("$file: $@") if $@;
+        Carp::croak("$file: $!") unless defined $config;
+        unless ( ref($config) eq 'HASH' ) {
+            Carp::croak("$file does not return HashRef.");
+        }
     }
     Ukigumo::Server->config($config);
 }
