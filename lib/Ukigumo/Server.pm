@@ -58,9 +58,35 @@ __END__
 
 Ukigumo::Server - Testing report storage Server
 
+=head1 SYNOPSIS
+
+    % ukigumo-server
+
 =head1 DESCRIPTION
 
-Ukigumo::Server is ...
+Ukigumo::Server is testing report storage server. You can use this server for Continious Testing.
+
+=begin html
+
+<img src="http://gyazo.64p.org/image/dbd98bc15032d97fab081a271541baa2.png" alt="Screen shot">
+
+=end html
+
+=head1 INSTRATION
+
+    % cpanm Ukigumo::Server
+    % ukigumo-server
+    ukigumo-server starts listen on 0:2828
+
+Or you can use git repo instead of C<<cpanm Ukigumo::Server>> for launching L<Ukigumo::Server>.
+
+    % git clone git@github.com:ukigumo/Ukigumo-Server.git .
+    # install carton to your system
+    % curl -L http://cpanmin.us | perl - Carton
+    # And setup the depended modules.
+    % carton install
+    # Then, run the http server!
+    % carton exec perl local/bin/ukigumo-server
 
 =head1 LICENSE
 
