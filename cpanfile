@@ -33,6 +33,9 @@ requires 'URI::Escape';
 requires 'URI::WithBase';
 requires 'Ukigumo::Constants';
 requires 'parent';
+requires 'Getopt::Long';
+requires 'Plack::Loader';
+requires 'Pod::Usage';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
@@ -46,4 +49,10 @@ on 'test' => sub {
     requires 'Plack::Util';
     requires 'Test::More', '0.98';
     requires 'autodie';
+};
+
+on configure => sub {
+    requires 'CPAN::Meta';
+    requires 'CPAN::Meta::Prereqs';
+    requires 'Module::Build';
 };
