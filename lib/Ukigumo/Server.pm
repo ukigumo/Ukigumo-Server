@@ -5,15 +5,28 @@ use 5.010001;
 
 package Ukigumo::Server;
 use parent qw(Amon2);
-use File::Spec;
+use Carp;
 use DBI;
+use File::Spec;
 __PACKAGE__->load_plugins(qw(ShareDir));
 
-our $VERSION='0.01';
+our $VERSION = '0.01';
 
 sub config {
     my ($c, $conf) = @_;
-    state $config = $conf || Ukigumo::Server->load_config;
+    state $config = $conf || do {
+        my $env = $c->mode_name || 'development';
+        my $config_base = File::Spec->catdir($c->base_dir, 'config'); # backward compatible
+           $config_base = File::Spec->catdir($c->share_dir, 'config') unless -d $config_base;
+        my $fname = File::Spec->catfile($config_base, "${env}.pl");
+        my $config = do $fname;
+        Carp::croak("$fname: $@") if $@;
+        Carp::croak("$fname: $!") unless defined $config;
+        unless ( ref($config) eq 'HASH' ) {
+            Carp::croak("$fname does not return HashRef.");
+        }
+        $config;
+    };
 }
 
 sub dbh {
