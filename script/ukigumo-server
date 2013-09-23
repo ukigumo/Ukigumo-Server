@@ -2,15 +2,16 @@
 use strict;
 use warnings;
 use Getopt::Long qw/:config posix_default no_ignore_case bundling auto_help/;
+use Pod::Usage;
 use Plack::Loader;
 use Ukigumo::Server::Launcher;
 
 GetOptions(\my %opt, qw/
-    port=s
-    host=s
-    config=s
+    port|p=s
+    host|h=s
+    config|c=s
     max-workers=i
-/);
+/) or pod2usage(1);
 $opt{host}          //= 0;
 $opt{port}          //= 2828;
 $opt{'max-workers'} //= 4;
@@ -41,9 +42,10 @@ ukigumo-server - ukigumo server launcher
 =head1 SYNOPSIS
 
     % ukigumo-server
-        --host=127.0.0.1 # Bind host   (Default: 0)
-        --port=80        # Bind port   (Default: 2828)
-        --max-workers    # Max workers (Default: 4)
+        --host|h=127.0.0.1   # Bind host   (Default: 0)
+        --port|p=80          # Bind port   (Default: 2828)
+        --max-workers        # Max workers (Default: 4)
+        --config|c=config.pl # Configuration file
 
 =head1 DESCRIPTION
 
