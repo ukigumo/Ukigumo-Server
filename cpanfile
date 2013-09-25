@@ -49,6 +49,8 @@ on 'test' => sub {
     requires 'Plack::Util';
     requires 'Test::More', '0.98';
     requires 'autodie';
+
+    recommends 'Test::mysqld';
 };
 
 on configure => sub {
