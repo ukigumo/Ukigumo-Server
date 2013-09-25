@@ -12,7 +12,7 @@ Ukigumo::Server is testing report storage server. You can use this server for Co
 
 <img src="http://gyazo.64p.org/image/dbd98bc15032d97fab081a271541baa2.png" alt="Screen shot">
 
-# INSTRATION
+# INSTALLATION
 
     % cpanm Ukigumo::Server
     % ukigumo-server
