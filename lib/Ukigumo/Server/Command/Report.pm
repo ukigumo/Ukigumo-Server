@@ -63,6 +63,39 @@ sub recent_list {
     return wantarray ? ($reports, $pager) : $reports;
 }
 
+sub failure_list {
+    my $class = shift;
+    state $rule = Data::Validator->new(
+        limit   => { isa => 'Int', default => 50 },
+        page    => { isa => 'Int', default => 1 },
+    );
+    my $args = $rule->validate(@_);
+
+    my $reports = c->dbh->selectall_arrayref(
+        q{SELECT branch.project, branch.branch, report.report_id, report.revision, report.status, report.ctime
+        FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id)
+        WHERE NOT report.status = 1
+        ORDER BY report_id DESC
+        LIMIT } . ($args->{limit} + 1) . " OFFSET " . $args->{limit}*($args->{page}-1),
+        { Slice => +{} },
+    );
+    my $has_next = do {
+        if (@$reports == $args->{limit}+1) {
+            pop @$reports;
+            1;
+        } else {
+            0;
+        }
+    };
+    my $pager = Data::Page::NoTotalEntries->new(
+        has_next => $has_next,
+        entries_per_page => $args->{limit},
+        current_page => $args->{page},
+        entries_on_this_page => @$reports,
+    );
+    return wantarray ? ($reports, $pager) : $reports;
+}
+
 sub list {
     my $class = shift;
     state $rule = Data::Validator->new(
