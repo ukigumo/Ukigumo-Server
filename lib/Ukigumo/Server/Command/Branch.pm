@@ -17,7 +17,13 @@ sub find_or_create {
     my $args = $rule->validate(@_);
 
     do {
-        my ( $sql, @bind ) = sql_interp 'INSERT OR IGNORE INTO branch ',
+        my $base_sql;
+        if (c->dbdriver eq 'mysql') {
+            $base_sql = 'INSERT IGNORE INTO branch ';
+        } else {
+            $base_sql = 'INSERT OR IGNORE INTO branch ';
+        }
+        my ( $sql, @bind ) = sql_interp $base_sql,
           +{
             project        => $args->{project},
             branch         => $args->{branch},
@@ -54,8 +60,19 @@ sub delete {
         branch_id => { isa => 'Int' },
     );
     my $args = $rule->validate(@_);
-    c->dbh->selectrow_array( q{DELETE FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
-    c->dbh->selectrow_array( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
+    if (c->dbdriver eq 'mysql') {
+        c->dbh->do( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
+
+        my @branch = c->dbh->selectrow_array( q{SELECT branch FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
+        if (scalar(@branch) == 1) {
+            c->dbh->do( q{DELETE FROM branch WHERE branch=?}, {}, $branch[0]);
+        } else {
+            Carp::carp "Failed to delete branch data. Because several branches have same branch_id: $args->{branch_id}";
+        }
+    } else {
+        c->dbh->selectrow_array( q{DELETE FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
+        c->dbh->selectrow_array( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
+    }
     return;
 }
 
