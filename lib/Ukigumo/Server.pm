@@ -72,7 +72,7 @@ Ukigumo::Server is testing report storage server. You can use this server for Co
 
 =end html
 
-=head1 INSTRATION
+=head1 INSTALLATION
 
     % cpanm Ukigumo::Server
     % ukigumo-server
