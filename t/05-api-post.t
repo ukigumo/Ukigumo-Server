@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use utf8;
 use Test::More;
+use t::Util;
 use Test::Requires 'LWP::Protocol::PSGI', 'LWP::UserAgent', 'Capture::Tiny';
 use Capture::Tiny qw(tee_merged);
 use LWP::UserAgent;
@@ -11,7 +12,7 @@ use HTTP::Message::PSGI;
 use LWP::Protocol::PSGI;
 use Data::Dumper;
 
-my $app = Plack::Util::load_psgi('app.psgi');
+my $app = test_ukigumo;
 LWP::Protocol::PSGI->register($app);
 
 my $c = Ukigumo::Server->bootstrap();
