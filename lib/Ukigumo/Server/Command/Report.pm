@@ -168,7 +168,11 @@ sub insert {
         my ( $sql, @bind ) = sql_interp 'INSERT INTO report ',
           +{ %params, ctime => time(), branch_id => $branch_id };
         c->dbh->do( $sql, {}, @bind );
-        c->dbh->sqlite_last_insert_rowid();
+        if (c->dbdriver eq 'mysql') {
+            c->dbh->last_insert_id(undef, undef, undef, undef);
+        } else {
+            c->dbh->sqlite_last_insert_rowid();
+        }
     };
 
     do {

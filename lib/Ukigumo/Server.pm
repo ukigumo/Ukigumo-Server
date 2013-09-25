@@ -39,12 +39,19 @@ sub dbh {
     };
 }
 
+sub dbdriver {
+    my $self = shift;
+    return lc( $self->dbh->{Driver}{Name} );
+}
+
 sub setup_schema {
     my $self = shift;
-    my $fname = File::Spec->catfile($self->share_dir , 'sql', 'sqlite3.sql');
+    my $f = $self->dbdriver eq 'mysql' ? 'mysql.sql' : 'sqlite3.sql';
+    my $fname = File::Spec->catfile($self->share_dir , 'sql', $f);
     open my $fh, '<', $fname or die "Cannot open $fname: $!";
     my $schema = do { local $/; <$fh> };
     for my $code (split /;/, $schema) {
+        next if $code =~ /^$/;
         $self->dbh->do( $code );
     }
 }
