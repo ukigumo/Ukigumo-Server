@@ -37,7 +37,7 @@ sub set_config {
     else {
         $file ||= File::Spec->catfile(Ukigumo::Server->share_dir, qw/config development.pl/);
 
-        my $config = do $file;
+        $config = do $file;
         Carp::croak("$file: $@") if $@;
         Carp::croak("$file: $!") unless defined $config;
         unless ( ref($config) eq 'HASH' ) {
