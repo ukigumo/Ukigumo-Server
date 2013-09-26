@@ -46,7 +46,7 @@ sub dbdriver {
 
 sub setup_schema {
     my $self = shift;
-    my $f = $self->dbdriver eq 'mysql' ? 'mysql.sql' : 'sqlite3.sql';
+    my $f = lc $self->dbdriver . '.sql';
     my $fname = File::Spec->catfile($self->share_dir , 'sql', $f);
     open my $fh, '<', $fname or die "Cannot open $fname: $!";
     my $schema = do { local $/; <$fh> };
