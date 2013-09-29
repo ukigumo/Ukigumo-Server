@@ -5,7 +5,6 @@ requires 'Text::Xslate'                    => '1.1005';
 requires 'Text::Xslate::Bridge::TT2Like'   => '0.00008';
 requires 'Plack::Middleware::ReverseProxy' => '0.09';
 requires 'Time::Piece'                     => '1.20';
-requires 'SQL::Interp' => 0;
 requires 'DBI' => 0;
 requires 'DBD::SQLite' => 1.33;
 requires 'Data::Validator' => 0.08;

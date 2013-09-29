@@ -6,7 +6,6 @@ use 5.010001;
 
 use Amon2::Declare;
 use Data::Validator;
-use SQL::Interp qw(:all);
 use Time::Piece;
 
 sub find_or_create {
@@ -68,13 +67,23 @@ sub list {
     );
     my $args = $rule->validate(@_);
 
-    my @projects = do {
-        my ($sql, @binds) =
-            sql_interp q{SELECT DISTINCT branch.project, branch.branch AS branch, report.report_id, report.status, report.revision, report.ctime FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) WHERE }, $args, q{ORDER BY last_report_id DESC};
+    my ($sql, @binds) = c->db->sql_builder->select(undef,
+        [qw/branch.project branch.branch report.report_id report.status report.revision report.ctime/],
+        $args, {
+            prefix => 'SELECT DISTINCT ',
+            joins => [
+                [branch => {
+                    type      => 'LEFT',
+                    table     => 'report',
+                    condition => {'branch.last_report_id' => 'report.report_id'},
+                }],
+            ],
+        }
+    );
+    my $itr = c->db->search_by_sql($sql, \@binds);
+    $itr->suppress_object_creation(1);
 
-        @{ c->dbh->selectall_arrayref( $sql, { Slice => +{} }, @binds, ) };
-    };
-    return \@projects;
+    [$itr->all];
 }
 
 1;

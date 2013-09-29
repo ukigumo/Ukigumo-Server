@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use 5.010001;
 use Amon2::Web::Dispatcher::Lite;
-use SQL::Interp qw(:all);
 use URI::Escape qw(uri_unescape uri_escape);
 use Time::Piece;
 use Ukigumo::Server::Command::Report;
