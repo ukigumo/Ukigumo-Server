@@ -29,7 +29,7 @@ sub find_or_create {
             branch         => $args->{branch},
             ctime          => time(),
           };
-        c->dbh->do( $sql, {}, @bind );
+        c->db->execute( $sql, \@bind );
     };
 
     return $class->find(%$args);
@@ -42,7 +42,8 @@ sub find {
         branch  => { isa => 'Str' },
     );
     my $args = $rule->validate(@_);
-    return c->dbh->selectrow_array( q{SELECT branch_id FROM branch WHERE project=? AND branch=?}, {}, $args->{project}, $args->{branch} );
+
+    return c->db->single(branch => {project => $args->{project}, branch => $args->{branch}})->branch_id;
 }
 
 sub lookup {
@@ -51,7 +52,7 @@ sub lookup {
         branch_id => { isa => 'Int' },
     );
     my $args = $rule->validate(@_);
-    return c->dbh->selectrow_hashref( q{SELECT * FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
+    return c->db->single(branch => {branch_id => $args->{branch_id}})->get_columns;
 }
 
 sub delete {
@@ -60,19 +61,8 @@ sub delete {
         branch_id => { isa => 'Int' },
     );
     my $args = $rule->validate(@_);
-    if (c->dbdriver eq 'mysql') {
-        c->dbh->do( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
-
-        my @branch = c->dbh->selectrow_array( q{SELECT branch FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
-        if (scalar(@branch) == 1) {
-            c->dbh->do( q{DELETE FROM branch WHERE branch=?}, {}, $branch[0]);
-        } else {
-            Carp::carp "Failed to delete branch data. Because several branches have same branch_id: $args->{branch_id}";
-        }
-    } else {
-        c->dbh->selectrow_array( q{DELETE FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
-        c->dbh->selectrow_array( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
-    }
+    c->db->delete(branch => {branch_id => $args->{branch_id}});
+    c->db->delete(report => {branch_id => $args->{branch_id}});
     return;
 }
 
@@ -84,7 +74,7 @@ sub list {
     my $args = $rule->validate(@_);
 
     my @projects = do {
-        my ($sql, @binds) = 
+        my ($sql, @binds) =
             sql_interp q{SELECT DISTINCT branch.project, branch.branch AS branch, report.report_id, report.status, report.revision, report.ctime FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) WHERE }, $args, q{ORDER BY last_report_id DESC};
 
         @{ c->dbh->selectall_arrayref( $sql, { Slice => +{} }, @binds, ) };
@@ -93,4 +83,3 @@ sub list {
 }
 
 1;
-

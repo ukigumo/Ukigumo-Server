@@ -20,8 +20,7 @@ sub get_last_status {
     my $args = $rule->validate(@_);
 
     my ( $sql, @bind ) =
-      sql_interp
-q{SELECT status FROM report INNER JOIN branch ON (report.report_id=branch.last_report_id) WHERE },
+      sql_interp q{SELECT status FROM report INNER JOIN branch ON (report.report_id=branch.last_report_id) WHERE },
       +{
         'branch.project' => $args->{project},
         'branch.branch'  => $args->{branch}
@@ -91,7 +90,7 @@ sub failure_list {
         has_next => $has_next,
         entries_per_page => $args->{limit},
         current_page => $args->{page},
-        entries_on_this_page => @$reports,
+        entries_on_this_page => $reports,
     );
     return wantarray ? ($reports, $pager) : $reports;
 }
@@ -105,13 +104,17 @@ sub list {
     );
     my $args = $rule->validate(@_);
 
-    my $reports = c->dbh->selectall_arrayref(
-        q{SELECT report_id, revision, status, ctime FROM report WHERE branch_id=?
-        ORDER BY report_id DESC
-        LIMIT } . ($args->{limit} + 1) . " OFFSET " . $args->{limit}*($args->{page}-1),
-        { Slice => +{} },
-        $args->{branch_id}
-    );
+    my $itr = c->db->search(report => {
+        branch_id => $args->{branch_id},
+    }, {
+        limit    => $args->{limit} + 1,
+        offset   => $args->{limit}*($args->{page}-1),
+        order_by => 'report_id DESC',
+        columns  => [qw/report_id revision status ctime/],
+    });
+    $itr->suppress_object_creation(1);
+
+    my $reports = [$itr->all];
     my $has_next = do {
         if (@$reports == $args->{limit}+1) {
             pop @$reports;
@@ -121,10 +124,10 @@ sub list {
         }
     };
     my $pager = Data::Page::NoTotalEntries->new(
-        has_next => $has_next,
-        entries_per_page => $args->{limit},
-        current_page => $args->{page},
-        entries_on_this_page => @$reports,
+        has_next             => $has_next,
+        entries_per_page     => $args->{limit},
+        current_page         => $args->{page},
+        entries_on_this_page => $reports,
     );
     return wantarray ? ($reports, $pager) : $reports;
 }
@@ -157,6 +160,8 @@ sub insert {
     );
     my $args = $rule->validate(@_);
 
+    my $txn = c->db->txn_scope;
+
     my $branch_id = Ukigumo::Server::Command::Branch->find_or_create(
         project => $args->{project},
         branch  => $args->{branch},
@@ -165,23 +170,23 @@ sub insert {
         my %params = %$args;
         delete $params{project};
         delete $params{branch};
-        my ( $sql, @bind ) = sql_interp 'INSERT INTO report ',
-          +{ %params, ctime => time(), branch_id => $branch_id };
-        c->dbh->do( $sql, {}, @bind );
-        if (c->dbdriver eq 'mysql') {
-            c->dbh->last_insert_id(undef, undef, undef, undef);
-        } else {
-            c->dbh->sqlite_last_insert_rowid();
-        }
+
+        my $row = c->db->insert(report => {
+            %params,
+            ctime     => time(),
+            branch_id => $branch_id,
+        });
+        $row->report_id;
     };
 
     do {
-        my ( $sql, @bind ) = sql_interp 'UPDATE branch SET ',
-          +{
+        c->db->update(branch => {
             last_report_id => $report_id,
-          }, q{ WHERE }, +{ branch_id => $branch_id };
-        c->dbh->do( $sql, {}, @bind ) ~~ [0,1] or die;
+        }, {
+            branch_id => $branch_id,
+        }) ~~ [0,1] or die;
     };
+    $txn->commit;
 
     return $report_id;
 }
