@@ -39,6 +39,9 @@ requires 'Pod::Usage';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
+    requires 'DBIx::Schema::DSL';
+    requires 'SQL::Translator::Producer::Teng';
+    requires 'Path::Tiny';
 };
 
 on 'test' => sub {
