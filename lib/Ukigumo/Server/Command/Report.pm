@@ -171,12 +171,11 @@ sub insert {
         delete $params{project};
         delete $params{branch};
 
-        my $row = c->db->insert(report => {
+        c->db->fast_insert(report => {
             %params,
             ctime     => time(),
             branch_id => $branch_id,
         });
-        $row->report_id;
     };
 
     do {

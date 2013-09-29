@@ -16,21 +16,12 @@ sub find_or_create {
     );
     my $args = $rule->validate(@_);
 
-    do {
-        my $base_sql;
-        if (c->dbdriver eq 'mysql') {
-            $base_sql = 'INSERT IGNORE INTO branch ';
-        } else {
-            $base_sql = 'INSERT OR IGNORE INTO branch ';
-        }
-        my ( $sql, @bind ) = sql_interp $base_sql,
-          +{
-            project        => $args->{project},
-            branch         => $args->{branch},
-            ctime          => time(),
-          };
-        c->db->execute( $sql, \@bind );
-    };
+    my $base_sql = c->dbdriver eq 'mysql' ? 'INSERT IGNORE INTO' : 'INSERT OR IGNORE INTO';
+    c->db->fast_insert(branch => {
+        project        => $args->{project},
+        branch         => $args->{branch},
+        ctime          => time(),
+    }, $base_sql);
 
     return $class->find(%$args);
 }
