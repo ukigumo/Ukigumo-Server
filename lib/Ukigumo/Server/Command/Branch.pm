@@ -46,7 +46,8 @@ sub lookup {
         branch_id => { isa => 'Int' },
     );
     my $args = $rule->validate(@_);
-    return c->db->single(branch => {branch_id => $args->{branch_id}})->get_columns;
+    local c->db->{suppress_row_objects} = 1;
+    return c->db->single(branch => {branch_id => $args->{branch_id}});
 }
 
 sub delete {
