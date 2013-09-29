@@ -67,19 +67,15 @@ sub list {
     );
     my $args = $rule->validate(@_);
 
-    my ($sql, @binds) = c->db->sql_builder->select(undef,
-        [qw/branch.project branch.branch report.report_id report.status report.revision report.ctime/],
-        $args, {
-            prefix => 'SELECT DISTINCT ',
-            joins => [
-                [branch => {
-                    type      => 'LEFT',
-                    table     => 'report',
-                    condition => {'branch.last_report_id' => 'report.report_id'},
-                }],
-            ],
-        }
-    );
+    my $sql = q{SELECT DISTINCT branch.project, branch.branch, report.report_id, report.status, report.revision, report.ctime
+        FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) };
+    my @binds;
+    if (exists $args->{project}) {
+        $sql .= 'WHERE project = ? ';
+        push @binds, $args->{project};
+    }
+    $sql .= q{ORDER BY last_report_id DESC};
+
     my $itr = c->db->search_by_sql($sql, \@binds);
     $itr->suppress_object_creation(1);
 
