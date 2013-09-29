@@ -7,6 +7,8 @@ use Carp;
 use DBI;
 use File::Spec;
 
+use Ukigumo::Server::DB;
+
 __PACKAGE__->load_plugins(qw(ShareDir));
 
 our $VERSION = '0.01';
@@ -33,15 +35,30 @@ sub dbh {
 
     $self->{dbh} ||= do {
         my $conf = $self->config->{DBI} or die "Missing configuration for DBI";
-        $conf->[3]->{RaiseError}     = 1;
-        $conf->[3]->{sqlite_unicode} = 1;
+        $conf->[3]->{RaiseError}        = 1;
+        $conf->[3]->{sqlite_unicode}    = 1 if $self->dbdriver eq 'sqlite';
+        $conf->[3]->{mysql_enable_utf8} = 1 if $self->dbdriver eq 'mysql';
         DBI->connect(@$conf) or die $DBI::errstr;
     };
 }
 
+sub db {
+    my $self = shift;
+    $self->{db} ||= Ukigumo::Server::DB->new(dbh => $self->dbh);
+}
+
 sub dbdriver {
     my $self = shift;
-    return lc( $self->dbh->{Driver}{Name} );
+
+    $self->{dbdriver} ||= do {
+        my $conf = $self->config->{DBI} or die "Missing configuration for DBI";
+        my $dsn0 = $conf->[0];
+        my $db
+            = $dsn0 =~ /:mysql:/ ? 'MySQL'
+            : $dsn0 =~ /:Pg:/    ? 'PostgreSQL'
+            :                      do { my ($d) = $dsn0 =~ /dbi:(.*?):/; $d };
+        lc $db;
+    };
 }
 
 sub setup_schema {
