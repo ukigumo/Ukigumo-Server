@@ -1,9 +1,8 @@
+package Ukigumo::Server::Command::Report;
 use strict;
 use warnings;
 use utf8;
 
-package Ukigumo::Server::Command::Report;
-use SQL::Interp qw(:all);
 use Amon2::Declare;
 use URI::WithBase;
 use 5.010001;
@@ -19,15 +18,17 @@ sub get_last_status {
     );
     my $args = $rule->validate(@_);
 
-    my ( $sql, @bind ) =
-      sql_interp q{SELECT status FROM report INNER JOIN branch ON (report.report_id=branch.last_report_id) WHERE },
-      +{
-        'branch.project' => $args->{project},
-        'branch.branch'  => $args->{branch}
-      },
-      q{ ORDER BY report_id DESC LIMIT 1};
-    my ($last_status) = c->dbh->selectrow_array($sql, {}, @bind);
-    return $last_status;
+    my $itr = c->db->search_by_sql(
+        q{SELECT status FROM report INNER JOIN branch ON (report.report_id=branch.last_report_id) WHERE
+            branch.project = ? AND
+            branch.branch  = ?
+        ORDER BY report_id DESC LIMIT 1},
+        [$args->{project}, $args->{branch}],
+    );
+    $itr->suppress_object_creation(1);
+
+    my $row = $itr->next || {};
+    $row->{status};
 }
 
 sub recent_list {
@@ -38,13 +39,15 @@ sub recent_list {
     );
     my $args = $rule->validate(@_);
 
-    my $reports = c->dbh->selectall_arrayref(
+    my $itr = c->db->search_by_sql(
         q{SELECT branch.project, branch.branch, report.report_id, report.revision, report.status, report.ctime
         FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id)
         ORDER BY report_id DESC
-        LIMIT } . ($args->{limit} + 1) . " OFFSET " . $args->{limit}*($args->{page}-1),
-        { Slice => +{} },
+        LIMIT ? OFFSET ?},
+        [$args->{limit} + 1, $args->{limit}*($args->{page}-1)],
     );
+    $itr->suppress_object_creation(1);
+    my $reports = [$itr->all];
     my $has_next = do {
         if (@$reports == $args->{limit}+1) {
             pop @$reports;
@@ -70,14 +73,15 @@ sub failure_list {
     );
     my $args = $rule->validate(@_);
 
-    my $reports = c->dbh->selectall_arrayref(
+    my $itr = c->db->search_by_sql(
         q{SELECT branch.project, branch.branch, report.report_id, report.revision, report.status, report.ctime
         FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id)
         WHERE NOT report.status = 1
         ORDER BY report_id DESC
-        LIMIT } . ($args->{limit} + 1) . " OFFSET " . $args->{limit}*($args->{page}-1),
-        { Slice => +{} },
+        LIMIT ? OFFSET ?}, [$args->{limit} + 1, $args->{limit}*($args->{page}-1)],
     );
+    $itr->suppress_object_creation(1);
+    my $reports = [$itr->all];
     my $has_next = do {
         if (@$reports == $args->{limit}+1) {
             pop @$reports;
@@ -143,8 +147,16 @@ sub search {
     my $args = $rule->validate(@_);
     my %where = map { $_ => $args->{$_} } qw(project branch revision);
 
-    my ($sql, @bind) = sql_interp q{SELECT status, report_id, report.ctime FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id) WHERE }, \%where, q{ ORDER BY report_id DESC LIMIT }, $args->{limit};
-    return c->dbh->selectall_arrayref($sql, +{ Slice => {}}, @bind);
+    my $itr = c->db->search_by_sql(
+        q{SELECT status, report_id, report.ctime FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id) WHERE
+            project  = ? AND
+            branch   = ? AND
+            revision = ?
+        ORDER BY report_id DESC LIMIT ?
+        }, [$args->{project}, $args->{branch}, $args->{revision}, $args->{limit}]);
+    $itr->suppress_object_creation(1);
+
+    [$itr->all];
 }
 
 sub insert {
@@ -204,9 +216,16 @@ sub find {
     );
     my $args = $rule->validate(@_);
 
-    my $report = c->dbh->selectrow_hashref(q{SELECT branch.project, branch.branch, report.* FROM report INNER JOIN branch ON (report.branch_id=branch.branch_id) WHERE report_id=?}, {}, $args->{report_id});
+    my $db = c->db;
+    my $org = $db->suppress_row_objects;
+    $db->suppress_row_objects(1);
+    my $report = $db->single_by_sql(
+        q{SELECT branch.project, branch.branch, report.* FROM report INNER JOIN branch ON (report.branch_id=branch.branch_id) WHERE report_id=?},
+        [$args->{report_id}]
+    );
+    $db->suppress_row_objects($org);
+
     return $report;
 }
 
 1;
-
