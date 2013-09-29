@@ -55,10 +55,10 @@ sub recent_list {
         }
     };
     my $pager = Data::Page::NoTotalEntries->new(
-        has_next => $has_next,
-        entries_per_page => $args->{limit},
-        current_page => $args->{page},
-        entries_on_this_page => @$reports,
+        has_next             => $has_next,
+        entries_per_page     => $args->{limit},
+        current_page         => $args->{page},
+        entries_on_this_page => scalar @$reports,
     );
     return wantarray ? ($reports, $pager) : $reports;
 }
@@ -88,10 +88,10 @@ sub failure_list {
         }
     };
     my $pager = Data::Page::NoTotalEntries->new(
-        has_next => $has_next,
-        entries_per_page => $args->{limit},
-        current_page => $args->{page},
-        entries_on_this_page => @$reports,
+        has_next             => $has_next,
+        entries_per_page     => $args->{limit},
+        current_page         => $args->{page},
+        entries_on_this_page => scalar @$reports,
     );
     return wantarray ? ($reports, $pager) : $reports;
 }
@@ -121,10 +121,10 @@ sub list {
         }
     };
     my $pager = Data::Page::NoTotalEntries->new(
-        has_next => $has_next,
-        entries_per_page => $args->{limit},
-        current_page => $args->{page},
-        entries_on_this_page => @$reports,
+        has_next             => $has_next,
+        entries_per_page     => $args->{limit},
+        current_page         => $args->{page},
+        entries_on_this_page => scalar @$reports,
     );
     return wantarray ? ($reports, $pager) : $reports;
 }
