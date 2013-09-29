@@ -2,13 +2,13 @@ package Ukigumo::Server::Command::Report;
 use strict;
 use warnings;
 use utf8;
+use 5.010001;
 
 use Amon2::Declare;
 use URI::WithBase;
-use 5.010001;
+use Data::Page::NoTotalEntries;
 use Data::Validator;
 use Ukigumo::Server::Command::Branch;
-use Data::Page::NoTotalEntries;
 
 sub get_last_status {
     my $class = shift;
@@ -217,15 +217,12 @@ sub find {
     my $args = $rule->validate(@_);
 
     my $db = c->db;
-    my $org = $db->suppress_row_objects;
-    $db->suppress_row_objects(1);
-    my $report = $db->single_by_sql(
+    local $db->{suppress_row_objects} = 1;
+
+    return $db->single_by_sql(
         q{SELECT branch.project, branch.branch, report.* FROM report INNER JOIN branch ON (report.branch_id=branch.branch_id) WHERE report_id=?},
         [$args->{report_id}]
     );
-    $db->suppress_row_objects($org);
-
-    return $report;
 }
 
 1;

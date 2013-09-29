@@ -1,12 +1,13 @@
+package Ukigumo::Server::Command::Branch;
 use strict;
 use warnings;
 use utf8;
 use 5.010001;
 
-package Ukigumo::Server::Command::Branch;
-use Time::Piece;
-use SQL::Interp qw(:all);
 use Amon2::Declare;
+use Data::Validator;
+use SQL::Interp qw(:all);
+use Time::Piece;
 
 sub find_or_create {
     my $class = shift;
@@ -34,7 +35,10 @@ sub find {
     );
     my $args = $rule->validate(@_);
 
-    return c->db->single(branch => {project => $args->{project}, branch => $args->{branch}})->branch_id;
+    my $db = c->db;
+    local $db->{suppress_row_objects} = 1;
+
+    return $db->single(branch => {project => $args->{project}, branch => $args->{branch}})->{branch_id};
 }
 
 sub lookup {
