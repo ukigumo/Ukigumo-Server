@@ -5,12 +5,12 @@ requires 'Text::Xslate'                    => '1.1005';
 requires 'Text::Xslate::Bridge::TT2Like'   => '0.00008';
 requires 'Plack::Middleware::ReverseProxy' => '0.09';
 requires 'Time::Piece'                     => '1.20';
-requires 'SQL::Interp' => 0;
 requires 'DBI' => 0;
 requires 'DBD::SQLite' => 1.33;
 requires 'Data::Validator' => 0.08;
 requires 'Plack::Middleware::Session' => 0.14;
 requires 'Ukigumo::Common' => '0.03';
+requires 'Teng';
 requires 'Text::Markdown' => 1;
 requires 'Data::Page::NoTotalEntries'     => 0.02;
 requires 'Locale::Maketext::Lexicon' => 0;
@@ -39,6 +39,9 @@ requires 'Pod::Usage';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
+    requires 'DBIx::Schema::DSL';
+    requires 'SQL::Translator::Producer::Teng';
+    requires 'Path::Tiny';
 };
 
 on 'test' => sub {

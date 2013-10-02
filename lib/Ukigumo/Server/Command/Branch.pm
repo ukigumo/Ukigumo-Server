@@ -1,12 +1,12 @@
+package Ukigumo::Server::Command::Branch;
 use strict;
 use warnings;
 use utf8;
 use 5.010001;
 
-package Ukigumo::Server::Command::Branch;
-use Time::Piece;
-use SQL::Interp qw(:all);
 use Amon2::Declare;
+use Data::Validator;
+use Time::Piece;
 
 sub find_or_create {
     my $class = shift;
@@ -16,21 +16,12 @@ sub find_or_create {
     );
     my $args = $rule->validate(@_);
 
-    do {
-        my $base_sql;
-        if (c->dbdriver eq 'mysql') {
-            $base_sql = 'INSERT IGNORE INTO branch ';
-        } else {
-            $base_sql = 'INSERT OR IGNORE INTO branch ';
-        }
-        my ( $sql, @bind ) = sql_interp $base_sql,
-          +{
-            project        => $args->{project},
-            branch         => $args->{branch},
-            ctime          => time(),
-          };
-        c->dbh->do( $sql, {}, @bind );
-    };
+    my $base_sql = c->dbdriver eq 'mysql' ? 'INSERT IGNORE INTO' : 'INSERT OR IGNORE INTO';
+    c->db->fast_insert(branch => {
+        project        => $args->{project},
+        branch         => $args->{branch},
+        ctime          => time(),
+    }, $base_sql);
 
     return $class->find(%$args);
 }
@@ -42,7 +33,9 @@ sub find {
         branch  => { isa => 'Str' },
     );
     my $args = $rule->validate(@_);
-    return c->dbh->selectrow_array( q{SELECT branch_id FROM branch WHERE project=? AND branch=?}, {}, $args->{project}, $args->{branch} );
+
+    local c->db->{suppress_row_objects} = 1;
+    return c->db->single(branch => {project => $args->{project}, branch => $args->{branch}})->{branch_id};
 }
 
 sub lookup {
@@ -51,7 +44,8 @@ sub lookup {
         branch_id => { isa => 'Int' },
     );
     my $args = $rule->validate(@_);
-    return c->dbh->selectrow_hashref( q{SELECT * FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
+    local c->db->{suppress_row_objects} = 1;
+    return c->db->single(branch => {branch_id => $args->{branch_id}});
 }
 
 sub delete {
@@ -60,21 +54,8 @@ sub delete {
         branch_id => { isa => 'Int' },
     );
     my $args = $rule->validate(@_);
-    if (c->dbdriver eq 'mysql') {
-        c->dbh->do( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
-
-        # Older version forgot to use unique constraints on branch_id in mysql schema.
-        # Yes. It's historycal reson.
-        my @branch = c->dbh->selectrow_array( q{SELECT branch FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
-        if (scalar(@branch) == 1) {
-            c->dbh->do( q{DELETE FROM branch WHERE branch=?}, {}, $branch[0]);
-        } else {
-            Carp::carp "Failed to delete branch data. Because several branches have same branch_id: $args->{branch_id}";
-        }
-    } else {
-        c->dbh->selectrow_array( q{DELETE FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
-        c->dbh->selectrow_array( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
-    }
+    c->db->delete(branch => {branch_id => $args->{branch_id}});
+    c->db->delete(report => {branch_id => $args->{branch_id}});
     return;
 }
 
@@ -85,14 +66,19 @@ sub list {
     );
     my $args = $rule->validate(@_);
 
-    my @projects = do {
-        my ($sql, @binds) = 
-            sql_interp q{SELECT DISTINCT branch.project, branch.branch AS branch, report.report_id, report.status, report.revision, report.ctime FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) WHERE }, $args, q{ORDER BY last_report_id DESC};
+    my $sql = q{SELECT DISTINCT branch.project, branch.branch, report.report_id, report.status, report.revision, report.ctime
+        FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) };
+    my @binds;
+    if (exists $args->{project}) {
+        $sql .= 'WHERE project = ? ';
+        push @binds, $args->{project};
+    }
+    $sql .= q{ORDER BY last_report_id DESC};
 
-        @{ c->dbh->selectall_arrayref( $sql, { Slice => +{} }, @binds, ) };
-    };
-    return \@projects;
+    my $itr = c->db->search_by_sql($sql, \@binds);
+    $itr->suppress_object_creation(1);
+
+    [$itr->all];
 }
 
 1;
-
