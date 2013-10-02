@@ -63,6 +63,8 @@ sub delete {
     if (c->dbdriver eq 'mysql') {
         c->dbh->do( q{DELETE FROM report WHERE branch_id=?}, {}, $args->{branch_id} );
 
+        # Older version forgot to use unique constraints on branch_id in mysql schema.
+        # Yes. It's historycal reson.
         my @branch = c->dbh->selectrow_array( q{SELECT branch FROM branch WHERE branch_id=?}, {}, $args->{branch_id} );
         if (scalar(@branch) == 1) {
             c->dbh->do( q{DELETE FROM branch WHERE branch=?}, {}, $branch[0]);
