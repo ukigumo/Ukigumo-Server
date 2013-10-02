@@ -50,3 +50,15 @@ ukigumo-server - ukigumo server launcher
 =head1 DESCRIPTION
 
 ukigumo-server is a Ukigumo::Server launcher.
+
+=head1 CONFIGURATION
+
+Config file is '.pl' format and has two configuration items.
+
+=head2 C<DBI>
+
+DBI connect information. You can use SQLite or MySQL.
+
+=head2 C<Text::Xslate>
+
+Text::Xslate constructor options. If you set this option, you can use original template file.
