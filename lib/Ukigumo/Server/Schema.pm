@@ -27,7 +27,7 @@ create_table report => columns {
     text    'body',    null;
     integer 'ctime';
 
-    belongs_to 'branch', foreign_column => 'branch_id', on_delete => 'CASCADE';
+    add_index report_branch_idx => [qw/branch_id/];
 };
 
 1;

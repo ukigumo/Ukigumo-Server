@@ -20,8 +20,7 @@ CREATE TABLE IF NOT EXISTS `report` (
   `vc_log` text NULL,
   `body` text NULL,
   `ctime` INTEGER NOT NULL,
-  INDEX (`branch_id`),
-  CONSTRAINT `report_fk` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`branch_id`) ON DELETE CASCADE,
+  INDEX `report_branch_idx` (`branch_id`),
   PRIMARY KEY (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8;
 

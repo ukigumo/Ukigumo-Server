@@ -20,8 +20,9 @@ CREATE TABLE IF NOT EXISTS report (
   revision VARCHAR(255),
   vc_log TEXT,
   body TEXT,
-  ctime INTEGER NOT NULL,
-  FOREIGN KEY (branch_id) REFERENCES branch(branch_id) ON DELETE CASCADE
+  ctime INTEGER NOT NULL
 );
+
+CREATE INDEX IF NOT EXISTS report_branch_idx ON report (branch_id);
 
 COMMIT;
