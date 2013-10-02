@@ -216,10 +216,8 @@ sub find {
     );
     my $args = $rule->validate(@_);
 
-    my $db = c->db;
-    local $db->{suppress_row_objects} = 1;
-
-    return $db->single_by_sql(
+    local c->db->{suppress_row_objects} = 1;
+    return c->db->single_by_sql(
         q{SELECT branch.project, branch.branch, report.* FROM report INNER JOIN branch ON (report.branch_id=branch.branch_id) WHERE report_id=?},
         [$args->{report_id}]
     );
