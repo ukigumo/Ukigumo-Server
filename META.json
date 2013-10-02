@@ -4,7 +4,7 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.4.3, CPAN::Meta::Converter version 2.130880",
+   "generated_by" : "Minilla/v0.7.0, CPAN::Meta::Converter version 2.132510",
    "license" : [
       "perl_5"
    ],
@@ -34,7 +34,10 @@
       },
       "develop" : {
          "requires" : {
+            "DBIx::Schema::DSL" : "0",
             "Locale::Maketext::Extract::Plugin::Xslate" : "v0.0.2",
+            "Path::Tiny" : "0",
+            "SQL::Translator::Producer::Teng" : "0",
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion" : "0.10108",
             "Test::Pod" : "1.41",
@@ -45,6 +48,7 @@
          "requires" : {
             "Amon2" : "2.50",
             "Amon2::Declare" : "0",
+            "Amon2::Plugin::ShareDir" : "0",
             "Amon2::Web" : "0",
             "Amon2::Web::Dispatcher::Lite" : "0",
             "Capture::Tiny" : "0",
@@ -53,17 +57,20 @@
             "Data::Page::NoTotalEntries" : "0.02",
             "Data::Validator" : "0.08",
             "File::Find::Rule" : "0",
+            "Getopt::Long" : "0",
             "JSON" : "2",
             "LWP::UserAgent" : "0",
             "Locale::Maketext::Extract" : "0",
             "Locale::Maketext::Lexicon" : "0",
             "Module::Functions" : "0",
             "Plack::Builder" : "0",
+            "Plack::Loader" : "0",
             "Plack::Middleware::ReverseProxy" : "0.09",
             "Plack::Middleware::Session" : "0.14",
             "Plack::Session::Store::File" : "0",
+            "Pod::Usage" : "0",
             "Router::Simple" : "0",
-            "SQL::Interp" : "0",
+            "Teng" : "0",
             "Text::Markdown" : "1",
             "Text::Xslate" : "1.1005",
             "Text::Xslate::Bridge::TT2Like" : "0.00008",
@@ -80,12 +87,15 @@
          }
       },
       "test" : {
+         "recommends" : {
+            "Test::mysqld" : "0"
+         },
          "requires" : {
             "HTTP::Message::PSGI" : "0",
             "LWP::Protocol::PSGI" : "0",
             "Plack::Test" : "0",
             "Plack::Util" : "0",
-            "Test::More" : "0.96",
+            "Test::More" : "0.98",
             "Test::Requires" : "0",
             "autodie" : "0"
          }
@@ -110,6 +120,10 @@
       "Kan Fushihara <kan@fout.jp>",
       "mattn <mattn.jp@gmail.com>",
       "Kan Fushihara <kan.fushihara@gmail.com>",
-      "Masayuki Matsuki <y.songmu@gmail.com>"
+      "Tomohiro Hosaka <bokutin@bokut.in>",
+      "studio3104 <studio3104.com@gmail.com>",
+      "moznion <moznion@gmail.com>",
+      "HIROSE Masaaki <hirose31@gmail.com>",
+      "Songmu <y.songmu@gmail.com>"
    ]
 }

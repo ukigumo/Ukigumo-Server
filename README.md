@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ukigumo/Ukigumo-Server.png?branch=master)](https://travis-ci.org/ukigumo/Ukigumo-Server) [![Coverage Status](https://coveralls.io/repos/ukigumo/Ukigumo-Server/badge.png?branch=master)](https://coveralls.io/r/ukigumo/Ukigumo-Server?branch=master)
 # NAME
 
 Ukigumo::Server - Testing report storage Server
