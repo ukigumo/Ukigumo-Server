@@ -1,4 +1,4 @@
-: cascade 'include/layout.tx'
+: cascade include::layout
 : override content -> {
 
 <link href="<: uri_for('/static/google-code-prettify/prettify.css') :>" rel="stylesheet" type="text/css" media="screen" />
