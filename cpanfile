@@ -49,6 +49,7 @@ on 'test' => sub {
     requires 'Test::Requires' => 0;
     requires 'HTTP::Message::PSGI';
     requires 'LWP::Protocol::PSGI';
+    requires 'Test::WWW::Mechanize::PSGI';
     requires 'Plack::Test';
     requires 'Plack::Util';
     requires 'Test::More', '0.98';
