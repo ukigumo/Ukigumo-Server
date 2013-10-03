@@ -2,6 +2,12 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+v1.0.0 2013-10-03T16:58:42Z
+
+    - Switch to Kolon syntax
+    - Remove deps on Text::Xslate::Bridge::TT2Like
+
+
 0.01 2013-10-03T02:12:17Z
 
     - original version

@@ -2,6 +2,8 @@ package Ukigumo::Server;
 use strict;
 use warnings;
 use 5.010001;
+use version; our $VERSION = version->declare('v1.0.0');
+
 use parent qw(Amon2);
 use Carp;
 use DBI;
@@ -11,8 +13,6 @@ use File::Spec;
 use Ukigumo::Server::DB;
 
 __PACKAGE__->load_plugins(qw(ShareDir));
-
-our $VERSION = '0.01';
 
 sub config {
     my ($c, $conf) = @_;

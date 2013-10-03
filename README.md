@@ -29,6 +29,10 @@ Or you can use git repo instead of `cpanm Ukigumo::Server` for launching [Ukigum
     # Then, run the http server!
     % carton exec perl local/bin/ukigumo-server
 
+# SEE ALSO
+
+[ukigumo-server](http://search.cpan.org/perldoc?ukigumo-server)
+
 # LICENSE
 
 Copyright (C) tokuhirom.
