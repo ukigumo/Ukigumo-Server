@@ -121,6 +121,10 @@ Or you can use git repo instead of C<< cpanm Ukigumo::Server >> for launching L<
     # Then, run the http server!
     % carton exec perl local/bin/ukigumo-server
 
+=head1 SEE ALSO
+
+L<ukigumo-server>
+
 =head1 LICENSE
 
 Copyright (C) tokuhirom.
