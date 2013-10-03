@@ -10,8 +10,7 @@ my $Ext = Locale::Maketext::Extract->new(
     plugins => {
         perl => [qw/pl pm js/],
         xslate => {
-            syntax     => 'TTerse',
-            extensions => ['tt', 'html'],
+            syntax => 'Kolon',
         },
     },
     warnings => 1,
@@ -20,7 +19,7 @@ my $Ext = Locale::Maketext::Extract->new(
 for my $lang (qw/ja/) {
     $Ext->read_po("share/po/$lang.po") if -f "share/po/$lang.po";
     $Ext->extract_file($_) for File::Find::Rule->file()->name('*.pm')->in('lib');
-    $Ext->extract_file($_) for File::Find::Rule->file()->name('*.tt')->in('share/tmpl/');
+    $Ext->extract_file($_) for File::Find::Rule->file()->name('*.tx')->in('share/tmpl/');
 
     # Set $entries_are_in_gettext_format if the .pl files above use
     # loc('%1') instead of loc('[_1]')
