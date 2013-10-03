@@ -1,10 +1,10 @@
-: cascade 'include/layout.tx'
+: cascade include::layout
 : override content -> {
 
 <section>
 <div class="row">
     <div class="span16">
-        : include 'include/table/project' { project_name => $project_name, projects => $projects }
+        : include 'include/table/project.tx' { project_name => $project_name, projects => $projects }
     </div>
 </div>
 </section>

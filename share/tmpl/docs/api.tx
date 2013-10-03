@@ -1,4 +1,4 @@
-: cascade 'include/layout.tx' { bodyID => 'APIDocs' }
+: cascade include::layout { bodyID => 'APIDocs' }
 : override content -> {
 
 <section>

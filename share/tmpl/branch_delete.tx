@@ -1,4 +1,4 @@
-: cascade 'include/layout'
+: cascade include::layout
 : override content -> {
 
 <hr class="space">
