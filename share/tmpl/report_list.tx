@@ -6,7 +6,7 @@
 <section>
 <div class="row">
     <div class="span16">
-        <h1><: l('Reports for') :> <a href="<: uri_for('/', {project => project}) :>"><: project :></a> [<: branch :>]</h1>
+        <h1><: l('Reports for') :> <a href="<: uri_for('/', {project => $project}) :>"><: $project :></a> [<: $branch :>]</h1>
 
         <table>
             <tr>
