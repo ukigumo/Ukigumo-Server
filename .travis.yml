@@ -7,5 +7,7 @@ perl:
   - "5.10"
 before_install:
   cpanm -n Devel::Cover::Report::Coveralls
+install:
+  cpanm --with-test --quiet --installdeps --notest .
 script:
   perl Build.PL && ./Build build && cover -test -report coveralls
