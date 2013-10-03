@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Projects>
+: for $projects.keys -> $project_name {
+    : for $projects.item($project_name) -> $v {
+    <Project name="<: project_name :> - <: $v.branch :>"
+             activity="Sleeping"
+             lastBuildStatus="<: $v.status | status_cc_str :>"
+             lastBuildLabel="<: $v.revision || '-' :>"
+             lastBuildTime="<: $v.ctime | ctime_cc_str :>"
+             webUrl="<: abs_uri_for('/project/' ~ uri($v.project) ~ '/' ~ uri($v.branch)) :>" />
+    : }
+: }
+</Projects>

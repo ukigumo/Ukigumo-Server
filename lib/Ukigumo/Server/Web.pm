@@ -22,13 +22,11 @@ sub create_view {
         unless (exists $view_conf->{path}) {
             $view_conf->{path} = [ File::Spec->catdir(__PACKAGE__->share_dir(), 'tmpl') ];
         }
-        Text::Xslate->new(
-            +{
-                'syntax' => 'TTerse',
-                'module' => [ 'Ukigumo::Helper', 'Text::Xslate::Bridge::Star', 'Ukigumo::Server::Web::ViewFunctions' ],
-                %$view_conf
-            }
-        );
+        Text::Xslate->new(+{
+            'syntax' => 'Kolon',
+            'module' => [ 'Ukigumo::Helper', 'Text::Xslate::Bridge::Star', 'Ukigumo::Server::Web::ViewFunctions' ],
+            %$view_conf
+        });
     };
 }
 

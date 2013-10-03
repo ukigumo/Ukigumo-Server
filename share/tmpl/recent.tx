@@ -1,0 +1,47 @@
+: cascade 'include/layout.tx'
+: override content -> {
+
+<hr class="space">
+
+<section>
+<div class="row">
+    <div class="span16">
+        <h1><: l('Recent reports') :></h1>
+
+        <table>
+            <tr>
+                <th><: l('Project') :></th>
+                <th><: l('Branch') :></th>
+                <th><: l('Revision') :></th>
+                <th><: l('Status') :></th>
+                <th><: l('Date') :></th>
+            </tr>
+        : for $reports -> $v {
+            <tr>
+                <td><: $v.project || '-' :></td>
+                <td><: $v.branch || '-' :></td>
+                <td><: $v.revision || '-' :></td>
+                <td style="color: <: $v.status | status_color :>"><: $v.status | status_str :> </td>
+                <td><a href="<: uri_for('/report/' ~ $v.report_id) :>"><: ago($now-$v.ctime, 1) :></a></td>
+            </tr>
+        : }
+        </table>
+
+        <div class="pager">
+        : if $pager.prev_page {
+            <a href="<: uri_with({page => $pager.prev_page}) :>">←</a>
+        : } else {
+            ←
+        : }
+        |<: $pager.current_page :>|
+        : if $pager.next_page {
+            <a href="<: uri_with({page => $pager.next_page}) :>">→</a>
+        : } else {
+            →
+         : }
+        </div>
+    </div>
+</div>
+</section>
+
+: }

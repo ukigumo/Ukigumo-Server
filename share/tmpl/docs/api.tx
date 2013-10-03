@@ -1,17 +1,18 @@
-[% WRAPPER 'include/layout.tt' WITH bodyID="APIDocs" %]
+: cascade 'include/layout.tx' { bodyID => 'APIDocs' }
+: override content -> {
 
 <section>
 <div class="row">
-    <h1>[% l('API Document for Ukigumo') %]</h1>
+    <h1><: l('API Document for Ukigumo') :></h1>
 
     <section>
-        <h2>[% l('Add new report') %]</h2>
+        <h2><: l('Add new report') :></h2>
 
-        <p>[% abs_uri_for('/api/v1/report/add') %]</p>
+        <p><: abs_uri_for('/api/v1/report/add') :></p>
 
         <div class="io">
             <div class="input">
-            <h3>[% l('Input') %]</h3>
+            <h3><: l('Input') :></h3>
             <table>
                 <tr><th>status</th><td>SUCCESS: 1, FAIL: 2, NA: 3</td></tr>
                 <tr><th>project</th><td>project name</td></tr>
@@ -24,7 +25,7 @@
             </div>
 
             <div class="output">
-            <h3>[% l('Output') %]</h3>
+            <h3><: l('Output') :></h3>
             <table>
                 <tr><th>report.report_id</th><td>report id</td></tr>
                 <tr><th>report.url</th><td>The url for report</td></tr>
@@ -35,11 +36,11 @@
     </section>
 
     <section>
-        <h2>[% l('Search Report') %]</h2>
-        <p>[% abs_uri_for('/api/v1/report/search') %]</p>
+        <h2><: l('Search Report') :></h2>
+        <p><: abs_uri_for('/api/v1/report/search') :></p>
         <div class="io">
             <div class="input">
-            <h3>[% l('Input') %]</h3>
+            <h3><: l('Input') :></h3>
             <table>
                 <tr><th>project</th><td>project name</td></tr>
                 <tr><th>branch</th><td>Branch name</td></tr>
@@ -49,10 +50,10 @@
             </div>
 
             <div class="output">
-            <h3>[% l('Output') %]</h3>
+            <h3><: l('Output') :></h3>
             <table>
-                <tr><th>reports.$n.report_id</th><td>report id</td></tr>
-                <tr><th>reports.$n.status</th><td>SUCCESS: 1, FAIL: 2, NA: 3</td></tr>
+                <tr><th>reports.n.report_id</th><td>report id</td></tr>
+                <tr><th>reports.n.status</th><td>SUCCESS: 1, FAIL: 2, NA: 3</td></tr>
             </table>
             </div>
         </div>
@@ -61,4 +62,4 @@
 </div>
 </section>
 
-[% END %]
+: }
