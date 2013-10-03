@@ -24,7 +24,7 @@
         </table>
 
     	<div class="pager">
-    	: if $pager.prev_page
+        : if $pager.prev_page {
     		<a href="<: uri_with({page => $pager.prev_page}) :>">←</a>
         : } else {
     		←
