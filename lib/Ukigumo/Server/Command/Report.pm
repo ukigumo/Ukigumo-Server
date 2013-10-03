@@ -190,13 +190,12 @@ sub insert {
         });
     };
 
-    do {
-        c->db->update(branch => {
-            last_report_id => $report_id,
-        }, {
-            branch_id => $branch_id,
-        }) ~~ [0,1] or die;
-    };
+    c->db->update(branch => {
+        last_report_id => $report_id,
+    }, {
+        branch_id => $branch_id,
+    });
+
     $txn->commit;
 
     return $report_id;
