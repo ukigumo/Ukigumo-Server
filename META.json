@@ -57,6 +57,7 @@
             "Data::Page::NoTotalEntries" : "0.02",
             "Data::Validator" : "0.08",
             "File::Find::Rule" : "0",
+            "File::ShareDir" : "0",
             "Getopt::Long" : "0",
             "JSON" : "2",
             "LWP::UserAgent" : "0",

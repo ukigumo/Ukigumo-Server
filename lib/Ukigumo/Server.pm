@@ -111,7 +111,7 @@ Ukigumo::Server is testing report storage server. You can use this server for Co
     % ukigumo-server
     ukigumo-server starts listen on 0:2828
 
-Or you can use git repo instead of C<<cpanm Ukigumo::Server>> for launching L<Ukigumo::Server>.
+Or you can use git repo instead of C<< cpanm Ukigumo::Server >> for launching L<Ukigumo::Server>.
 
     % git clone git@github.com:ukigumo/Ukigumo-Server.git .
     # install carton to your system
