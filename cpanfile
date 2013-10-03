@@ -23,6 +23,7 @@ requires 'Amon2::Web';
 requires 'Amon2::Web::Dispatcher::Lite';
 requires 'Capture::Tiny';
 requires 'File::Find::Rule';
+requires 'File::ShareDir';
 requires 'LWP::UserAgent';
 requires 'Locale::Maketext::Extract';
 requires 'Plack::Builder';

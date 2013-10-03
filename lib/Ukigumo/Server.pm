@@ -5,6 +5,7 @@ use 5.010001;
 use parent qw(Amon2);
 use Carp;
 use DBI;
+use File::ShareDir;
 use File::Spec;
 
 use Ukigumo::Server::DB;
@@ -65,8 +66,16 @@ sub setup_schema {
     my $self = shift;
     my $f = lc $self->dbdriver . '.sql';
     my $fname = File::Spec->catfile($self->share_dir , 'sql', $f);
-    open my $fh, '<', $fname or die "Cannot open $fname: $!";
-    my $schema = do { local $/; <$fh> };
+    unless (-f $fname) {
+        # Resolve real share_dir. User himself might create 'share/' dir in current directory.
+        my $real_share = File::ShareDir::dist_dir('Ukigumo-Server');
+        $fname = File::Spec->catfile($real_share, 'sql', $f);
+    }
+    my $schema = do {
+        local $/;
+        open my $fh, '<', $fname or die "Cannot open $fname: $!";
+        <$fh>
+    };
     for my $code (split /;/, $schema) {
         next if $code =~ /^$/;
         $self->dbh->do( $code );
