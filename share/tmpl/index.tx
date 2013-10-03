@@ -6,8 +6,8 @@
 <section>
 <div class="row">
     <div class="span16">
-        : for $projects.keys -> $project_name {
-        : include 'include/table/project' {project_name => $project_name, projects => $projects.item($project_name) }
+        : for $projects.keys() -> $project_name {
+        : include 'include/table/project.tx' {project_name => $project_name, projects => $projects[$project_name] }
         : }
     </div>
 </div>
