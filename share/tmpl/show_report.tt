@@ -9,7 +9,7 @@
     	<span style="font-weight:bold; font-size: 130%; color: [% report.status | status_color %]">[% report.status | status_str | l %]</span>
     	</h1>
         [% IF report.vc_log %]
-        <div>[% report.vc_log | html | html_line_break %]</div>
+        <div><pre>[% report.vc_log | html %]</pre></div>
         <hr />
         [% END %]
     	<pre>[% body %]</pre>

@@ -25,7 +25,7 @@ sub create_view {
         Text::Xslate->new(
             +{
                 'syntax' => 'TTerse',
-                'module' => [ 'Text::Xslate::Bridge::TT2Like', 'Ukigumo::Helper', 'Text::Xslate::Bridge::Star', 'Ukigumo::Server::Web::ViewFunctions' ],
+                'module' => [ 'Ukigumo::Helper', 'Text::Xslate::Bridge::Star', 'Ukigumo::Server::Web::ViewFunctions' ],
                 %$view_conf
             }
         );
