@@ -36,6 +36,7 @@ requires 'parent';
 requires 'Getopt::Long';
 requires 'Plack::Loader';
 requires 'Pod::Usage';
+requires 'Starlet';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
