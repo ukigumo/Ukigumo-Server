@@ -24,7 +24,7 @@ any '/' => sub {
         push @{$projects{$project->{project}}}, $project;
     }
 
-    $c->render( 'index.tt',
+    $c->render( 'index.tx',
         {
             now => time(),
             projects => \%projects,
@@ -42,7 +42,7 @@ get '/cc.xml' => sub {
         push @{$projects{$project->{project}}}, $project;
     }
 
-    $c->render( 'cc.xml.tt',
+    $c->render( 'cc.xml.tx',
         {
             now => time(),
             projects => \%projects,
@@ -61,7 +61,7 @@ get '/recent' => sub {
         limit     => $limit,
     );
     return $c->render(
-        'recent.tt' => {
+        'recent.tx' => {
             reports   => $reports,
             pager     => $pager,
             now       => time(),
@@ -80,7 +80,7 @@ get '/failure' => sub {
         limit     => $limit,
     );
     return $c->render(
-        'recent.tt' => {
+        'recent.tx' => {
             reports   => $reports,
             pager     => $pager,
             now       => time(),
@@ -97,7 +97,7 @@ get '/project/{project}' => sub {
     );
 
     $c->render(
-        'project/index.tt',
+        'project/index.tx',
         {
             now          => time(),
             project_name => $project,
@@ -123,7 +123,7 @@ get '/project/{project}/{branch:[A-Za-z0-9/_\-\.]+}' => sub {
         limit     => $limit,
     );
     return $c->render(
-        'report_list.tt' => {
+        'report_list.tx' => {
             project   => $project,
             branch    => $branch,
             branch_id => $branch_id,
@@ -142,7 +142,7 @@ get '/branch/delete' => sub {
         branch_id => $branch_id,
     ) or die "Unknown branch: $branch_id";
     return $c->render(
-        'branch_delete.tt' => {
+        'branch_delete.tx' => {
             branch  => $branch,
         }
     );
@@ -163,7 +163,7 @@ get '/report/{report_id:\d+}' => sub {
     my $report = Ukigumo::Server::Command::Report->find( report_id => $report_id );
     if ($report) {
         return $c->render(
-            'show_report.tt',
+            'show_report.tx',
             {
                 report => $report,
                 body => Ukigumo::Server::Util::make_line_link( $report->{body} )
@@ -176,7 +176,7 @@ get '/report/{report_id:\d+}' => sub {
 
 get '/docs/api' => sub {
     my ($c) = @_;
-    return $c->render('docs/api.tt');
+    return $c->render('docs/api.tx');
 };
 
 get '/docs/{path:[a-z0-9_-]+}' => sub {
@@ -185,7 +185,7 @@ get '/docs/{path:[a-z0-9_-]+}' => sub {
     require Ukigumo::Server::Command::Docs;
     my $html = Ukigumo::Server::Command::Docs->render($path);
 
-    $c->render('docs.tt', {
+    $c->render('docs.tx', {
         doc => $html
     });
 };

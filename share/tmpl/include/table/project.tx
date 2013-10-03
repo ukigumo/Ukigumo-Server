@@ -1,0 +1,22 @@
+<h2><a href="<: uri_for('/project/' ~ uri($project_name)) :>"><: $project_name :></a></h2>
+<table>
+<tr>
+    <th><: l('Branch') :></th>
+    <th><: l('Revision') :></th>
+    <th><: l('Status') :></th>
+    <th><: l('Date') :></th>
+</tr>
+    : for $projects ->  $v {
+    <tr>
+        <td><a href="<: uri_for('/project/' ~ uri($v.project) ~ '/' ~ uri($v.branch)) :>"><: $v.branch || '-' :></a></td>
+        <td><: $v.revision || '-' :></td>
+        <td style="color: <: $v.status | status_color :>"><: $v.status | status_str :> </td>
+        <td>
+            <a href="<: uri_for('/report/' ~ $v.report_id) :>" style="color:<: if $v.ctime < ($now - 24*60*60) { :>gray<: } else { :>blue<: } :>">
+                <: ago($now-$v.ctime, 1) :>
+                <: if $v.ctime < $now - 24*60*60 { :>[old]<: } :>
+            </a>
+        </td>
+    </tr>
+    : }
+</table>

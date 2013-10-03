@@ -2,44 +2,44 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>[% IF subtitle %][% subtitle %] - [% END %][% title || l('Ukigumo') %]</title>
+    <title><: if $subtitle { :><: $subtitle :> - <: } :><: $title || l('Ukigumo') :></title>
     <meta http-equiv="Content-Style-Type" content="text/css" />  
     <meta http-equiv="Content-Script-Type" content="text/javascript" />  
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"]]>
     <meta name="robots" content="noindex,nofollow,noarchive" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="[% uri_for('/static/img/favicon.ico') %]" />
-    <link href="[% uri_for('/static/less/bootstrap/bootstrap.less') %]" rel="stylesheet/less" media="screen" />
-    <script src="[% uri_for('/static/js/jquery-1.6.3.min.js') %]"></script>
-    <link href="[% uri_for('/static/css/main.less') %]" rel="stylesheet/less" media="screen" />
-    <script src="[% uri_for('/static/js/less-1.1.3.min.js') %]"></script>
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<: uri_for('/static/img/favicon.ico') :>" />
+    <link href="<: uri_for('/static/less/bootstrap/bootstrap.less') :>" rel="stylesheet/less" media="screen" />
+    <script src="<: uri_for('/static/js/jquery-1.6.3.min.js') :>"></script>
+    <link href="<: uri_for('/static/css/main.less') :>" rel="stylesheet/less" media="screen" />
+    <script src="<: uri_for('/static/js/less-1.1.3.min.js') :>"></script>
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body[% IF bodyID %] id="[% bodyID %]"[% END %]>
+<body<: if $bodyID { :> id="<: $bodyID :>"<: } :>>
     <div class="container">
         <div class="topbar">
             <div class="topbar-inner">
                 <div class="container">
-                    <h3><a href="[% uri_for('/') %]">[% l('Ukigumo') %]</a></h3>
+                    <h3><a href="<: uri_for('/') :>"><: l('Ukigumo') :></a></h3>
                     <ul class="nav">
                         <li>
-                            <a href="[% uri_for('/recent') %]">Recent</a>
+                            <a href="<: uri_for('/recent') :>">Recent</a>
                         </li>
                         <li>
-                            <a href="[% uri_for('/failure') %]">Failure</a>
+                            <a href="<: uri_for('/failure') :>">Failure</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div id="main">
-            [% content %]
+            : block content -> {}
         </div>
         <footer>
             Support <a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a>
-            format XML (<a href="[% uri_for('/cc.xml') %]">cc.xml</a>)<br />
+            format XML (<a href="<: uri_for('/cc.xml') :>">cc.xml</a>)<br />
             Powered by <a href="http://amon.64p.org/">Amon2</a>
         </footer>
     </div>
