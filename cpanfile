@@ -38,6 +38,7 @@ requires 'Getopt::Long';
 requires 'Plack::Loader';
 requires 'Pod::Usage';
 requires 'Starlet';
+requires 'SQL::Interp';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
