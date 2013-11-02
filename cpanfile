@@ -28,6 +28,7 @@ requires 'Locale::Maketext::Extract';
 requires 'Plack::Builder';
 requires 'Plack::Session::Store::File';
 requires 'Router::Simple';
+requires 'Router::Simple::Sinatraish';
 requires 'Text::Xslate::Util';
 requires 'URI::Escape';
 requires 'URI::WithBase';
