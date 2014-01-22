@@ -104,8 +104,8 @@ get '/all_failure' => sub {
             reports   => $reports,
             pager     => $pager,
             now       => time(),
-         }
-     );
+        }
+    );
 };
 
 get '/project/{project}' => sub {

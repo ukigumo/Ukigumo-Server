@@ -7,7 +7,6 @@ use 5.010001;
 use Amon2::Declare;
 use Data::Validator;
 use Time::Piece;
-use SQL::Interp qw(:all);
 
 sub find_or_create {
     my $class = shift;
@@ -67,12 +66,20 @@ sub list {
         status  => { isa => 'ArrayRef', optional => 1 },
     );
     my $args = $rule->validate(@_);
+ 
+    my $sql = q{SELECT DISTINCT branch.project, branch.branch, report.report_id, report.status, report.revision, report.ctime
+        FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) };
+    my @wheres;
+    if (exists $args->{project}) {
+        push @wheres, 'project = :project ';
+    }
+    if (exists $args->{status}) {
+        push @wheres, 'status IN :status ';
+    }
+    $sql .= q{WHERE } . join('AND ', @wheres) if @wheres;
+    $sql .= q{ORDER BY last_report_id DESC};
 
-    my ($sql, @binds) =
-        sql_interp q{SELECT DISTINCT branch.project, branch.branch, report.report_id, report.status, report.revision, report.ctime
-            FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) WHERE }, $args, q{ORDER BY last_report_id DESC};
-
-    my $itr = c->db->search_by_sql($sql, \@binds);
+    my $itr = c->db->search_named($sql, $args);
     $itr->suppress_object_creation(1);
 
     [$itr->all];
