@@ -30,6 +30,9 @@
                         <li>
                             <a href="<: uri_for('/failure') :>">Failure</a>
                         </li>
+                        <li>
+                            <a href="<: uri_for('/all_failure') :>">All Failure</a>
+                        </li>
                     </ul>
                 </div>
             </div>

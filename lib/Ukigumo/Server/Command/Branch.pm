@@ -62,20 +62,24 @@ sub delete {
 sub list {
     my $class = shift;
     state $rule = Data::Validator->new(
-        project => { isa => 'Str', optional => 1 },
+        project => { isa => 'Str',      optional => 1 },
+        status  => { isa => 'ArrayRef', optional => 1 },
     );
     my $args = $rule->validate(@_);
-
+ 
     my $sql = q{SELECT DISTINCT branch.project, branch.branch, report.report_id, report.status, report.revision, report.ctime
         FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) };
-    my @binds;
+    my @wheres;
     if (exists $args->{project}) {
-        $sql .= 'WHERE project = ? ';
-        push @binds, $args->{project};
+        push @wheres, 'project = :project ';
     }
+    if (exists $args->{status}) {
+        push @wheres, 'status IN :status ';
+    }
+    $sql .= q{WHERE } . join('AND ', @wheres) if @wheres;
     $sql .= q{ORDER BY last_report_id DESC};
 
-    my $itr = c->db->search_by_sql($sql, \@binds);
+    my $itr = c->db->search_named($sql, $args);
     $itr->suppress_object_creation(1);
 
     [$itr->all];

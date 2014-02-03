@@ -72,6 +72,25 @@ get '/recent' => sub {
 get '/failure' => sub {
     my ($c, $args) = @_;
 
+    my $project_src = Ukigumo::Server::Command::Branch->list(
+        status => [2, 3],
+    );
+    my %projects = ();
+    for my $project (@$project_src) {
+        push @{$projects{$project->{project}}}, $project;
+    }
+
+    return $c->render(
+        'index.tx' => {
+            projects => \%projects,
+            now      => time(),
+        }
+    );
+};
+
+get '/all_failure' => sub {
+    my ($c, $args) = @_;
+
     my $page = $c->req->param('page') || 1;
     my $limit = 50;
 
@@ -79,6 +98,7 @@ get '/failure' => sub {
         page      => $page,
         limit     => $limit,
     );
+
     return $c->render(
         'recent.tx' => {
             reports   => $reports,
