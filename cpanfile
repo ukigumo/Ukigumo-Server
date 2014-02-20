@@ -13,7 +13,7 @@ requires 'Teng';
 requires 'Text::Markdown' => 1;
 requires 'Data::Page::NoTotalEntries'     => 0.02;
 requires 'Locale::Maketext::Lexicon' => 0;
-requires 'Time::Duration::ja' => 0;
+requires 'Time::Duration::ja' => '0.03';
 requires 'Time::Duration' => 0;
 requires 'JSON' => 2;
 requires 'Module::Functions';
