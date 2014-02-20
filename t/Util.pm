@@ -32,6 +32,8 @@ our @EXPORT = qw/test_ukigumo/;
 }
 
 sub test_ukigumo {
+    unlink 'test.db' if -f 'test.db';
+
     my $file = File::Spec->catfile(Ukigumo::Server->share_dir, qw/config test.pl/);
     Ukigumo::Server::Launcher->set_config($file);
     Ukigumo::Server::Launcher->setup;
