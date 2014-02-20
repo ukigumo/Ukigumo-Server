@@ -5,12 +5,12 @@ use Test::More;
 
 use Ukigumo::Server::Util;
 
-is(Ukigumo::Server::Util::make_line_link(<<'...'), <<',,,');
+like(Ukigumo::Server::Util::make_line_link(<<'...'), qr{@{[ <<',,,' ]}});
 XXX
 YYY>
 ...
-<a href="#L1" id="L1" class="line-anchor">_</a>&nbsp;<span>XXX</span>
-<a href="#L2" id="L2" class="line-anchor">_</a>&nbsp;<span>YYY&gt;</span>
+<a href="#L1" id="L1" class="line-anchor">_</a>&nbsp;<span><span class="">XXX</span></span>
+<a href="#L2" id="L2" class="line-anchor">_</a>&nbsp;<span><span class="">YYY&gt;</span></span>
 ,,,
 
 done_testing;
