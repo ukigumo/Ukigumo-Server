@@ -4,7 +4,7 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.8.1, CPAN::Meta::Converter version 2.132510",
+   "generated_by" : "Minilla/v0.11.0, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -60,6 +60,7 @@
             "File::Find::Rule" : "0",
             "File::ShareDir" : "0",
             "Getopt::Long" : "0",
+            "HTML::FromANSI::Tiny" : "0",
             "JSON" : "2",
             "LWP::UserAgent" : "0",
             "Locale::Maketext::Extract" : "0",
@@ -79,7 +80,7 @@
             "Text::Xslate" : "1.1005",
             "Text::Xslate::Util" : "0",
             "Time::Duration" : "0",
-            "Time::Duration::ja" : "0",
+            "Time::Duration::ja" : "0.03",
             "Time::Piece" : "1.20",
             "URI::Escape" : "0",
             "URI::WithBase" : "0",
@@ -117,10 +118,9 @@
          "web" : "https://github.com/ukigumo/Ukigumo-Server"
       }
    },
-   "version" : "v1.0.2",
+   "version" : "v1.1.0",
    "x_contributors" : [
       "xaicron <xaicron@gmail.com>",
-      "cho45 <cho45@lowreal.net>",
       "Kan Fushihara <kan@fout.jp>",
       "mattn <mattn.jp@gmail.com>",
       "Kan Fushihara <kan.fushihara@gmail.com>",
@@ -128,6 +128,8 @@
       "studio3104 <studio3104.com@gmail.com>",
       "moznion <moznion@gmail.com>",
       "HIROSE Masaaki <hirose31@gmail.com>",
-      "Songmu <y.songmu@gmail.com>"
+      "Takumi Sakamoto <takumi.saka@gmail.com>",
+      "Songmu <y.songmu@gmail.com>",
+      "cho45 <cho45@lowreal.net>"
    ]
 }

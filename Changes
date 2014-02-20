@@ -2,6 +2,26 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+v1.1.0 2014-02-20T10:33:14Z
+
+    commit 95b7e83c6d51382b8cbc59ad77c90bddca01d964
+    Author: cho45 <cho45@lowreal.net>
+    Date:   Thu Feb 20 14:07:25 2014 +0900
+
+    Coloring console output
+
+    commit dc5eab639fe82d3a8fd530f97496d4164535d1cb
+    Author: Takumi Sakamoto <takumi.saka@gmail.com>
+    Date:   Thu Jan 23 02:57:24 2014 +0900
+
+    Use Teng instead of SQL::Interp
+
+    commit 413e05bb9ae174dbb1afe7398a137d426a7d17ec
+    Author: sakamoto-takumi <takumi.saka@gmail.com>
+    Date:   Sun Oct 6 02:53:04 2013 +0900
+
+    Listing only current failures
+
 v1.0.2 2013-11-02T09:27:19Z
 
     - Fixed deps, again.

@@ -11,7 +11,9 @@ Ukigumo::Server - Testing report storage Server
 
 Ukigumo::Server is testing report storage server. You can use this server for Continious Testing.
 
-<img src="http://gyazo.64p.org/image/dbd98bc15032d97fab081a271541baa2.png" alt="Screen shot">
+<div>
+    <img src="http://gyazo.64p.org/image/dbd98bc15032d97fab081a271541baa2.png" alt="Screen shot">
+</div>
 
 # INSTALLATION
 
@@ -19,7 +21,7 @@ Ukigumo::Server is testing report storage server. You can use this server for Co
     % ukigumo-server
     ukigumo-server starts listen on 0:2828
 
-Or you can use git repo instead of `cpanm Ukigumo::Server` for launching [Ukigumo::Server](http://search.cpan.org/perldoc?Ukigumo::Server).
+Or you can use git repo instead of `cpanm Ukigumo::Server` for launching [Ukigumo::Server](https://metacpan.org/pod/Ukigumo::Server).
 
     % git clone git@github.com:ukigumo/Ukigumo-Server.git .
     # install carton to your system
@@ -31,7 +33,7 @@ Or you can use git repo instead of `cpanm Ukigumo::Server` for launching [Ukigum
 
 # SEE ALSO
 
-[ukigumo-server](http://search.cpan.org/perldoc?ukigumo-server)
+[ukigumo-server](https://metacpan.org/pod/ukigumo-server)
 
 # LICENSE
 
