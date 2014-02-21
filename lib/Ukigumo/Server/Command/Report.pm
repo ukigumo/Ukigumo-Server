@@ -196,6 +196,28 @@ sub insert {
         branch_id => $branch_id,
     });
 
+    if (defined c->config->{max_report_size_by_branch}) {
+        my $last = [ c->db->search_named(q{ SELECT report_id FROM report WHERE branch_id = :branch_id ORDER BY report_id DESC LIMIT :limit }, {
+            limit     => c->config->{max_report_size_by_branch},
+            branch_id => $branch_id,
+        }) ]->[-1];
+
+        c->db->delete('report', {
+            report_id => { '<' => $last->report_id },
+            branch_id => $branch_id,
+        });
+    }
+
+    if (defined c->config->{max_report_size}) {
+        my $last = [ c->db->search_named(q{ SELECT report_id FROM report ORDER BY report_id DESC LIMIT :limit }, {
+            limit     => c->config->{max_report_size},
+        }) ]->[-1];
+
+        c->db->delete('report', {
+            report_id => { '<' => $last->report_id },
+        });
+    }
+
     $txn->commit;
 
     return $report_id;
