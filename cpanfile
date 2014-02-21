@@ -27,7 +27,7 @@ requires 'LWP::UserAgent';
 requires 'Locale::Maketext::Extract';
 requires 'Plack::Builder';
 requires 'Plack::Session::Store::File';
-requires 'Router::Simple';
+requires 'Router::Simple', '0.14';
 requires 'Router::Simple::Sinatraish';
 requires 'Text::Xslate::Util';
 requires 'URI::Escape';
