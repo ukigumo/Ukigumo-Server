@@ -39,6 +39,7 @@ requires 'Plack::Loader';
 requires 'Pod::Usage';
 requires 'Starlet';
 requires 'HTML::FromANSI::Tiny';
+requires 'FindBin::libs';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
