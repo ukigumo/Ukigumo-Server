@@ -27,6 +27,7 @@ subtest 'no body' => sub {
             branch   => 'master',       # branch name
             revision => 3,
             repo     => 'git://...',
+            compare_url => 'http://.../deadbeaf...badcaffe',
         ]
     );
     ok($res->is_success) or die $res->status_line;

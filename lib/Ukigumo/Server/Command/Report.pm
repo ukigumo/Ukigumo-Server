@@ -169,6 +169,7 @@ sub insert {
         revision => { isa => 'Str', optional => 1 },
         body     => { isa => 'Str', optional => 1 },
         vc_log   => { isa => 'Str', optional => 1 },
+        compare_url => { isa => 'Str', optional => 1 },
     );
     my $args = $rule->validate(@_);
 
