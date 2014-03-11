@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `report` (
   `vc_log` text NULL,
   `body` text NULL,
   `ctime` INTEGER NOT NULL,
+  `compare_url` VARCHAR(255) NULL,
   INDEX `report_branch_idx` (`branch_id`),
   PRIMARY KEY (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8;
