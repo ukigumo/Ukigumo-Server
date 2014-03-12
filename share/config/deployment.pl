@@ -7,4 +7,7 @@
             sqlite_unicode => 1,
         }
     ],
+
+    max_report_size_by_branch => 1000,
+    max_report_size => 5000,
 };
