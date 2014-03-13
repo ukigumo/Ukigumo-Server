@@ -2,6 +2,16 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+v2.0.0 2014-03-13T10:41:14Z
+
+    - Delete old reports for keeping DB file size constant
+      (cho45)
+    - Compress body and vc_log with enable_compression option
+      (cho45)
+    - Support compare_url (for GitHub webhooks)
+      *** YOU MUST ALTER DETABASE SCHEMA ***
+      (moznion)
+
 v1.1.0 2014-02-20T10:33:14Z
 
     commit 95b7e83c6d51382b8cbc59ad77c90bddca01d964

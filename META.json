@@ -4,7 +4,7 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.11.0, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Minilla/v0.11.0, CPAN::Meta::Converter version 2.133380",
    "license" : [
       "perl_5"
    ],
@@ -53,12 +53,14 @@
             "Amon2::Web" : "0",
             "Amon2::Web::Dispatcher::Lite" : "0",
             "Capture::Tiny" : "0",
+            "Compress::Zlib" : "0",
             "DBD::SQLite" : "1.33",
             "DBI" : "0",
             "Data::Page::NoTotalEntries" : "0.02",
             "Data::Validator" : "0.08",
             "File::Find::Rule" : "0",
             "File::ShareDir" : "0",
+            "FindBin::libs" : "0",
             "Getopt::Long" : "0",
             "HTML::FromANSI::Tiny" : "0",
             "JSON" : "2",
@@ -72,7 +74,7 @@
             "Plack::Middleware::Session" : "0.14",
             "Plack::Session::Store::File" : "0",
             "Pod::Usage" : "0",
-            "Router::Simple" : "0",
+            "Router::Simple" : "0.14",
             "Router::Simple::Sinatraish" : "0",
             "Starlet" : "0",
             "Teng" : "0",
@@ -84,7 +86,7 @@
             "Time::Piece" : "1.20",
             "URI::Escape" : "0",
             "URI::WithBase" : "0",
-            "Ukigumo::Common" : "0.03",
+            "Ukigumo::Common" : "0.04",
             "Ukigumo::Constants" : "0",
             "parent" : "0",
             "perl" : "5.010001"
@@ -109,16 +111,16 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/ukigumo/Ukigumo-Server/issues"
+         "web" : "https://github.com/ukigumo/ukigumo-server/issues"
       },
-      "homepage" : "https://github.com/ukigumo/Ukigumo-Server",
+      "homepage" : "https://github.com/ukigumo/ukigumo-server",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/ukigumo/Ukigumo-Server.git",
-         "web" : "https://github.com/ukigumo/Ukigumo-Server"
+         "url" : "git://github.com/ukigumo/ukigumo-server.git",
+         "web" : "https://github.com/ukigumo/ukigumo-server"
       }
    },
-   "version" : "v1.1.0",
+   "version" : "v2.0.0",
    "x_contributors" : [
       "xaicron <xaicron@gmail.com>",
       "Kan Fushihara <kan@fout.jp>",
@@ -126,10 +128,10 @@
       "Kan Fushihara <kan.fushihara@gmail.com>",
       "Tomohiro Hosaka <bokutin@bokut.in>",
       "studio3104 <studio3104.com@gmail.com>",
-      "moznion <moznion@gmail.com>",
       "HIROSE Masaaki <hirose31@gmail.com>",
       "Takumi Sakamoto <takumi.saka@gmail.com>",
       "Songmu <y.songmu@gmail.com>",
-      "cho45 <cho45@lowreal.net>"
+      "cho45 <cho45@lowreal.net>",
+      "moznion <moznion@gmail.com>"
    ]
 }
