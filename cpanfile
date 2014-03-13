@@ -8,7 +8,7 @@ requires 'DBI' => 0;
 requires 'DBD::SQLite' => 1.33;
 requires 'Data::Validator' => 0.08;
 requires 'Plack::Middleware::Session' => 0.14;
-requires 'Ukigumo::Common' => '0.03';
+requires 'Ukigumo::Common' => '0.04';
 requires 'Teng';
 requires 'Text::Markdown' => 1;
 requires 'Data::Page::NoTotalEntries'     => 0.02;
