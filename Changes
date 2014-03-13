@@ -2,6 +2,11 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+v2.0.1 2014-03-13T15:32:55Z
+
+    - Add screen shot in documentation
+    - Formal release! (Not UNAUTHORIZED)
+
 v2.0.0 2014-03-13T10:41:14Z
 
     - Delete old reports for keeping DB file size constant
