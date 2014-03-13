@@ -40,6 +40,7 @@ requires 'Pod::Usage';
 requires 'Starlet';
 requires 'HTML::FromANSI::Tiny';
 requires 'FindBin::libs';
+requires 'Compress::Zlib';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
