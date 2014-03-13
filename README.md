@@ -12,7 +12,7 @@ Ukigumo::Server - Testing report storage Server
 Ukigumo::Server is testing report storage server. You can use this server for Continious Testing.
 
 <div>
-    <img src="http://gyazo.64p.org/image/dbd98bc15032d97fab081a271541baa2.png" alt="Screen shot">
+    <img src="https://dl.dropboxusercontent.com/u/14832699/Ukigumo-Server-Top.png" alt="Screen shot">
 </div>
 
 # INSTALLATION
