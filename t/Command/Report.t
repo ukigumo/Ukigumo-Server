@@ -14,8 +14,8 @@ my $c = Ukigumo::Server->bootstrap;
 subtest 'remove old report' => sub {
     $c->dbh->selectall_arrayref(q{DELETE FROM report});
 
-    $c->config->{max_report_size_by_branch} = 3;
-    $c->config->{max_report_size} = 5;
+    $c->config->{max_num_of_reports_by_branch} = 3;
+    $c->config->{max_num_of_reports} = 5;
 
     my $reports_1 = [];
     for my $rev (1..4) {
@@ -27,7 +27,7 @@ subtest 'remove old report' => sub {
         );
     }
 
-    ok !Ukigumo::Server::Command::Report->find(report_id => $reports_1->[0]), 'deleted by max_report_size_by_branch';
+    ok !Ukigumo::Server::Command::Report->find(report_id => $reports_1->[0]), 'deleted by max_num_of_reports_by_branch';
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_1->[1]);
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_1->[2]);
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_1->[3]);
@@ -42,12 +42,12 @@ subtest 'remove old report' => sub {
         );
     }
 
-    ok !Ukigumo::Server::Command::Report->find(report_id => $reports_2->[0]), 'deleted by max_report_size_by_branch';
+    ok !Ukigumo::Server::Command::Report->find(report_id => $reports_2->[0]), 'deleted by max_num_of_reports_by_branch';
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_2->[1]);
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_2->[2]);
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_2->[3]);
 
-    ok !Ukigumo::Server::Command::Report->find(report_id => $reports_1->[1]), 'deleted by max_report_size';
+    ok !Ukigumo::Server::Command::Report->find(report_id => $reports_1->[1]), 'deleted by max_num_of_reports';
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_1->[2]);
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_1->[3]);
 };

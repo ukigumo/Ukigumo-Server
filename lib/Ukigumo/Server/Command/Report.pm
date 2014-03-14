@@ -199,9 +199,9 @@ sub insert {
         branch_id => $branch_id,
     });
 
-    if (defined c->config->{max_report_size_by_branch}) {
+    if (defined c->config->{max_num_of_reports_by_branch}) {
         my $last = [ c->db->search_named(q{ SELECT report_id FROM report WHERE branch_id = :branch_id ORDER BY report_id DESC LIMIT :limit }, {
-            limit     => c->config->{max_report_size_by_branch},
+            limit     => c->config->{max_num_of_reports_by_branch},
             branch_id => $branch_id,
         }) ]->[-1];
 
@@ -211,9 +211,9 @@ sub insert {
         });
     }
 
-    if (defined c->config->{max_report_size}) {
+    if (defined c->config->{max_num_of_reports}) {
         my $last = [ c->db->search_named(q{ SELECT report_id FROM report ORDER BY report_id DESC LIMIT :limit }, {
-            limit     => c->config->{max_report_size},
+            limit     => c->config->{max_num_of_reports},
         }) ]->[-1];
 
         c->db->delete('report', {
@@ -273,7 +273,7 @@ sub __compress {
 sub __uncompress {
     # Only uncompress with gzip header
     if (
-        substr($_[0], 0, length(IO::Compress::Gzip::Constants::GZIP_MINIMUM_HEADER)) eq 
+        substr($_[0], 0, length(IO::Compress::Gzip::Constants::GZIP_MINIMUM_HEADER)) eq
         IO::Compress::Gzip::Constants::GZIP_MINIMUM_HEADER
     ) {
         return Compress::Zlib::memGunzip(\$_[0]) ;

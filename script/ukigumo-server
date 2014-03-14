@@ -63,11 +63,11 @@ DBI connect information. You can use SQLite or MySQL.
 
 Text::Xslate constructor options. If you set this option, you can use original template file.
 
-=head2 C<max_report_size_by_branch>
+=head2 C<max_num_of_reports_by_branch>
 
 Upper limit of number of reports to preserve for each branch. If you omit this configuration, it will be unlimited.
 
-=head2 C<max_report_size>
+=head2 C<max_num_of_reports>
 
 Upper limit of number of report rows. If you omit this configuration, it will be unlimited.
 

@@ -8,6 +8,6 @@
         }
     ],
 
-    max_report_size_by_branch => 1000,
-    max_report_size => 5000,
+    max_num_of_reports_by_branch => 1000,
+    max_num_of_reports => 5000,
 };
