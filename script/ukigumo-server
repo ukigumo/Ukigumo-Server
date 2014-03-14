@@ -69,5 +69,5 @@ Upper limit of number of reports to preserve for each branch. If you omit this c
 
 =head2 C<max_num_of_reports>
 
-Upper limit of number of report rows. If you omit this configuration, it will be unlimited.
+Upper limit of number of all reports. If you omit this configuration, it will be unlimited.
 
