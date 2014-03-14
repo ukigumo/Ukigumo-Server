@@ -2,6 +2,12 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+v2.0.2 2014-03-14T14:35:53Z
+
+    - Change option name to limit number of reports
+    - Upgrade SQL schemas
+    - Fix documentations
+
 v2.0.1 2014-03-13T15:32:55Z
 
     - Add screen shot in documentation
