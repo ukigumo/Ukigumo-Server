@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `branch` (
   `branch_id` INTEGER NOT NULL auto_increment,
   `project` VARCHAR(255) NOT NULL,
   `branch` VARCHAR(255) NOT NULL,
-  `last_report_id` INTEGER NULL,
+  `last_report_id` INTEGER NULL DEFAULT NULL,
   `ctime` INTEGER NOT NULL,
   UNIQUE INDEX `project_branch_uniq` (`project`, `branch`),
   PRIMARY KEY (`branch_id`)
@@ -16,11 +16,11 @@ CREATE TABLE IF NOT EXISTS `report` (
   `branch_id` INTEGER NOT NULL,
   `status` TINYINT NOT NULL,
   `repo` text NULL,
-  `revision` VARCHAR(255) NULL,
+  `revision` VARCHAR(255) NULL DEFAULT NULL,
   `vc_log` text NULL,
   `body` text NULL,
   `ctime` INTEGER NOT NULL,
-  `compare_url` VARCHAR(255) NULL,
+  `compare_url` VARCHAR(255) NULL DEFAULT NULL,
   INDEX `report_branch_idx` (`branch_id`),
   PRIMARY KEY (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8;

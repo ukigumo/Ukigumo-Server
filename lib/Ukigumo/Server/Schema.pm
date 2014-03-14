@@ -26,6 +26,7 @@ create_table report => columns {
     text    'vc_log',  null;
     text    'body',    null;
     integer 'ctime';
+    varchar 'compare_url', null;
 
     add_index report_branch_idx => [qw/branch_id/];
 };

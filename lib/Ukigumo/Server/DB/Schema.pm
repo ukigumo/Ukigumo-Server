@@ -29,6 +29,7 @@ table {
         { name => 'vc_log', type => SQL_LONGVARCHAR }, # TEXT
         { name => 'body', type => SQL_LONGVARCHAR }, # TEXT
         { name => 'ctime', type => SQL_INTEGER }, # INTEGER
+        { name => 'compare_url', type => SQL_VARCHAR }, # VARCHAR
     ;
 };
 

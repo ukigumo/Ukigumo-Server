@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS branch (
   branch_id INTEGER PRIMARY KEY NOT NULL,
   project VARCHAR(255) NOT NULL,
   branch VARCHAR(255) NOT NULL,
-  last_report_id INTEGER,
+  last_report_id INTEGER DEFAULT NULL,
   ctime INTEGER NOT NULL
 );
 
@@ -17,11 +17,11 @@ CREATE TABLE IF NOT EXISTS report (
   branch_id INTEGER NOT NULL,
   status TINYINT NOT NULL,
   repo TEXT,
-  revision VARCHAR(255),
+  revision VARCHAR(255) DEFAULT NULL,
   vc_log TEXT,
   body TEXT,
   ctime INTEGER NOT NULL,
-  compare_url VARCHAR(255)
+  compare_url VARCHAR(255) DEFAULT NULL
 );
 
 CREATE INDEX IF NOT EXISTS report_branch_idx ON report (branch_id);
