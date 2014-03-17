@@ -250,7 +250,7 @@ sub find {
 sub _compress_text_data {
     my ($self, $row) = @_;
     c->config->{enable_compression} or return $row;
-    $row->{$_} = __compress(encode_utf8($row->{$_})) for qw(vc_log body);
+    $row->{$_} = __compress($row->{$_}) for qw(vc_log body);
     $row;
 }
 
@@ -262,7 +262,7 @@ sub _uncompress_text_data {
 }
 
 sub __compress {
-    my $bytes = Compress::Zlib::memGzip(\ $_[0]) ;
+    my $bytes = Compress::Zlib::memGzip(\ encode_utf8($_[0])) ;
     if (length($bytes) < length($_[0])) {
         return $bytes;
     }

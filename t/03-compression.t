@@ -30,6 +30,8 @@ subtest "compress large data" => sub {
     my $report = Ukigumo::Server::Command::Report->find(report_id => $id);
     is $report->{body}, 'body' x 100;
     is $report->{vc_log}, 'vc_log' x 100;
+    ok utf8::is_utf8($report->{body});
+    ok utf8::is_utf8($report->{vc_log});
 };
 
 subtest "not compress small data" => sub {
@@ -39,17 +41,19 @@ subtest "not compress small data" => sub {
         project => 'MyProj',
         branch  => 'master',
         status  => 1,
-        body    => 'body',
-        vc_log  => 'vc_log',
+        body    => 'body あいやー',
+        vc_log  => 'vc_log そいやー',
     );
 
     my $row = $c->db->single('report', { report_id => $id })->get_columns;
-    is $row->{body}, 'body';
-    is $row->{vc_log}, 'vc_log';
+    is $row->{body}, 'body あいやー';
+    is $row->{vc_log}, 'vc_log そいやー';
 
     my $report = Ukigumo::Server::Command::Report->find(report_id => $id);
-    is $report->{body}, 'body';
-    is $report->{vc_log}, 'vc_log';
+    is $report->{body}, 'body あいやー';
+    is $report->{vc_log}, 'vc_log そいやー';
+    ok utf8::is_utf8($report->{body});
+    ok utf8::is_utf8($report->{vc_log});
 };
 
 subtest "enable_compression option is false" => sub {
@@ -70,6 +74,8 @@ subtest "enable_compression option is false" => sub {
     my $report = Ukigumo::Server::Command::Report->find(report_id => $id);
     is $report->{body}, 'body' x 100;
     is $report->{vc_log}, 'vc_log' x 100;
+    ok utf8::is_utf8($report->{body});
+    ok utf8::is_utf8($report->{vc_log});
 };
 
 subtest "multibytes" => sub {
@@ -90,6 +96,8 @@ subtest "multibytes" => sub {
     my $report = Ukigumo::Server::Command::Report->find(report_id => $id);
     is $report->{body}, 'あいやー' x 100;
     is $report->{vc_log}, 'そいやー' x 100;
+    ok utf8::is_utf8($report->{body});
+    ok utf8::is_utf8($report->{vc_log});
 };
 
 done_testing;
