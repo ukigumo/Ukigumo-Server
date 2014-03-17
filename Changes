@@ -2,6 +2,13 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+v2.0.3 2014-03-17T15:23:28Z
+
+    - Fix mojibake
+    - Suppress warning message by encoding undef value
+    - Remove some escape sequences from reports
+    - Add documentation for report compression
+
 v2.0.2 2014-03-14T14:35:53Z
 
     - Change option name to limit number of reports
