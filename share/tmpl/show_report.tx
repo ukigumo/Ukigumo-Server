@@ -11,7 +11,7 @@
         </h1>
         : if $report.compare_url {
             <p>
-                Compare: <a href="<: $report.compare_url :>"><: $report.compare_url :></a>
+                Compare: <a href="<: $report.compare_url :>" target="_blank"><: $report.compare_url :></a>
             </p>
         : }
         : if $report.vc_log {
