@@ -71,3 +71,7 @@ Upper limit of number of reports to preserve for each branch. If you omit this c
 
 Upper limit of number of all reports. If you omit this configuration, it will be unlimited.
 
+=head2 C<enable_compression>
+
+Compress reports if this option is enabled
+
