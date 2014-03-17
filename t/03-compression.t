@@ -100,4 +100,23 @@ subtest "multibytes" => sub {
     ok utf8::is_utf8($report->{vc_log});
 };
 
+subtest "with no warnings of Encode.pm" => sub {
+    my $warned = 0;
+    local $SIG{__WARN__} = sub {
+        $warned++;
+    };
+
+    $c->config->{enable_compression} = 1;
+
+    my $id = Ukigumo::Server::Command::Report->insert(
+        project => 'MyProj',
+        branch  => 'master',
+        status  => 1,
+    );
+
+    my $row = $c->db->single('report', { report_id => $id })->get_columns;
+
+    ok !$warned;
+};
+
 done_testing;

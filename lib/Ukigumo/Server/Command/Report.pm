@@ -250,7 +250,13 @@ sub find {
 sub _compress_text_data {
     my ($self, $row) = @_;
     c->config->{enable_compression} or return $row;
-    $row->{$_} = __compress($row->{$_}) for qw(vc_log body);
+
+    for my $type (qw/vc_log body/) {
+        if (defined(my $content_text = $row->{$type})) {
+            $row->{$type} = __compress($content_text);
+        }
+    }
+
     $row;
 }
 
