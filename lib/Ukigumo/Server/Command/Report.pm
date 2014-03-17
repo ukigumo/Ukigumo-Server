@@ -257,7 +257,12 @@ sub _compress_text_data {
 sub _uncompress_text_data {
     my ($self, $row) = @_;
     c->config->{enable_compression} or return $row;
-    $row->{$_} = decode_utf8(__uncompress($row->{$_})) for qw(vc_log body);
+
+    for my $type (qw/vc_log body/) {
+        # For new Encode.pm
+        eval { $row->{$type} = decode_utf8(__uncompress($row->{$type})) };
+    }
+
     $row;
 }
 
