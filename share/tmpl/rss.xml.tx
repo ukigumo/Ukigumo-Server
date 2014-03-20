@@ -10,7 +10,7 @@
 <item>
 <title><: $v.project :>-<: $v.branch :> <: $v.revision :> <: $v.status | status_str :></title>
 <link><: abs_uri_for('/report/' ~ $v.report_id) :></link>
-<date><: $now-$v.ctime | ctime_cc_str :></date>
+<date><: $v.ctime | ctime_cc_str :></date>
 <description><pre><: $v.body :></pre></description>
 </item>
 : }
