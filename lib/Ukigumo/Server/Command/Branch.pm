@@ -6,7 +6,6 @@ use 5.010001;
 
 use Amon2::Declare;
 use Data::Validator;
-use Time::Piece;
 
 sub find_or_create {
     my $class = shift;

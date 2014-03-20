@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<channel>
+<title>Recent reports</title>
+<link><: uri_for('/') :></link>
+<description>Recent build statuses</description>
+<generator>Ukigumo::Server</generator>
+: for $reports -> $v {
+<item>
+<title><: $v.project :>-<: $v.branch :>-<: $v.revision :> <: $v.status | status_str :></title>
+<link><: uri_for('/report/' ~ $v.report_id) :></link>
+<date><: $now-$v.ctime | ctime_cc_str :></date>
+<description><pre><: $v.body :></pre></description>
+</item>
+: }
+</channel>
