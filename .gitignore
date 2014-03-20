@@ -25,3 +25,4 @@ carton.lock
 !Build/
 !META.json
 !LICENSE
+/Build.bat

@@ -61,7 +61,6 @@
             "Encode" : "2.57",
             "File::Find::Rule" : "0",
             "File::ShareDir" : "0",
-            "FindBin::libs" : "0",
             "Getopt::Long" : "0",
             "HTML::FromANSI::Tiny" : "0.103",
             "JSON" : "2",
