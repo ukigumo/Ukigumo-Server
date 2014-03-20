@@ -8,7 +8,7 @@
 <generator>Ukigumo::Server</generator>
 : for $reports -> $v {
 <item>
-<title><: $v.project :>-<: $v.branch :> <: $v.revision :> <: $v.status | status_str :></title>
+<title><: $v.project :> [<: $v.branch :>](<: $v.revision :>) <: $v.status | status_str :></title>
 <link><: abs_uri_for('/report/' ~ $v.report_id) :></link>
 <date><: $v.ctime | ctime_cc_str :></date>
 <description><pre><: $v.body :></pre></description>
