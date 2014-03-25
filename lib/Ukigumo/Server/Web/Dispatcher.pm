@@ -4,7 +4,6 @@ use warnings;
 use 5.010001;
 use Amon2::Web::Dispatcher::Lite;
 use URI::Escape qw(uri_unescape uri_escape);
-use Time::Piece;
 use Ukigumo::Server::Command::Report;
 use Ukigumo::Server::Command::Branch;
 use Data::Validator;
@@ -42,12 +41,36 @@ get '/cc.xml' => sub {
         push @{$projects{$project->{project}}}, $project;
     }
 
-    $c->render( 'cc.xml.tx',
+    my $res = $c->render( 'cc.xml.tx',
         {
             now => time(),
             projects => \%projects,
         }
     );
+    $res->content_type( 'application/xml' );
+    $res;
+};
+
+get '/rss.xml' => sub {
+    my ($c, $args) = @_;
+
+    my $limit = 50;
+
+    my ($reports, $pager) = Ukigumo::Server::Command::Report->recent_list(
+        limit     => $limit,
+    );
+    for my $report (@{$reports}) {
+        $report->{body} = Ukigumo::Server::Command::Report->find( report_id => $report->{report_id} )->{body};
+    }
+    my $res = $c->render(
+        'rss.xml.tx' => {
+            reports   => $reports,
+            now       => time(),
+            base_uri  => $c->req->base,
+        }
+    );
+    $res->content_type( 'application/xml' );
+    $res;
 };
 
 get '/recent' => sub {

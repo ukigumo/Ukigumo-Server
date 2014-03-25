@@ -6,7 +6,7 @@ use parent qw(Exporter);
 use URI::WithBase;
 use Text::Xslate qw/mark_raw html_escape/;
 use Module::Functions;
-use Time::Piece;
+use POSIX::strftime::Compiler qw/strftime/;
 use Ukigumo::Constants;
 
 our @EXPORT = get_public_functions();
@@ -36,7 +36,7 @@ sub l {
 
 sub ctime_cc_str {
     my $epoch = shift;
-    Time::Piece->new($epoch)->strftime('%Y-%m-%dT%H:%M:%S.000%z');
+    strftime('%Y-%m-%dT%H:%M:%S.000%z', localtime $epoch);
 }
 
 sub status_cc_str {
