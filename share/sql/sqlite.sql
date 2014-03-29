@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS report (
   vc_log TEXT,
   body TEXT,
   ctime INTEGER NOT NULL,
-  compare_url VARCHAR(255) DEFAULT NULL
+  compare_url VARCHAR(255) DEFAULT NULL,
+  elapsed_time_sec INTEGER DEFAULT NULL
 );
 
 CREATE INDEX IF NOT EXISTS report_branch_idx ON report (branch_id);
