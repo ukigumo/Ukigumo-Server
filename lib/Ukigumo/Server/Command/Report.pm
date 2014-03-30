@@ -254,7 +254,7 @@ sub find {
         $report->{elapsed_time} = $elapsed_time;
     }
 
-    return unless keys $report;
+    return unless %$report;
     return $report;
 }
 
