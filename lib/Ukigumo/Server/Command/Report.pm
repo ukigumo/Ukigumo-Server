@@ -129,6 +129,9 @@ sub list {
             0;
         }
     };
+
+    map {$_->{elapsed_time} = $self->_convert_sec_to_formatted_time($_->{elapsed_time_sec})} @$reports;
+
     my $pager = Data::Page::NoTotalEntries->new(
         has_next             => $has_next,
         entries_per_page     => $args->{limit},
@@ -172,6 +175,7 @@ sub insert {
         body     => { isa => 'Str', optional => 1 },
         vc_log   => { isa => 'Str', optional => 1 },
         compare_url => { isa => 'Str', optional => 1 },
+        elapsed_time_sec => { isa => 'Int', optional => 1 },
     );
     my $args = $rule->validate(@_);
 
@@ -290,6 +294,19 @@ sub __uncompress {
         return Compress::Zlib::memGunzip(\$_[0]) ;
     }
     $_[0];
+}
+
+sub _convert_sec_to_formatted_time {
+    my ($selc, $sec) = @_;
+
+    return unless defined $sec;
+
+    my $hour = int($sec / 3600);
+    $sec -= $hour * 3600;
+    my $min = int($sec / 60);
+    $sec -= $min * 60;
+
+    return "$hour:$min:$sec";
 }
 
 1;

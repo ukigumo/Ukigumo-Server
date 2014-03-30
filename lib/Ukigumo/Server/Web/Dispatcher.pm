@@ -165,6 +165,7 @@ get '/project/{project}/{branch:[A-Za-z0-9/_\-\.]+}' => sub {
         page      => $page,
         limit     => $limit,
     );
+
     return $c->render(
         'report_list.tx' => {
             project   => $project,
