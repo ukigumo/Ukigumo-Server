@@ -130,7 +130,7 @@ sub list {
         }
     };
 
-    map {$_->{elapsed_time} = $self->_convert_sec_to_formatted_time($_->{elapsed_time_sec})} @$reports;
+    map {$_->{elapsed_time} = $class->_convert_sec_to_formatted_time($_->{elapsed_time_sec})} @$reports;
 
     my $pager = Data::Page::NoTotalEntries->new(
         has_next             => $has_next,
@@ -245,10 +245,14 @@ sub find {
     my $args = $rule->validate(@_);
 
     local c->db->{suppress_row_objects} = 1;
-    return $class->_uncompress_text_data(c->db->single_by_sql(
+    my $report = $class->_uncompress_text_data(c->db->single_by_sql(
         q{SELECT branch.project, branch.branch, report.* FROM report INNER JOIN branch ON (report.branch_id=branch.branch_id) WHERE report_id=?},
         [$args->{report_id}]
     ));
+
+    $report->{elapsed_time} = $class->_convert_sec_to_formatted_time($report->{elapsed_time_sec});
+
+    return $report;
 }
 
 sub _compress_text_data {
@@ -297,7 +301,7 @@ sub __uncompress {
 }
 
 sub _convert_sec_to_formatted_time {
-    my ($selc, $sec) = @_;
+    my ($class, $sec) = @_;
 
     return unless defined $sec;
 
