@@ -250,8 +250,11 @@ sub find {
         [$args->{report_id}]
     ));
 
-    $report->{elapsed_time} = $class->_convert_sec_to_formatted_time($report->{elapsed_time_sec});
+    if (my $elapsed_time = $class->_convert_sec_to_formatted_time($report->{elapsed_time_sec})) {
+        $report->{elapsed_time} = $elapsed_time;
+    }
 
+    return unless keys $report;
     return $report;
 }
 
