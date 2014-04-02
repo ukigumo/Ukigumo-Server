@@ -313,7 +313,13 @@ sub _convert_sec_to_formatted_time {
     my $min = int($sec / 60);
     $sec -= $min * 60;
 
-    return "$hour:$min:$sec";
+    my $formatted_time = '';
+    if ($hour) {
+        $formatted_time = "$hour hour ";
+    }
+    $formatted_time .= "$min min $sec sec";
+
+    return $formatted_time;
 }
 
 1;
