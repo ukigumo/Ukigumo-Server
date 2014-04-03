@@ -28,6 +28,10 @@ sub ago {
     Amon2->context->duration->can('ago')->(@_)
 }
 
+sub duration {
+    Amon2->context->duration->can('duration')->(@_)
+}
+
 sub l {
     my $base = shift;
     my @args = map { html_escape $_ } @_;    # escape arguments

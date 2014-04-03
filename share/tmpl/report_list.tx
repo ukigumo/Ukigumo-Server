@@ -20,7 +20,7 @@
                 <td><: $v.revision || '-' :></td>
                 <td style="color: <: $v.status | status_color :>"><: $v.status | status_str :> </td>
                 <td><a href="<: uri_for('/report/' ~ $v.report_id) :>"><: ago($now-$v.ctime, 1) :></a></td>
-                <td><: $v.elapsed_time || '-' :></td>
+                <td><: duration($v.elapsed_time_sec) :></td>
             </tr>
         : }
         </table>

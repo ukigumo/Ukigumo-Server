@@ -13,8 +13,8 @@
         : if $report.compare_url {
             Compare: <a href="<: $report.compare_url :>" target="_blank"><: $report.compare_url :></a>
         : }
-        : if $report.elapsed_time {
-            Elapsed Time: <: $report.elapsed_time :>
+        : if $report.elapsed_time_sec {
+            <: l('Elapsed Time') :>: <: duration($report.elapsed_time_sec) :>
         : }
         </p>
         : if $report.vc_log {

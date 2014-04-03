@@ -51,7 +51,7 @@ msgstr "浮雲サーバーを DotCloud に配置する方法(英語)"
 msgid "Deploy Ukigumo-Server to the heroku"
 msgstr "浮雲サーバーを Heroku に配置する方法(英語)"
 
-#: share/tmpl/report_list.tx:16
+#: share/tmpl/report_list.tx:16 share/tmpl/show_report.tx:17
 msgid "Elapsed Time"
 msgstr "処理時間"
 
