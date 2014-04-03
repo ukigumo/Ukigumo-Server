@@ -47,6 +47,8 @@ on 'develop' => sub {
     requires 'DBIx::Schema::DSL';
     requires 'SQL::Translator::Producer::Teng';
     requires 'Path::Tiny';
+    requires 'Perl::Critic';
+    requires 'Test::Perl::Critic';
 };
 
 on 'test' => sub {
