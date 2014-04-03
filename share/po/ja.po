@@ -35,7 +35,7 @@ msgstr "ブランチ"
 msgid "Date"
 msgstr "日付"
 
-#: share/tmpl/branch_delete.tx:9 share/tmpl/report_list.tx:40
+#: share/tmpl/branch_delete.tx:9 share/tmpl/report_list.tx:42
 msgid "Delete test data for this branch"
 msgstr "このブランチのテストデータを削除する"
 
@@ -50,6 +50,10 @@ msgstr "浮雲サーバーを DotCloud に配置する方法(英語)"
 #: share/tmpl/index.tx:26
 msgid "Deploy Ukigumo-Server to the heroku"
 msgstr "浮雲サーバーを Heroku に配置する方法(英語)"
+
+#: share/tmpl/report_list.tx:16
+msgid "Elapsed Time"
+msgstr "処理時間"
 
 #:
 msgid "FAIL"
@@ -109,7 +113,7 @@ msgstr "状態"
 msgid "This action removes all reports on '%1'."
 msgstr "実行すると %1 ブランチに関するすべてのテスト結果レポートが削除されます。"
 
-#: share/tmpl/include/layout.tx:25 share/tmpl/include/layout.tx:5
+#: share/tmpl/include/layout.tx:26 share/tmpl/include/layout.tx:5
 msgid "Ukigumo"
 msgstr "浮雲"
 
