@@ -27,6 +27,7 @@ create_table report => columns {
     text    'body',    null;
     integer 'ctime';
     varchar 'compare_url', null;
+    integer 'elapsed_time_sec', null;
 
     add_index report_branch_idx => [qw/branch_id/];
 };

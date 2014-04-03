@@ -81,7 +81,8 @@ post '/api/v1/report/add' => [
     body     => { isa => 'Str', optional => 1 },
     revision => { isa => 'Str' },
     repo     => { isa => 'Str' },
-    compare_url => { isa => 'Str', optional => 1 }
+    compare_url => { isa => 'Str', optional => 1 },
+    elapsed_time_sec => { isa => 'Int', optional => 1 },
 ] => sub {
     my ($c, $args) = @_;
 

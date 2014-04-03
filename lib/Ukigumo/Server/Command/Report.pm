@@ -129,6 +129,9 @@ sub list {
             0;
         }
     };
+
+    map {$_->{elapsed_time} = $class->_convert_sec_to_formatted_time($_->{elapsed_time_sec})} @$reports;
+
     my $pager = Data::Page::NoTotalEntries->new(
         has_next             => $has_next,
         entries_per_page     => $args->{limit},
@@ -172,6 +175,7 @@ sub insert {
         body     => { isa => 'Str', optional => 1 },
         vc_log   => { isa => 'Str', optional => 1 },
         compare_url => { isa => 'Str', optional => 1 },
+        elapsed_time_sec => { isa => 'Int', optional => 1 },
     );
     my $args = $rule->validate(@_);
 
@@ -241,10 +245,17 @@ sub find {
     my $args = $rule->validate(@_);
 
     local c->db->{suppress_row_objects} = 1;
-    return $class->_uncompress_text_data(c->db->single_by_sql(
+    my $report = $class->_uncompress_text_data(c->db->single_by_sql(
         q{SELECT branch.project, branch.branch, report.* FROM report INNER JOIN branch ON (report.branch_id=branch.branch_id) WHERE report_id=?},
         [$args->{report_id}]
     ));
+
+    if (my $elapsed_time = $class->_convert_sec_to_formatted_time($report->{elapsed_time_sec})) {
+        $report->{elapsed_time} = $elapsed_time;
+    }
+
+    return unless %$report;
+    return $report;
 }
 
 sub _compress_text_data {
@@ -290,6 +301,25 @@ sub __uncompress {
         return Compress::Zlib::memGunzip(\$_[0]) ;
     }
     $_[0];
+}
+
+sub _convert_sec_to_formatted_time {
+    my ($class, $sec) = @_;
+
+    return unless defined $sec;
+
+    my $hour = int($sec / 3600);
+    $sec -= $hour * 3600;
+    my $min = int($sec / 60);
+    $sec -= $min * 60;
+
+    my $formatted_time = '';
+    if ($hour) {
+        $formatted_time = "$hour hour ";
+    }
+    $formatted_time .= "$min min $sec sec";
+
+    return $formatted_time;
 }
 
 1;

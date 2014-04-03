@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `report` (
   `body` text NULL,
   `ctime` INTEGER NOT NULL,
   `compare_url` VARCHAR(255) NULL DEFAULT NULL,
+  `elapsed_time_sec` INTEGER NULL DEFAULT NULL,
   INDEX `report_branch_idx` (`branch_id`),
   PRIMARY KEY (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8;
