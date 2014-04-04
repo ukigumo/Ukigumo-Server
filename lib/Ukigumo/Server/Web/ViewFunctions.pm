@@ -30,10 +30,21 @@ sub ago {
 
 sub duration {
     my $sec = shift;
-    if (defined $sec) {
-        return Amon2->context->duration->can('duration')->($sec);
+
+    return '-' unless defined $sec;
+
+    my $hour = int($sec / 3600);
+    $sec -= $hour * 3600;
+    my $min = int($sec / 60);
+    $sec -= $min * 60;
+
+    my $formatted_time = '';
+    if ($hour) {
+        $formatted_time = "$hour hour ";
     }
-    return '-';
+    $formatted_time .= "$min min $sec sec";
+
+    return $formatted_time;
 }
 
 sub l {
