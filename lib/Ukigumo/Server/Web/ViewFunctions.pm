@@ -29,7 +29,11 @@ sub ago {
 }
 
 sub duration {
-    Amon2->context->duration->can('duration')->(@_)
+    my $sec = shift;
+    if (defined $sec) {
+        return Amon2->context->duration->can('duration')->($sec);
+    }
+    return '-';
 }
 
 sub l {
