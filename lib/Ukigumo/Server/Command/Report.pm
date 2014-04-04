@@ -116,7 +116,7 @@ sub list {
         limit    => $args->{limit} + 1,
         offset   => $args->{limit}*($args->{page}-1),
         order_by => 'report_id DESC',
-        columns  => [qw/report_id revision status ctime/],
+        columns  => [qw/report_id revision status ctime elapsed_time_sec/],
     });
     $itr->suppress_object_creation(1);
 
