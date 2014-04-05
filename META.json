@@ -38,9 +38,11 @@
             "DBIx::Schema::DSL" : "0",
             "Locale::Maketext::Extract::Plugin::Xslate" : "v0.0.2",
             "Path::Tiny" : "0",
+            "Perl::Critic" : "0",
             "SQL::Translator::Producer::Teng" : "0",
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion" : "0.10108",
+            "Test::Perl::Critic" : "0",
             "Test::Pod" : "1.41",
             "Test::Spellunker" : "v0.2.7"
          }
@@ -68,13 +70,13 @@
             "Locale::Maketext::Extract" : "0",
             "Locale::Maketext::Lexicon" : "0",
             "Module::Functions" : "0",
+            "POSIX::strftime::Compiler" : "0.31",
             "Plack::Builder" : "0",
             "Plack::Loader" : "0",
             "Plack::Middleware::ReverseProxy" : "0.09",
             "Plack::Middleware::Session" : "0.14",
             "Plack::Session::Store::File" : "0",
             "Pod::Usage" : "0",
-            "POSIX::strftime::Compiler" : "0.31",
             "Router::Simple" : "0.14",
             "Router::Simple::Sinatraish" : "0",
             "Starlet" : "0",
@@ -120,11 +122,10 @@
          "web" : "https://github.com/ukigumo/Ukigumo-Server"
       }
    },
-   "version" : "v2.0.3",
+   "version" : "v2.1.0",
    "x_contributors" : [
       "xaicron <xaicron@gmail.com>",
       "Kan Fushihara <kan@fout.jp>",
-      "mattn <mattn.jp@gmail.com>",
       "Kan Fushihara <kan.fushihara@gmail.com>",
       "Tomohiro Hosaka <bokutin@bokut.in>",
       "studio3104 <studio3104.com@gmail.com>",
@@ -132,6 +133,7 @@
       "Takumi Sakamoto <takumi.saka@gmail.com>",
       "Songmu <y.songmu@gmail.com>",
       "cho45 <cho45@lowreal.net>",
+      "mattn <mattn.jp@gmail.com>",
       "moznion <moznion@gmail.com>"
    ]
 }
