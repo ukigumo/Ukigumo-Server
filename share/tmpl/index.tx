@@ -4,6 +4,12 @@
 <hr class="space">
 
 <section>
+<div style="text-align: right">
+    <a href="<: uri_for('/rss.xml') :>" ><img src="<: uri_for('/static/img/rss-icon.png') :>"alt="Feed icon"> RSS</a>
+</div>
+</section>
+
+<section>
 <div class="row">
     <div class="span16">
         : for $projects.keys() -> $project_name {
