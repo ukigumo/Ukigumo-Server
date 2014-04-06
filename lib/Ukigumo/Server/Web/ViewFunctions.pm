@@ -63,6 +63,7 @@ sub status_cc_str {
     +{
         STATUS_SUCCESS() => 'Success',
         STATUS_FAIL()    => 'Failure',
+        STATUS_TIMEOUT() => 'Timeout',
         STATUS_NA()      => 'Unknown',
         STATUS_SKIP()    => 'Unknown',
     }->{$status} || 'Unknown';
