@@ -2,7 +2,7 @@ package Ukigumo::Server;
 use strict;
 use warnings;
 use 5.010001;
-use version; our $VERSION = version->declare('v2.1.0');
+use version; our $VERSION = version->declare('v2.1.1');
 
 use parent qw(Amon2);
 use Carp;
