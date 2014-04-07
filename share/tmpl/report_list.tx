@@ -10,6 +10,7 @@
 
         <table>
             <tr>
+                <th>ID</th>
                 <th><: l('Revision') :></th>
                 <th><: l('Status') :></th>
                 <th><: l('Date') :></th>
@@ -17,9 +18,10 @@
             </tr>
         : for $reports -> $v {
             <tr>
+                <td><a href="<: uri_for('/report/' ~ $v.report_id) :>"><: $v.report_id :></a></td>
                 <td><: $v.revision || '-' :></td>
                 <td style="color: <: $v.status | status_color :>"><: $v.status | status_str :> </td>
-                <td><a href="<: uri_for('/report/' ~ $v.report_id) :>"><: ago($now-$v.ctime, 1) :></a></td>
+                <td><: ago($now-$v.ctime, 1) :></td>
                 <td><: duration($v.elapsed_time_sec) :></td>
             </tr>
         : }
