@@ -66,7 +66,7 @@ sub list {
     );
     my $args = $rule->validate(@_);
 
-    my $sql = q{SELECT DISTINCT branch.project, branch.branch, report.report_id, report.status, report.revision, report.ctime report.elapsed_time_sec
+    my $sql = q{SELECT DISTINCT branch.project, branch.branch, report.report_id, report.status, report.revision, report.ctime, report.elapsed_time_sec
         FROM branch LEFT JOIN report ON (branch.last_report_id=report.report_id) };
     my @wheres;
     if (exists $args->{project}) {
