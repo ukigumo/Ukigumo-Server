@@ -42,7 +42,7 @@ sub recent_list {
     my $args = $rule->validate(@_);
 
     my $itr = c->db->search_by_sql(
-        q{SELECT branch.project, branch.branch, report.report_id, report.revision, report.status, report.ctime
+        q{SELECT branch.project, branch.branch, report.report_id, report.revision, report.status, report.ctime report.elapsed_time_sec
         FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id)
         ORDER BY report_id DESC
         LIMIT ? OFFSET ?},
@@ -76,7 +76,7 @@ sub failure_list {
     my $args = $rule->validate(@_);
 
     my $itr = c->db->search_by_sql(
-        q{SELECT branch.project, branch.branch, report.report_id, report.revision, report.status, report.ctime
+        q{SELECT branch.project, branch.branch, report.report_id, report.revision, report.status, report.ctime report.elapsed_time_sec
         FROM report INNER JOIN branch ON (branch.branch_id=report.branch_id)
         WHERE NOT report.status = 1
         ORDER BY report_id DESC
