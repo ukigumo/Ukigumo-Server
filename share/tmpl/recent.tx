@@ -16,6 +16,7 @@
                 <th><: l('Revision') :></th>
                 <th><: l('Status') :></th>
                 <th><: l('Date') :></th>
+                <th><: l('Elapsed Time') :></th>
             </tr>
         : for $reports -> $v {
             <tr>
@@ -25,6 +26,7 @@
                 <td><: $v.revision || '-' :></td>
                 <td style="color: <: $v.status | status_color :>"><: $v.status | status_str :> </td>
                 <td><: ago($now-$v.ctime, 1) :></td>
+                <td><: duration($v.elapsed_time_sec) :></td>
             </tr>
         : }
         </table>
