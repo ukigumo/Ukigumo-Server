@@ -2,6 +2,11 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+v2.1.2 2014-04-08T07:07:29Z
+
+    - Show build ID column in tables
+    - Show elapsed time column in tables
+
 v2.1.1 2014-04-06T14:50:51Z
 
     - Support STATUS_TIMEOUT
