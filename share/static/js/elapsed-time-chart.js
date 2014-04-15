@@ -34,11 +34,17 @@ function drawElapsedTimeGraph($drawArea, elapsedTimes, spot) {
     ]
   };
 
+  var maxVal = Math.round(Math.max.apply(null, elapsedTimes) / 100) * 100;
+
   var ctx = $drawArea.get(0).getContext("2d");
   var myNewChart = new Chart(ctx).Line(data, {
     pointDotRadius: 2.5,
     pointDotStrokeWidth: 0.5,
-    animation: false
+    animation: false,
+    scaleOverride: true,
+    scaleSteps: 10,
+    scaleStepWidth: maxVal / 10,
+    scaleStartValue: 0
   });
 }
 
