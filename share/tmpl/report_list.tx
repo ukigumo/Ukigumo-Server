@@ -1,49 +1,77 @@
 : cascade include::layout
 : override content -> {
 
+<link rel="stylesheet" href="<: uri_for('/static/css/jquery.powertip-light.min.css') :>" type="text/css">
+<script src="<: uri_for('/static/js/jquery.powertip.min.js') :>"></script>
+<script src="<: uri_for('/static/js/Chart.min.js') :>"></script>
+<script src="<: uri_for('/static/js/elapsed-time-chart.js') :>"></script>
+
+<script>
+  var elapsedTimes = [];
+</script>
+
 <hr class="space">
 
 <section>
 <div class="row">
-    <div class="span16">
-        <h1><: l('Reports for') :> <a href="<: uri_for('/', {project => $project}) :>"><: $project :></a> [<: $branch :>]</h1>
+  <div class="span16">
+    <h1><: l('Reports for') :> <a href="<: uri_for('/', {project => $project}) :>"><: $project :></a> [<: $branch :>]</h1>
 
-        <table>
-            <tr>
-                <th>ID</th>
-                <th><: l('Revision') :></th>
-                <th><: l('Status') :></th>
-                <th><: l('Date') :></th>
-                <th><: l('Elapsed Time') :></th>
-            </tr>
-        : for $reports -> $v {
-            <tr>
-                <td><a href="<: uri_for('/report/' ~ $v.report_id) :>"><: $v.report_id :></a></td>
-                <td><: $v.revision || '-' :></td>
-                <td style="color: <: $v.status | status_color :>"><: $v.status | status_str :> </td>
-                <td><: ago($now-$v.ctime, 1) :></td>
-                <td><: duration($v.elapsed_time_sec) :></td>
-            </tr>
-        : }
-        </table>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th><: l('Revision') :></th>
+        <th><: l('Status') :></th>
+        <th><: l('Date') :></th>
+        <th><: l('Elapsed Time') :></th>
+      </tr>
+      : for $reports -> $v {
+      <tr>
+        <td><a href="<: uri_for('/report/' ~ $v.report_id) :>"><: $v.report_id :></a></td>
+        <td><: $v.revision || '-' :></td>
+        <td style="color: <: $v.status | status_color :>"><: $v.status | status_str :> </td>
+        <td><: ago($now-$v.ctime, 1) :></td>
+        <td id="elapsed_time_<: $v.report_id :>">
+          <: duration($v.elapsed_time_sec) :>
+          <script>
+            : if defined $v.elapsed_time_sec {
+              elapsedTimes.unshift(<: $v.elapsed_time_sec :>);
+              (function () {
+                var spot = $.map(elapsedTimes, function () {return '-'});
+                spot[0] = elapsedTimes[0];
+                $("#elapsed_time_<: $v.report_id :>").powerTip({smartPlacement: true});
+                $("#elapsed_time_<: $v.report_id :>").data('powertip', function () {
+                  var tooltip = $('<canvas width="300" height="200"></canvas>');
+                  drawElapsedTimeGraph(tooltip, elapsedTimes, spot);
+                  return tooltip;
+                });
+              })();
+            : } else {
+              elapsedTimes.unshift("-");
+            : }
+          </script>
+        </td>
+      </tr>
+      : }
+    </table>
 
-    	<div class="pager">
-        : if $pager.prev_page {
-    		<a href="<: uri_with({page => $pager.prev_page}) :>">←</a>
-        : } else {
-    		←
-        : }
-    	|<: $pager.current_page :>|
-        : if $pager.next_page {
-    		<a href="<: uri_with({page => $pager.next_page}) :>">→</a>
-        : } else {
-    		→
-        : }
-    	</div>
-
-    	<a href="<: uri_for('/branch/delete', { branch_id => $branch_id }) :>"><: l('Delete test data for this branch') :></a>
+    <div class="pager">
+    : if $pager.prev_page {
+      <a href="<: uri_with({page => $pager.prev_page}) :>">←</a>
+    : } else {
+      ←
+    : }
+    |<: $pager.current_page :>|
+    : if $pager.next_page {
+      <a href="<: uri_with({page => $pager.next_page}) :>">→</a>
+    : } else {
+      →
+    : }
     </div>
+
+    <a href="<: uri_for('/branch/delete', { branch_id => $branch_id }) :>"><: l('Delete test data for this branch') :></a>
+  </div>
 </div>
 </section>
-
 : }
+

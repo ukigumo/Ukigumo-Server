@@ -11,7 +11,7 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="<: uri_for('/rss.xml') :>" />
     <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<: uri_for('/static/img/favicon.ico') :>" />
     <link href="<: uri_for('/static/less/bootstrap/bootstrap.less') :>" rel="stylesheet/less" media="screen" />
-    <script src="<: uri_for('/static/js/jquery-1.6.3.min.js') :>"></script>
+    <script src="<: uri_for('/static/js/jquery-1.11.0.min.js') :>"></script>
     <link href="<: uri_for('/static/css/main.less') :>" rel="stylesheet/less" media="screen" />
     <script src="<: uri_for('/static/js/less-1.1.3.min.js') :>"></script>
     <!--[if lt IE 9]>
