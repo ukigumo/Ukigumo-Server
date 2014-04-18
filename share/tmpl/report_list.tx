@@ -6,10 +6,6 @@
 <script src="<: uri_for('/static/js/Chart.min.js') :>"></script>
 <script src="<: uri_for('/static/js/elapsed-time-chart.js') :>"></script>
 
-<script>
-  var elapsedTimes = [];
-</script>
-
 <hr class="space">
 
 <section>
@@ -31,26 +27,7 @@
         <td><: $v.revision || '-' :></td>
         <td style="color: <: $v.status | status_color :>"><: $v.status | status_str :> </td>
         <td><: ago($now-$v.ctime, 1) :></td>
-        <td id="elapsed_time_<: $v.report_id :>">
-          <: duration($v.elapsed_time_sec) :>
-          <script>
-            : if defined $v.elapsed_time_sec {
-              elapsedTimes.unshift(<: $v.elapsed_time_sec :>);
-              (function () {
-                var spot = $.map(elapsedTimes, function () {return '-'});
-                spot[0] = elapsedTimes[0];
-                $("#elapsed_time_<: $v.report_id :>").powerTip({smartPlacement: true});
-                $("#elapsed_time_<: $v.report_id :>").data('powertip', function () {
-                  var tooltip = $('<canvas width="300" height="200"></canvas>');
-                  drawElapsedTimeGraph(tooltip, elapsedTimes, spot);
-                  return tooltip;
-                });
-              })();
-            : } else {
-              elapsedTimes.unshift("-");
-            : }
-          </script>
-        </td>
+        <td id="elapsed_time_<: $v.report_id :>"><: duration($v.elapsed_time_sec) :></td>
       </tr>
       : }
     </table>
@@ -73,5 +50,31 @@
   </div>
 </div>
 </section>
+
+<script>
+$(function(){
+  var reports = $.grep(<: $reports_json :>, function (n, i) {
+    return n.elapsed_time_sec !== null;
+  });
+  var elapsedTimes = [];
+  var reports_num = reports.length - 1;
+  $.each(reports, function () {
+    elapsedTimes.unshift(this.elapsed_time_sec);
+    var self = this;
+    (function () {
+      var spot_number = reports_num;
+      var $elapsed_time_td = $("#elapsed_time_" + self.report_id);
+      $elapsed_time_td.powerTip({smartPlacement: true});
+      $elapsed_time_td.data('powertip', function () {
+        var tooltip = $('<canvas width="300" height="200"></canvas>');
+        drawElapsedTimeGraph(tooltip, elapsedTimes, spot_number);
+        return tooltip;
+      });
+    })();
+    reports_num--;
+  });
+});
+</script>
+
 : }
 
