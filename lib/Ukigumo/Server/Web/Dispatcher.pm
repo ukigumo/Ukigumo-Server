@@ -9,6 +9,8 @@ use Ukigumo::Server::Command::Branch;
 use Data::Validator;
 use File::Spec;
 use Ukigumo::Server::Util;
+use JSON qw(encode_json);
+use Text::Xslate qw(mark_raw);
 
 any '/' => sub {
     my ($c) = @_;
@@ -165,15 +167,17 @@ get '/project/{project}/{branch:[A-Za-z0-9/_\-\.]+}' => sub {
         page      => $page,
         limit     => $limit,
     );
+    my $reports_json = encode_json($reports);
 
     return $c->render(
         'report_list.tx' => {
-            project   => $project,
-            branch    => $branch,
-            branch_id => $branch_id,
-            reports   => $reports,
-            pager     => $pager,
-            now       => time(),
+            project      => $project,
+            branch       => $branch,
+            branch_id    => $branch_id,
+            reports      => $reports,
+            reports_json => mark_raw("$reports_json"),
+            pager        => $pager,
+            now          => time(),
         }
     );
 };

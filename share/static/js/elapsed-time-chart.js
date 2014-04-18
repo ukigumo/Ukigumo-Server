@@ -1,18 +1,9 @@
-function drawElapsedTimeGraph($drawArea, elapsedTimes, spot) {
-  var gap = elapsedTimes.length - spot.length;
-  for (var i = 0; i < gap; i++) {
-    spot.unshift(undefined);
+function drawElapsedTimeGraph($drawArea, elapsedTimes, spot_number) {
+  var spot = [];
+  for (var i = 0; i < spot_number; i++) {
+    spot.push(undefined);
   }
-
-  var excludeHyphenValue = function (arr) {
-    return $.grep(arr, function (n, i) {
-      return n !== '-';
-    });
-  };
-  elapsedTimes = excludeHyphenValue(elapsedTimes);
-  spot = excludeHyphenValue(spot);
-
-  spot.splice(0, spot.length - elapsedTimes.length);
+  spot.push(elapsedTimes[spot_number]);
 
   var data = {
     labels: $.map(elapsedTimes, function () {
