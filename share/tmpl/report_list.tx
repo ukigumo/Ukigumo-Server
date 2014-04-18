@@ -52,14 +52,15 @@
 </section>
 
 <script>
-$(function(){
+$(function () {
   var reports = $.grep(<: $reports_json :>, function (n, i) {
     return n.elapsed_time_sec !== null;
   });
-  var elapsedTimes = [];
+  var elapsedTimes = $.map(reports, function (n, i) {
+    return n.elapsed_time_sec;
+  }).reverse();
   var reports_num = reports.length - 1;
   $.each(reports, function () {
-    elapsedTimes.unshift(this.elapsed_time_sec);
     var self = this;
     (function () {
       var spot_number = reports_num;
