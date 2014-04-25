@@ -86,6 +86,7 @@
             "Text::Xslate" : "1.1005",
             "Text::Xslate::Util" : "0",
             "Time::Duration" : "0",
+            "Time::Duration::Abbreviated" : "0",
             "Time::Duration::ja" : "0.03",
             "URI::Escape" : "0",
             "URI::WithBase" : "0",

@@ -7,6 +7,7 @@ use URI::WithBase;
 use Text::Xslate qw/mark_raw html_escape/;
 use Module::Functions;
 use POSIX::strftime::Compiler qw/strftime/;
+use Time::Duration::Abbreviated ();
 use Ukigumo::Constants;
 
 our @EXPORT = get_public_functions();
@@ -32,19 +33,7 @@ sub duration {
     my $sec = shift;
 
     return '-' unless defined $sec;
-
-    my $hour = int($sec / 3600);
-    $sec -= $hour * 3600;
-    my $min = int($sec / 60);
-    $sec -= $min * 60;
-
-    my $formatted_time = '';
-    if ($hour) {
-        $formatted_time = "$hour hour ";
-    }
-    $formatted_time .= "$min min $sec sec";
-
-    return $formatted_time;
+    Time::Duration::Abbreviated::duration($sec, 3);
 }
 
 sub l {
