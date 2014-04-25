@@ -1,0 +1,4 @@
+before_install:
+  - "cpanm -L $HOME/.ukigumo/ukigumo-server/extlib --installdeps -n ."
+install: "ln -s $HOME/.ukigumo/ukigumo-server/extlib ./extlib"
+script: prove -lrv -Iextlib/lib/perl5 t
