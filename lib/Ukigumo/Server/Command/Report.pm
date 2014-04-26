@@ -266,6 +266,8 @@ sub _compress_text_data {
 
 sub _uncompress_text_data {
     my ($self, $row) = @_;
+
+    return unless $row;
     c->config->{enable_compression} or return $row;
 
     for my $type (qw/vc_log body/) {
@@ -287,13 +289,17 @@ sub __compress {
 
 sub __uncompress {
     # Only uncompress with gzip header
+    my $item = shift;
+
+    return unless $item;
+
     if (
-        substr($_[0], 0, length(IO::Compress::Gzip::Constants::GZIP_MINIMUM_HEADER)) eq
+        substr($item, 0, length(IO::Compress::Gzip::Constants::GZIP_MINIMUM_HEADER)) eq
         IO::Compress::Gzip::Constants::GZIP_MINIMUM_HEADER
     ) {
-        return Compress::Zlib::memGunzip(\$_[0]) ;
+        return Compress::Zlib::memGunzip(\$item) ;
     }
-    $_[0];
+    $item;
 }
 
 1;
