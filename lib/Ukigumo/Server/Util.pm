@@ -12,7 +12,7 @@ my $ansi = HTML::FromANSI::Tiny->new(
 
 # 行頭に行ごとのリンクをつけるの術
 sub make_line_link {
-    my $src = shift;
+    my $src = shift || '';
 
     my @lines = split /\r?\n/, $src;
     my $num = 1;
