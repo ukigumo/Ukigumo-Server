@@ -34,7 +34,7 @@ sub find {
     my $args = $rule->validate(@_);
 
     local c->db->{suppress_row_objects} = 1;
-    return c->db->single(branch => {project => $args->{project}, branch => $args->{branch}})->{branch_id};
+    return eval { c->db->single(branch => {project => $args->{project}, branch => $args->{branch}})->{branch_id} };
 }
 
 sub lookup {

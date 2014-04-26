@@ -18,10 +18,17 @@ Ukigumo::Server::Command::Report->insert(
     branch  => 'feature/bar',
     status  => STATUS_SUCCESS,
 );
-
 my $ua = LWP::UserAgent->new();
-my $res = $ua->get('http://localhost/project/Foo/feature%2Fbar');
-is($res->code, 200);
+
+subtest 'exist' => sub {
+    my $res = $ua->get('http://localhost/project/Foo/feature%2Fbar');
+    is($res->code, 200);
+};
+
+subtest 'not found' => sub {
+    my $res = $ua->get('http://localhost/project/Foo/not_exist_branch');
+    is($res->code, 404);
+};
 
 done_testing;
 

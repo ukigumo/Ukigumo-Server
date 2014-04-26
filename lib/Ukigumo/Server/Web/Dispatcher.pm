@@ -162,6 +162,8 @@ get '/project/{project}/{branch:[A-Za-z0-9/_\-\.]+}' => sub {
         project => $args->{project},
         branch  => $args->{branch},
     );
+    return $c->res_404() unless $branch_id;
+
     my ($reports, $pager) = Ukigumo::Server::Command::Report->list(
         branch_id => $branch_id,
         page      => $page,
