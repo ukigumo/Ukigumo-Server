@@ -49,6 +49,7 @@ on 'develop' => sub {
     requires 'Path::Tiny';
     requires 'Perl::Critic';
     requires 'Test::Perl::Critic';
+    requires 'Test::mysqld';
 };
 
 on 'test' => sub {
