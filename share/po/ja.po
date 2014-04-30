@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: share/tmpl/index.tx:23
+#: share/tmpl/index.tx:29
 msgid "API Document"
 msgstr "API ドキュメント"
 
@@ -27,15 +27,15 @@ msgstr "浮雲 API ドキュメント"
 msgid "Add new report"
 msgstr "レポートを追加する"
 
-#: share/tmpl/include/table/project.tx:4 share/tmpl/recent.tx:14
+#: share/tmpl/include/table/project.tx:5 share/tmpl/recent.tx:15
 msgid "Branch"
 msgstr "ブランチ"
 
-#: share/tmpl/include/table/project.tx:7 share/tmpl/recent.tx:17 share/tmpl/report_list.tx:15
+#: share/tmpl/include/table/project.tx:8 share/tmpl/recent.tx:18 share/tmpl/report_list.tx:21
 msgid "Date"
 msgstr "日付"
 
-#: share/tmpl/branch_delete.tx:9 share/tmpl/report_list.tx:42
+#: share/tmpl/branch_delete.tx:9 share/tmpl/report_list.tx:49
 msgid "Delete test data for this branch"
 msgstr "このブランチのテストデータを削除する"
 
@@ -43,19 +43,19 @@ msgstr "このブランチのテストデータを削除する"
 msgid "Delete!"
 msgstr "はい。本当に削除してください。"
 
-#: share/tmpl/index.tx:25
+#: share/tmpl/index.tx:31
 msgid "Deploy Ukigumo-Server to the dotcloud"
 msgstr "浮雲サーバーを DotCloud に配置する方法(英語)"
 
-#: share/tmpl/index.tx:26
+#: share/tmpl/index.tx:32
 msgid "Deploy Ukigumo-Server to the heroku"
 msgstr "浮雲サーバーを Heroku に配置する方法(英語)"
 
-#: share/tmpl/index.tx:21
+#: share/tmpl/index.tx:27
 msgid "Documentation"
 msgstr "ドキュメント"
 
-#: share/tmpl/report_list.tx:16 share/tmpl/show_report.tx:19
+#: share/tmpl/include/table/project.tx:9 share/tmpl/recent.tx:19 share/tmpl/report_list.tx:22 share/tmpl/show_report.tx:19
 msgid "Elapsed Time"
 msgstr "処理時間"
 
@@ -79,7 +79,7 @@ msgstr "不明。。"
 msgid "Output"
 msgstr "出力"
 
-#: share/tmpl/recent.tx:13
+#: share/tmpl/recent.tx:14
 msgid "Project"
 msgstr "プロジェクト"
 
@@ -92,11 +92,11 @@ msgstr "本当に %2 の %1 ブランチを削除しますか?"
 msgid "Recent reports"
 msgstr "最近のレポート"
 
-#: share/tmpl/report_list.tx:9
+#: share/tmpl/report_list.tx:14
 msgid "Reports for"
 msgstr "レポート: "
 
-#: share/tmpl/include/table/project.tx:5 share/tmpl/recent.tx:15 share/tmpl/report_list.tx:13
+#: share/tmpl/include/table/project.tx:6 share/tmpl/recent.tx:16 share/tmpl/report_list.tx:19
 msgid "Revision"
 msgstr "リビジョン"
 
@@ -108,7 +108,7 @@ msgstr "成功"
 msgid "Search Report"
 msgstr "レポートを検索する"
 
-#: share/tmpl/include/table/project.tx:6 share/tmpl/recent.tx:16 share/tmpl/report_list.tx:14
+#: share/tmpl/include/table/project.tx:7 share/tmpl/recent.tx:17 share/tmpl/report_list.tx:20
 msgid "Status"
 msgstr "状態"
 
@@ -121,6 +121,6 @@ msgstr "実行すると %1 ブランチに関するすべてのテスト結果�
 msgid "Ukigumo"
 msgstr "浮雲"
 
-#: share/tmpl/index.tx:24
+#: share/tmpl/index.tx:30
 msgid "about Ukigumo(In English)"
 msgstr "浮雲ってなんですか?(英語)"

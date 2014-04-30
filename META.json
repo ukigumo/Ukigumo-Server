@@ -45,7 +45,8 @@
             "Test::PAUSE::Permissions" : "0.04",
             "Test::Perl::Critic" : "0",
             "Test::Pod" : "1.41",
-            "Test::Spellunker" : "v0.2.7"
+            "Test::Spellunker" : "v0.2.7",
+            "Test::mysqld" : "0"
          }
       },
       "runtime" : {
@@ -123,7 +124,7 @@
          "web" : "https://github.com/ukigumo/Ukigumo-Server"
       }
    },
-   "version" : "v2.1.2",
+   "version" : "v2.1.3",
    "x_contributors" : [
       "xaicron <xaicron@gmail.com>",
       "Kan Fushihara <kan@fout.jp>",
