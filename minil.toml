@@ -1,2 +1,4 @@
 name = "Ukigumo-Server"
 badges = ["travis", "coveralls"]
+authority="cpan:TOKUHIROM"
+module_maker="ModuleBuildTiny"
