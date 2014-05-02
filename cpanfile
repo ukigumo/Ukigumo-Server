@@ -6,6 +6,7 @@ requires 'Plack::Middleware::ReverseProxy' => '0.09';
 requires 'POSIX::strftime::Compiler'       => '0.31';
 requires 'DBI' => 0;
 requires 'DBD::SQLite' => 1.33;
+requires 'DBIx::Schema::DSL';
 requires 'Data::Validator' => 0.08;
 requires 'Plack::Middleware::Session' => 0.14;
 requires 'Ukigumo::Common' => '0.07';
@@ -34,6 +35,8 @@ requires 'Text::Xslate::Util';
 requires 'URI::Escape';
 requires 'URI::WithBase';
 requires 'parent';
+requires 'feature';
+requires 'version';
 requires 'Getopt::Long';
 requires 'Plack::Loader';
 requires 'Pod::Usage';
@@ -44,7 +47,6 @@ requires 'Encode', '2.57';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
-    requires 'DBIx::Schema::DSL';
     requires 'SQL::Translator::Producer::Teng';
     requires 'Path::Tiny';
     requires 'Perl::Critic';
