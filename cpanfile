@@ -24,6 +24,7 @@ requires 'Amon2::Web';
 requires 'Amon2::Web::Dispatcher::Lite';
 requires 'Capture::Tiny';
 requires 'File::Find::Rule';
+requires 'File::Path';
 requires 'File::ShareDir';
 requires 'LWP::UserAgent';
 requires 'Locale::Maketext::Extract';
@@ -69,5 +70,5 @@ on 'test' => sub {
 };
 
 on configure => sub {
-    requires 'Module::Build::Tiny';
+    requires 'Module::Build::Tiny', '0.035';
 };
