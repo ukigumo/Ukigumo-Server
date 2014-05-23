@@ -11,6 +11,7 @@ use Data::Validator;
 use Ukigumo::Server::Command::Branch;
 use Compress::Zlib;
 use Encode;
+use List::MoreUtils qw/uniq/;
 
 sub get_last_status {
     my $class = shift;
@@ -215,12 +216,25 @@ sub insert {
 
     if (defined c->config->{max_num_of_reports}) {
         my $last = [ c->db->search_named(q{ SELECT report_id FROM report ORDER BY report_id DESC LIMIT :limit }, {
-            limit     => c->config->{max_num_of_reports},
+            limit => c->config->{max_num_of_reports},
         }) ]->[-1];
 
-        c->db->delete('report', {
+        my $should_delete_rows_itr = c->db->search('report', {
             report_id => { '<' => $last->report_id },
         });
+
+        my @branch_ids;
+        while (my $delete_row = $should_delete_rows_itr->next) {
+            push @branch_ids, $delete_row->branch_id;
+            $delete_row->delete;
+        }
+
+        for my $branch_id (uniq @branch_ids) {
+            my $branch = c->db->single('branch', {branch_id => $branch_id});
+            unless ($class->find(report_id => $branch->last_report_id)) {
+                $branch->delete;
+            }
+        }
     }
 
     $txn->commit;

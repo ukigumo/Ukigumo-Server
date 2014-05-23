@@ -52,4 +52,49 @@ subtest 'remove old report' => sub {
     ok +Ukigumo::Server::Command::Report->find(report_id => $reports_1->[3]);
 };
 
+subtest 'remove the branch when it has no reports' => sub {
+    $c->dbh->selectall_arrayref(q{DELETE FROM report});
+
+    $c->config->{max_num_of_reports_by_branch} = 2;
+    $c->config->{max_num_of_reports} = 2;
+
+    my @reports;
+    my $project = 'MyProj1';
+
+    push @reports, Ukigumo::Server::Command::Report->insert(
+        project => $project,
+        branch  => 'master',
+        status  => '1',
+        revision => 1,
+    );
+
+    push @reports, Ukigumo::Server::Command::Report->insert(
+        project => $project,
+        branch  => 'forked',
+        status  => '1',
+        revision => 2,
+    );
+
+    push @reports, Ukigumo::Server::Command::Report->insert(
+        project => $project,
+        branch  => 'forked',
+        status  => '1',
+        revision => 3,
+    );
+
+    ok !Ukigumo::Server::Command::Report->find(report_id => $reports[0]);
+    ok +Ukigumo::Server::Command::Report->find(report_id => $reports[1]);
+    ok +Ukigumo::Server::Command::Report->find(report_id => $reports[2]);
+
+    ok !Ukigumo::Server::Command::Branch->find(
+        project => $project,
+        branch  => 'master',
+    );
+
+    ok +Ukigumo::Server::Command::Branch->find(
+        project => $project,
+        branch  => 'forked',
+    );
+};
+
 done_testing;
