@@ -44,7 +44,7 @@ requires 'Starlet';
 requires 'HTML::FromANSI::Tiny', '0.103';
 requires 'Compress::Zlib';
 requires 'Encode', '2.57';
-requires 'List::MoreUtils', '0.400';
+requires 'List::MoreUtils', '0.33';
 
 on 'develop' => sub {
     requires 'Locale::Maketext::Extract::Plugin::Xslate', 'v0.0.2';
