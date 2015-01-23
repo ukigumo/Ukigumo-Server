@@ -2,6 +2,10 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+v2.1.4 2015-01-23T12:04:05Z
+
+    - Add lacked dependent module (Thank you for reporting, @hfm)
+
 v2.1.3 2014-04-30T06:45:34Z
 
     [Feature]
