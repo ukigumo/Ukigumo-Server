@@ -1,9 +1,10 @@
 requires 'perl', '5.010001';
-requires 'Amon2'                           => '2.50';
+requires 'Amon2'                            => '2.50';
 requires 'Amon2::Plugin::ShareDir';
-requires 'Text::Xslate'                    => '1.1005';
-requires 'Plack::Middleware::ReverseProxy' => '0.09';
-requires 'POSIX::strftime::Compiler'       => '0.31';
+requires 'Amon2::Plugin::Web::CSRFDefender' => '7.03';
+requires 'Text::Xslate'                     => '1.1005';
+requires 'Plack::Middleware::ReverseProxy'  => '0.09';
+requires 'POSIX::strftime::Compiler'        => '0.31';
 requires 'DBI' => 0;
 requires 'DBD::SQLite' => 1.33;
 requires 'DBIx::Schema::DSL';
