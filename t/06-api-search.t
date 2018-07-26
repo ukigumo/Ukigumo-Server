@@ -3,6 +3,8 @@ use strict;
 use warnings;
 use utf8;
 use Test::More;
+use FindBin;
+use lib "$FindBin::Bin/..";
 use t::Util;
 use Test::Requires 'LWP::Protocol::PSGI', 'LWP::UserAgent', 'Capture::Tiny';
 use Capture::Tiny qw(tee_merged);

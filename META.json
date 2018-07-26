@@ -4,7 +4,7 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v2.3.0, CPAN::Meta::Converter version 2.143240",
+   "generated_by" : "Minilla/v3.1.2, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -127,19 +127,22 @@
          "web" : "https://github.com/ukigumo/Ukigumo-Server"
       }
    },
-   "version" : "v2.1.4",
+   "version" : "v2.1.5",
    "x_authority" : "cpan:TOKUHIROM",
    "x_contributors" : [
-      "xaicron <xaicron@gmail.com>",
-      "Kan Fushihara <kan@fout.jp>",
-      "Kan Fushihara <kan.fushihara@gmail.com>",
-      "Tomohiro Hosaka <bokutin@bokut.in>",
-      "studio3104 <studio3104.com@gmail.com>",
       "HIROSE Masaaki <hirose31@gmail.com>",
-      "Takumi Sakamoto <takumi.saka@gmail.com>",
+      "Kan Fushihara <kan.fushihara@gmail.com>",
+      "Kan Fushihara <kan@fout.jp>",
+      "Kang-min Liu <gugod@gugod.org>",
       "Songmu <y.songmu@gmail.com>",
+      "Takumi Sakamoto <takumi.saka@gmail.com>",
+      "Tomohiro Hosaka <bokutin@bokut.in>",
       "cho45 <cho45@lowreal.net>",
       "mattn <mattn.jp@gmail.com>",
-      "moznion <moznion@gmail.com>"
-   ]
+      "moznion <moznion@gmail.com>",
+      "studio3104 <studio3104.com@gmail.com>",
+      "xaicron <xaicron@gmail.com>"
+   ],
+   "x_serialization_backend" : "JSON::PP version 2.27400_02",
+   "x_static_install" : 1
 }

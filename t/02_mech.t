@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+use FindBin;
+use lib "$FindBin::Bin/..";
 use t::Util;
 use Plack::Test;
 use Plack::Util;

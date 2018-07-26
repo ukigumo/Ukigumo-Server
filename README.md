@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ukigumo/Ukigumo-Server.svg?branch=master)](https://travis-ci.org/ukigumo/Ukigumo-Server) [![Coverage Status](https://img.shields.io/coveralls/ukigumo/Ukigumo-Server/master.svg)](https://coveralls.io/r/ukigumo/Ukigumo-Server?branch=master)
+[![Build Status](https://travis-ci.org/ukigumo/Ukigumo-Server.svg?branch=master)](https://travis-ci.org/ukigumo/Ukigumo-Server) [![Coverage Status](https://img.shields.io/coveralls/ukigumo/Ukigumo-Server/master.svg?style=flat)](https://coveralls.io/r/ukigumo/Ukigumo-Server?branch=master)
 # NAME
 
 Ukigumo::Server - Testing report storage Server
