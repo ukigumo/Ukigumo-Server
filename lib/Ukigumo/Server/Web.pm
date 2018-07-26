@@ -11,8 +11,7 @@ use Ukigumo::Constants;
 use Ukigumo::Server::Web::Dispatcher;
 sub dispatch {
     my $c = shift;
-    return Ukigumo::Server::Web::Dispatcher->dispatch($c)
-      or die "response is not generated";
+    return Ukigumo::Server::Web::Dispatcher->dispatch($c) || die "response is not generated";
 }
 
 # setup view class

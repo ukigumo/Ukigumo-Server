@@ -9,7 +9,7 @@ use Ukigumo::Server::API::Dispatcher;
 
 sub dispatch {
     my $c = shift;
-    return Ukigumo::Server::API::Dispatcher->dispatch($c) or die "response is not generated";
+    return Ukigumo::Server::API::Dispatcher->dispatch($c) || die "response is not generated";
 }
 
 __PACKAGE__->load_plugins( 'Web::JSON' );
