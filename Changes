@@ -2,6 +2,9 @@ Revision history for Perl extension Ukigumo-Server
 
 {{$NEXT}}
 
+    - Fix 'return-or-die' statements in `dispatch` (gugod)
+    - remove dotcloud.yml
+
 v2.1.4 2015-01-23T12:04:05Z
 
     - Add lacked dependent module (Thank you for reporting, @hfm)
